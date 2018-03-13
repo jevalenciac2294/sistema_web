@@ -1,7 +1,9 @@
 @extends('layouts.home')
 
+
 @section('content')
-<h1>Bienvenid@s a la aplicación</h1>
+<div style="padding-top: 40px "><h1>Bienvenid@s a la aplicaciónn</h1>
+</div>
 
 @if (Session::has('status'))
 <div class='text-success'>

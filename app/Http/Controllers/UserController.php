@@ -17,8 +17,8 @@ class UserController extends Controller{
 	}
         public function password(){
         return View('user.password');
-    }
-    
+        }
+        
     public function updatePassword(Request $request){
         $rules = [
             'mypassword' => 'required',

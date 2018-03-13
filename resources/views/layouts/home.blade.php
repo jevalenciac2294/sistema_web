@@ -16,33 +16,12 @@
     </head>
     <body>
         
+        @extends('layouts.navbar')
         
-            <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
 
-
-          <a class="navbar-brand" href="{{url()}}">Sistema</a>
-          
-          <ul class="nav navbar-nav">
-            <a href="{{url()}}">Inicio</a>
-          <ul class="nav navbar-nav navbar-right">
-   @if (Auth::check())
-   <li><a href="{{url()}}">{{Auth::user()->name}}</a></li>
-   <br>
-   <li><a href="{{url('auth/logout')}}">Salir</a></li>
-   @else
-            <a href="{{url('auth/login')}}">Iniciar sesión</a>
-   @endif
-          </ul>
-          </ul>
-        </div>
-       
-      </div>
-    </nav>
-
-        <div class="container">
+        <div class="container" style="padding-top: 40px ">
             @yield('content')
+            
         </div>
     </body>
 </html>
