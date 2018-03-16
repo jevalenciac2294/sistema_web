@@ -17,7 +17,7 @@
     <body>
         
         @extends('layouts.navbar')
-        
+                 
 
         <div class="container" style="padding-top: 40px ">
             @yield('content')

@@ -10,13 +10,16 @@
 
         <ul class="nav navbar-nav navbar-right">
 
-            @if (Auth::check())
-
+        @if (Auth::check())
+                
             <li><a href="#">{{Auth::user()->name}}</a></li>
-            <li class='active'><a href="{{url('auth/logout')}}">Salir</a></li>
-            @else
-            <li><li><a href="{{url('auth/login')}}">Iniciar sesión</a></li>
+            @if (Auth::user()->user == 1)
+                <li><a href="{{url('admin')}}">Panel de Administrador</a></li>
             @endif
+            <li class='active'><a href="{{url('auth/logout')}}">Salir</a></li>
+        @else
+            <li><li><a href="{{url('auth/login')}}">Iniciar sesión</a></li>
+        @endif
         </ul>
     </div>
 

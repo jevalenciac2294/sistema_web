@@ -49,3 +49,6 @@ Route::get('user', 'UserController@user');
 
 Route::get('user/password', 'UserController@password');
 Route::post('user/updatepassword', 'UserController@updatePassword');
+
+//Route::match(['get', 'post'], 'admin/createadmin', 'AdminController@createAdmin');
+Route::get('admin', 'AdminController@admin');
