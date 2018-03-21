@@ -4,7 +4,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\User;
 use Hash;
+
+use App\Http\Requests;
+
+use Validator;
+use Auth;
+
 
 class UserController extends Controller{
 	
@@ -49,6 +56,23 @@ class UserController extends Controller{
                 return redirect('user/password')->with('message', 'Credenciales incorrectas');
             }
         }
+    }
+    
+    
+    //Crear Usuario
+    public function index()  {
+        
+    }
+ 
+    public function store(Request $request){
+        return View('Hola has creado el usuario');
+    }
+    
+    public function show($id){
+        
+    }
+    public  function edit($id){
+        
     }
 	
 }

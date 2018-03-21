@@ -49,6 +49,21 @@ Route::get('user', 'UserController@user');
 
 Route::get('user/password', 'UserController@password');
 Route::post('user/updatepassword', 'UserController@updatePassword');
+//Crear usuario
+//Route::get('admin/create', 'AdminController@create');
+//Route::post('user/store', 'UserController@store');
+//Route::match(['get', 'post'], 'admin/create', 'AdminController@create');
+//Route::get('createuser', 'AdminController@createuser');
+//crear usuario desde el admin
 
-//Route::match(['get', 'post'], 'admin/createadmin', 'AdminController@createAdmin');
+//crear useruario desde admin
+Route::match(['get', 'post'], 'admin/createuser', 'AdminController@createuser');
+Route::get('admin/createuser', 'AdminController@createuser');
+Route::get('adminuser', 'AdminController@adminuser');
+
+//Ver usuario
+Route::get('admin/index', 'AdminController@index');
+
+Route::match(['get', 'post'], 'admin/createadmin', 'AdminController@createAdmin');
 Route::get('admin', 'AdminController@admin');
+
