@@ -1,7 +1,7 @@
 @extends('layouts.home')
 @section('content')
 <div style="padding-top: 40px ">
-<h1>Bienvenid@ {{Auth::user()->name}} a su Panel ddddde Control</h1>
+<h1>Bienvenid@ {{Auth::user()->name}} a su Panel de Control __Usuario</h1>
 </div>
 @if (Session::has('status'))
 <hr />

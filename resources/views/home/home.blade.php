@@ -2,7 +2,7 @@
 
 
 @section('content')
-<div style="padding-top: 40px "><h1>Bienvenid@s a la aplicaciónn</h1>
+<div style="padding-top: 40px "><h1>Bienvenid@s a la aplicación PAgina Principal</h1>
 </div>
 
 @if (Session::has('status'))

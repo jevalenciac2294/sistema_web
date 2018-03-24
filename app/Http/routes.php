@@ -50,10 +50,11 @@ Route::get('user', 'UserController@user');
 Route::get('user/password', 'UserController@password');
 Route::post('user/updatepassword', 'UserController@updatePassword');
 //Crear usuario
-//Route::get('admin/create', 'AdminController@create');
-//Route::post('user/store', 'UserController@store');
-//Route::match(['get', 'post'], 'admin/create', 'AdminController@create');
+Route::get('admin/create', 'AdminController@create');
+Route::post('user/store', 'UserController@store');
+Route::match(['get', 'post'], 'admin/create', 'AdminController@create');
 //Route::get('createuser', 'AdminController@createuser');
+
 //crear usuario desde el admin
 
 //crear useruario desde admin
@@ -63,6 +64,14 @@ Route::get('adminuser', 'AdminController@adminuser');
 
 //Ver usuario
 Route::get('admin/index', 'AdminController@index');
+//destroy usuario
+//Route::get('admin/edit', 'AdminController@edit');
+
+Route::post('admin/update/{id}', 'AdminController@update');
+Route::get('admin/edit/{id}', 'AdminController@edit');
+
+Route::post('admin/destroy/{id}', 'AdminController@destroy');
+Route::get('admin/destroy/{id}', 'AdminController@destroy');
 
 Route::match(['get', 'post'], 'admin/createadmin', 'AdminController@createAdmin');
 Route::get('admin', 'AdminController@admin');

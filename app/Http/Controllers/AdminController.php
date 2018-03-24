@@ -4,16 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Data;
+use Session;
+use Redirect;
 
 use App\User;
 use Validator;
 use Auth;
+use Illuminate\Http\html;
 
 class AdminController extends Controller
 {
+    
+    use SoftDeletes;
     /**
      * Display a listing of the resource.
      *
@@ -133,9 +140,14 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id){
+        $users = User::find($id);
+        return View('admin.edit', ['users'=>$users]);
+        /*$users = User::findOrFail($id);
+        return View('admin.edit', compact('users'));*/
+        //$users = User::find($id);
+        //return View('admin.edit' )->with('users',$users);
+        //return $id;
     }
 
     /**
@@ -147,7 +159,15 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $users = User::find($id);
+        $users->fill($request->all());
+        $users->password = bcrypt($request->password);
+        $users->save();
+        
+        $users_all = User::orderBy('name', 'ASC')->paginate(2);
+        Session::flash('message', 'Usuario modificado correctamente.');
+        return View('admin.index', ['users'=>$users_all]);
+//        return redirect($to = 'admin/index');
     }
 
     /**
@@ -158,7 +178,11 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        $users_all = User::orderBy('name', 'ASC')->paginate(2);
+        Session::flash('message','Usuario Eliminado Correctamente');
+        return View('admin.index', ['users'=>$users_all]);
     }
     public function createAdmin(Request $request){
   
