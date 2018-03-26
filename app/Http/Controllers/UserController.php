@@ -58,14 +58,12 @@ class UserController extends Controller{
         }
     }
     
-    
-    //Crear Usuario
     public function index()  {
         
     }
  
     public function store(Request $request){
-        return View('Hola has creado el usuario');
+        return View('');
     }
     
     public function show($id){
