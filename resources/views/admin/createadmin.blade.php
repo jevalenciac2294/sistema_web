@@ -1,9 +1,11 @@
 @extends('layouts.home')
 @section('content')
 
-<h1>Crear un nuevo administrador</h1>
-<div class='bg-danger' style='padding: 20px'>¡¡¡Una vez termines de crear el administrador desactiva esta acción-ruta!!!</div>
+
+
+<h1 Style="padding-top: 40px">Crear un nuevo administrador</h1>
 <hr />
+
 @if (Session::has('message'))
  <div class='bg-info' style='padding: 20px'>
   {{Session::get('message')}}
@@ -16,7 +18,7 @@
  </div>
  <hr />
 @endif
-<form method="POST" action="{{url('admin/createadmin')}}">
+<form class="container" method="POST" action="{{url('admin/createadmin')}}">
     {!! csrf_field() !!}
 
     <div class='form-group'>

@@ -19,7 +19,7 @@
 </div>
 <table>
     <thead>
-        <th>    Id  </th>>
+        <th>    Id  </th>
         <th>    Nombre  </th>
         <th>    Correo  </th>
         
@@ -39,7 +39,7 @@
 
        </tr>
     </tbody>
-    @endforeach;
+    @endforeach
     
     
     </div>

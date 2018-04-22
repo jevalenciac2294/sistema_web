@@ -78,11 +78,21 @@ Route::get('admin', 'AdminController@admin');
 
 //Empleado
 //Mostrar empleados
+Route::get('indexEmpleado', 'EmpleadoController@indexEmpleado');
 Route::post('indexEmpleado', 'EmpleadoController@indexEmpleado');
+
 //Route::get('admin/edit/{id}', 'AdminController@edit');
 //agregar empleado
 
 Route::get('createEmpleado', 'EmpleadoController@createEmpleado');
 Route::post('createEmpleado', 'EmpleadoController@createEmpleado');
-//Eliminar empleado existente
+//Editar empelado existente
+////Eliminar empleado existente
 //Route::delete('/empleado/{id}', function($id){});
+
+
+Route::post('updateEmpleado/{id}', 'EmpleadoController@updateEmpleado');
+Route::get('editEmpleado/{id}', 'EmpleadoController@editEmpleado');
+
+Route::post('destroyEmpleado/{id}', 'EmpleadoController@destroyEmpleado');
+Route::get('destroyEmpleado/{id}', 'EmpleadoController@destroyEmpleado');

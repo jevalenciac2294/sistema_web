@@ -30,9 +30,17 @@ use Illuminate\Http\html;
  */
 class EmpleadoController extends Controller{
     
-    public function indexEmpleado(){
-        return View('empleado.empleados');
-    }    
+     public function indexEmpleado()
+    {
+        
+        $empleado = Empleado::orderBy('name', 'ASC')->paginate(5);
+        return View('admin.empleado.indexEmpleado' )->with('empleado',$empleado);
+        
+        /*dd("test");
+        $users = \App\User::All();
+       //return $users->where('admin.index', Auth::user()->$users);
+        return $users->where('admin.index', user()->$user);*/
+    }  
     
     public function createEmpleado(Request $request){
 
@@ -107,8 +115,45 @@ class EmpleadoController extends Controller{
         return View('admin.empleado.createEmpleado');
   
 }    
-    public function destroyEmpleado(){
-        return View('empleado');
+       public function destroyEmpleado($id)
+    {
+        $empleado = Empleado::find($id);
+        $empleado ->delete();
+        $empleado_all = Empleado::orderBy('name', 'ASC')->paginate(2);
+        Session::flash('message','Empleado Eliminado Correctamente');
+        return View('admin.empleado.indexEmpleado', ['empleado'=>$empleado_all]);
+    }
+    
+    
+    public function updateEmpleado(Request $request, $id)
+    {
+        $empleado = Empleado::find($id);
+        $empleado->fill($request->all());
+//        $empleado = new Empleado();
+        $empleado->name = $request->name;
+        $empleado->apellidoS = $request->apellidoS;
+        $empleado->documento = $request->documento;
+        $empleado->email = $request->email;
+        $empleado->direccion = $request->direccion;
+        $empleado->telefono = $request->telefono;
+        $empleado->sueldo = $request->sueldo;
+//        echo 'Empleado: ' . print_r($empleado, 1);
+//        echo '<p>id: ' . print_r($id, 1);
+        $empleado->save();
+//        
+        $empleado_all = Empleado::orderBy('name', 'ASC')->paginate(5);
+        Session::flash('message', 'Empleado modificado correctamente.');
+        return View('admin.empleado.indexEmpleado', ['empleado'=>$empleado_all]);
+        return redirect($to = 'admin/index');
+    }
+    public function editEmpleado($id){
+        $empleado = Empleado::find($id);
+        return View('admin.empleado.editEmpleado', ['empleado'=>$empleado]);
+        /*$users = User::findOrFail($id);
+        return View('admin.edit', compact('users'));*/
+        //$users = User::find($id);
+        //return View('admin.edit' )->with('users',$users);
+        //return $id;
     }
 
 }

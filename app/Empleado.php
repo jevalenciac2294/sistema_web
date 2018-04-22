@@ -10,8 +10,9 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Hash;
 
 
-class Empleado extends Model
+class Empleado extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
+    use Authenticatable, CanResetPassword;
     protected $table = 'empleado';
 
     /**
@@ -19,5 +20,5 @@ class Empleado extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'apellidos','documento','email','direccion','telefono','sueldo' ];
+    protected $fillable = ['name', 'apellidoS','documento','email','direccion','telefono','sueldo' ];
 }

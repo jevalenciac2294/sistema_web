@@ -1,15 +1,17 @@
 @extends('layouts.home')
 @section('content')
 
-<div Style="padding-top: 40px">
-</div>
-<div class="text-info" Style="padding-top: 40px">
+
+<h1 class="container" Style="padding-top: 80px">Crear un nuevo usuario</h1>
+<hr />
+
+<div class="text-info" Style="padding-top: 30px">
     @if(Session::has('message'))
         {{Session::get('message')}}
     @endif
 </div>
 
-<form method="POST" action="{{url('admin/createuser')}}">
+<form class="container" method="POST" action="{{url('admin/createuser')}}">
     {!! csrf_field() !!}
 
     <div class='form-group'>

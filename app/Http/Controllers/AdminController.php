@@ -37,7 +37,7 @@ class AdminController extends Controller
     public function index()
     {
         
-        $users = User::orderBy('name', 'ASC')->paginate(2);
+        $users = User::orderBy('name', 'ASC')->paginate(5);
         return View('admin.index' )->with('users',$users);//ó return View('admin.index', $users )
         
         /*dd("test");
@@ -164,7 +164,7 @@ class AdminController extends Controller
         $users->password = bcrypt($request->password);
         $users->save();
         
-        $users_all = User::orderBy('name', 'ASC')->paginate(2);
+        $users_all = User::orderBy('name', 'ASC')->paginate(5);
         Session::flash('message', 'Usuario modificado correctamente.');
         return View('admin.index', ['users'=>$users_all]);
 //        return redirect($to = 'admin/index');
@@ -180,7 +180,7 @@ class AdminController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        $users_all = User::orderBy('name', 'ASC')->paginate(2);
+        $users_all = User::orderBy('name', 'ASC')->paginate(5);
         Session::flash('message','Usuario Eliminado Correctamente');
         return View('admin.index', ['users'=>$users_all]);
     }
