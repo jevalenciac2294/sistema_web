@@ -11,7 +11,7 @@
 </div>
 
 <form method="POST" action="{{url('auth/register')}}">
-    {!! csrf_field() !!}
+    {{ csrf_field() }}
 
     <div class='form-group'>
         <label for="name">Nombre:</label>

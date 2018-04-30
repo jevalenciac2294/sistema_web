@@ -96,3 +96,77 @@ Route::get('editEmpleado/{id}', 'EmpleadoController@editEmpleado');
 
 Route::post('destroyEmpleado/{id}', 'EmpleadoController@destroyEmpleado');
 Route::get('destroyEmpleado/{id}', 'EmpleadoController@destroyEmpleado');
+//Buscar en el index, usuarios creados
+//Route::get('admin/searchredirect', function(){
+//     
+//    /* Nuevo: si el argumento search está vacío regresar a la página anterior */
+//    if (empty(Input::get('search'))) return redirect()->back();
+//    
+//    $search = urlencode(e(Input::get('search')));
+//    $route = "admin/search/$search";
+//    return redirect($route);
+//});
+//Route::get("admin/search/{search}", "adminController@search");
+
+//Route::get('/posts', 'PostsController@index')->name('posts.index');
+
+//Vehiculos
+//create vehiculo
+//agregar empleado
+
+Route::get('createVehiculo', 'VehiculoController@createVehiculo');
+Route::post('createVehiculo', 'VehiculoController@createVehiculo');
+
+//Mostrar vehiculos
+Route::get('indexVehiculo', 'VehiculoController@indexVehiculo');
+Route::post('indexVehiculo', 'VehiculoController@indexVehiculo');
+
+//Route::get('admin/edit/{id}', 'AdminController@edit');
+
+//Editar vehiculo existente
+////Eliminar vehiculo existente
+//Route::delete('/vehiculo/{id}', function($id){});
+
+
+Route::post('updateVehiculo/{id}', 'VehiculoController@updateVehiculo');
+Route::get('editVehiculo/{id}', 'VehiculoController@editVehiculo');
+
+Route::post('destroyVehiculo/{id}', 'VehiculoController@destroyVehiculo');
+Route::get('destroyVehiculo/{id}', 'VehiculoController@destroyVehiculo');
+
+
+//Route::any("home/front", "HomeController@front");
+//Route::post('/Rutas', 'RutasController@searchRutas');
+
+Route::get('rutacreate', 'RutasController@rutacreate');
+Route::post('rutacreate', 'RutasController@rutacreate');
+
+Route::get('rutaindex', 'RutasController@rutaindex');
+Route::post('rutaindex', 'RutasController@rutaindex');
+
+//Route::get('home/front', function(){
+//    return View::make('home.front');
+//});
+//
+//Route::post('rutacreate', function(){
+//
+//    Ruta::create(Input::all());
+//    var_dump('esta agregado...');
+//});
+//
+//Route::get('rutaindex/id', function($id){
+//
+//     
+//    $ruta= Ruta::find($id);
+//    
+//    return View::make('ruta', compact('ruta'));
+//    
+//});
+
+//Mostrar rutas
+//Route::get('prueba/indexruteo', 'HomeController@rutaindex');
+//Route::post('prueba/indexruteo', 'HomeController@rutaindex
+Route::get('indexubicacion/{ruta_id}', 'RutasController@indexubicacion');
+Route::post('indexubicacion/{ruta_id}', 'RutasController@indexubicacion');
+Route::get('indexubicacion/{ruta_id}', 'RutasController@indexubicacion');
+Route::post('indexubicacion/{ruta_id}', 'RutasController@indexubicacion');

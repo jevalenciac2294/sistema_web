@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
 {
-    /**
+    /*
      * The application's global HTTP middleware stack.
      *
      * @var array
@@ -18,9 +18,10 @@ class Kernel extends HttpKernel
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \App\Http\Middleware\VerifyCsrfToken::class,
+        
     ];
 
-    /**
+    /*
      * The application's route middleware.
      *
      * @var array
@@ -29,5 +30,8 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'usuarioAdmin'=> \App\Http\Middleware\MDusuarioadmin::class,
+        'usuarioStandard'=> \App\Http\Middleware\MDusuariostandard::class,
+    
     ];
 }

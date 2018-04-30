@@ -132,5 +132,6 @@ class AuthController extends Controller
             ->withInput()
             ->with('message', 'Error al iniciar sesión');
         }
+        
     }
 }

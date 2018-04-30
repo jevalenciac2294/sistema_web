@@ -119,6 +119,7 @@ class EmpleadoController extends Controller{
     {
         $empleado = Empleado::find($id);
         $empleado ->delete();
+//        $empleado->destroy($id);
         $empleado_all = Empleado::orderBy('name', 'ASC')->paginate(2);
         Session::flash('message','Empleado Eliminado Correctamente');
         return View('admin.empleado.indexEmpleado', ['empleado'=>$empleado_all]);

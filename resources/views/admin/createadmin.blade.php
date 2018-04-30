@@ -43,6 +43,10 @@
         <label for="password_confirmation">Confirmar Password:</label>
         <input type="password" class="form-control" name="password_confirmation">
     </div>
+    <div class="form-group">
+        <label for="user">Tipo de usuario:</label>
+        <input type="text" class="form-control" name="user">
+    </div>
 
     <div>
         <button type="submit" class="btn btn-primary">Crear administrador</button>

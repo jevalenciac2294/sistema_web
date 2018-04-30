@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Hash;
+use App\TipoUsuario;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -33,6 +34,44 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
-    
-    protected $dates = ['deleted_at'];
+//
+//    //course\profile
+//     public static function scopeName($query, $name)
+//    {
+//         
+//        if(trim($name) !="")
+//        {
+//            $query->where('name', 'LIKE', "%$name%");
+//        }
+//    }
+
+
+  public static function scopeBusqueda($query,$name)
+     {
+
+            if(trim($name) !=""){ 
+            $query-> where('name',"LIKE","%$name%");
+                               
+            }
+            
+     }
+
+     
+      public function tipo($idtipo)
+      {
+        $resul=TipoUsuario::find($idtipo);
+        if(isset($resul)){
+         return $resul->nombre;
+        }
+        else
+        {
+          return "Estandar";
+        }
+        
+      }
+
+
+
+
+
 }
