@@ -24,6 +24,12 @@
         <input type="password" class="form-control" name="password" />
         <div class="text-danger">{{$errors->first('password')}}</div>
     </div>
+    
+    <div class="form-group">
+        <label for="user">Tipo de usuario:</label>
+        <input type="text" class="form-control" name="user">
+    </div>
+
     <div>
         <button type="submit" class="btn btn-primary">Guardar</button>
     </div>

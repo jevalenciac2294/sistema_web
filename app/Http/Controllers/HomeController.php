@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MiFormulario;
 use Validator;
 
+use App\Comments;
 class HomeController extends Controller{
     
     public function getId($id1, $id2){

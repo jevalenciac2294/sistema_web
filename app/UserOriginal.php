@@ -4,11 +4,10 @@ namespace App;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use App\TipoUsuario;
+use Hash;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -34,29 +33,38 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+    
+    protected $dates = ['deleted_at'];
+            public function educacion()
+      {
+        return $this->hasMany('App\Educacion', 'idUsuario', 'id');
+      }
 
 
-    public static function filterAndPaginate($name)
+        public function publicaciones()
+      {
+        return $this->hasMany('App\Publicaciones', 'idUsuario', 'id');
+      }
+
+
+        public function proyectos()
+      {
+        return $this->hasMany('App\Proyectos', 'idUsuario', 'id');
+      }
+
+
+          public function delpais()
+      {
+        return $this->hasOne('App\Pais', 'id', 'pais');
+      }
+
+
+
+      public function scopeBusqueda($query,$name)
      {
-        //return $this->hasOne('admin\index');
-        return User::name($name);
-     }
-    //course\profile
-     public static function scopeName($query, $name)
-    {
-         
-        if(trim($name) !="")
-        {
-            $query->where('name', 'LIKE', "%$name%");
-        }
-    }
 
-
-  public function scopeBusqueda($query,$name)
-     {
-
-            if(trim($name) !=""){ 
-            $query-> where('full_name','name',"LIKE","%$name%");
+            if($name !=""){ 
+            $query= where(\DB::raw("CONCAT(name,'', email)"),"LIKE","%$name%");
                                
             }
             
@@ -75,8 +83,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
         
       }
-
-
 
 
 

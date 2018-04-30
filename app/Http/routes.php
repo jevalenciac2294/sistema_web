@@ -96,3 +96,22 @@ Route::get('editEmpleado/{id}', 'EmpleadoController@editEmpleado');
 
 Route::post('destroyEmpleado/{id}', 'EmpleadoController@destroyEmpleado');
 Route::get('destroyEmpleado/{id}', 'EmpleadoController@destroyEmpleado');
+//Buscar en el index, usuarios creados
+//Route::get('admin/searchredirect', function(){
+//     
+//    /* Nuevo: si el argumento search está vacío regresar a la página anterior */
+//    if (empty(Input::get('search'))) return redirect()->back();
+//    
+//    $search = urlencode(e(Input::get('search')));
+//    $route = "admin/search/$search";
+//    return redirect($route);
+//});
+//Route::get("admin/search/{search}", "adminController@search");
+
+//Route::get('/posts', 'PostsController@index')->name('posts.index');
+
+//create vehiculo
+//agregar empleado
+
+Route::get('createVehiculo', 'VehiculoController@createVehiculo');
+Route::post('createVehiculo', 'VehiculoController@createVehiculo');

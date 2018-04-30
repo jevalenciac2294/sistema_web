@@ -1,4 +1,5 @@
 @extends('layouts.home')
+
 @section('content')
 
 
@@ -17,7 +18,7 @@
         {{Session::get('message')}}
     @endif
 </div>
-<table>
+<table class="table table-striped">
     <thead>
         <th>    Id  </th>
         <th>    name  </th>

@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Http\name;
+use App\Comments;
+use Illuminate\Database\Query\Builder;
+        
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Data;
 use Session;
 use Redirect;
 
+use App\TipoUsuario;
 use App\User;
 use Validator;
 use Auth;
@@ -34,10 +38,21 @@ class AdminController extends Controller
         if (Auth::user()->user == 1) return true;
         else return false;
     }
-    public function index()
-    {
-        
+    public function index(Request $request){
+        //$users = User::scopeName($request->get('name')->get('name'));
+//        $search = urldecode($search);
+//        $users = User::select()
+//                ->where('users', 'LIKE', '%' . $search . '%')
+//                ->orderBy('id', 'desc')
+//                ->get();
+        //$users = User::with($request->get('name'))->orderBy('id','DESC')->paginate(2);
+//        $posts = Post::where('title', 'like', '%'.Input::get('search').'%')
+//                ->orWhere('body', 'like', '%'.Input::get('search').'%')
+//                ->orderBy('id', 'desc')->paginate(6);
+//  
+//  return view('posts', ['posts' => $posts]);
         $users = User::orderBy('name', 'ASC')->paginate(5);
+        //$users = User::filterAndPaginate($request->get('name'));
         return View('admin.index' )->with('users',$users);//ó return View('admin.index', $users )
         
         /*dd("test");
@@ -45,6 +60,24 @@ class AdminController extends Controller
        //return $users->where('admin.index', Auth::user()->$users);
         return $users->where('admin.index', user()->$user);*/
     }
+
+//    public function search($search){
+//        $search = urldecode($search);
+//        $users = Users::select()
+//                ->where('users', 'LIKE', '%'.$search.'%')
+//                ->orderBy('id', 'desc')
+//                ->get();
+//        
+//        if (count($users) == 0){
+//            return View('admin.search')
+//            ->with('message', 'No hay resultados que mostrar')
+//            ->with('search', $search);
+//        } else{
+//            return View('admin.search')
+//            ->with('users', $users)
+//            ->with('search', $search);
+//        }
+//    }
 
     /**
      * Show the form for creating a new resource.
@@ -162,6 +195,7 @@ class AdminController extends Controller
         $users = User::find($id);
         $users->fill($request->all());
         $users->password = bcrypt($request->password);
+        $users->user = $request->user;
         $users->save();
         
         $users_all = User::orderBy('name', 'ASC')->paginate(5);
@@ -193,6 +227,7 @@ class AdminController extends Controller
     'name' => 'required|min:3|max:16|regex:/^[a-záéíóúàèìòùäëïöüñ\s]+$/i',
     'email' => 'required|email|max:255|unique:users,email',
     'password' => 'required|min:6|max:18|confirmed',
+       'user' => 'required|min:1|max:1|regex:/^[1-1]+$/i',
    ];
    
    //Posibles mensajes de error de validación
@@ -209,6 +244,7 @@ class AdminController extends Controller
     'password.min' => 'El mínimo de caracteres permitidos son 6',
     'password.max' => 'El máximo de caracteres permitidos son 18',
     'password.confirmed' => 'Los passwords no coinciden',
+       'user.required' => 'el tipo de usuario es 1 o 0'
    ];
    
    $validator = Validator::make($request->all(), $rules, $messages);
@@ -224,10 +260,11 @@ class AdminController extends Controller
     $user->password = bcrypt($request->password);
     $user->remember_token = str_random(100);
     $user->confirm_token = str_random(100);
+    $user->user=$request->user;
     //Activar al administrador sin necesidad de enviar correo electrónico
     $user->active = 1;
     //El valor 1 en la columna determina si el usuario es administrador o no
-    $user->user = 1;
+    //$user->user = 1;
     
     if ($user->save()){
      return redirect()->back()->with('message', 'Enhorabuena nuevo administrador creado correctamente');
@@ -246,4 +283,22 @@ class AdminController extends Controller
             return redirect()->back();
         }
     }
+    
+//    public function info_datos_usuario($id)
+//	{
+//		//funcion para cargar los datos de cada usuario en la ficha
+//		$user=User::find($id);
+//		$contador=count($user);
+//		$tiposusuario=TipoUsuario::all();
+//		
+//		if($contador>0){          
+//            return view("admin.index")
+//                   ->with("user",$user)
+//                   ->with("tiposusuario",$tiposusuario);
+//		}
+//		else
+//		{            
+//            Session::flash('message','El usuario no existe'); 
+//		}
+//	}
 }
