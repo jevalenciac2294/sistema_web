@@ -14,7 +14,6 @@
         <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
         <script type='text/javascript' src='{{url()}}/bootstrap/js/bootstrap.min.js'>
         </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkz-BhCJcWq35bx6vEpFTn4KtKYCm-OQE&libraries=geometry"></script>
         
         <meta charset="utf-8">
         <meta name="_token" content="{!! csrf_token() !!}"/>
@@ -25,9 +24,8 @@
   
     </head>
     <body>
-
-        @extends('layouts.navbar')
         
+<!----------asigna vehiculo-------------->
 
 <div class="container">
   
@@ -41,8 +39,8 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Modal Header</h4>
         </div>
-          <div class="modal-body" id="listaRutas">
-          <p>Cargando rutas...</p>
+          <div class="modal-body" id="listaVehiculos">
+          <p>Cargando vehiculos...</p>
          </div>
           <!--<div id="getRequestData"></div>-->
         <div class="modal-footer">

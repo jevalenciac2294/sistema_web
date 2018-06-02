@@ -1,3 +1,4 @@
+@extends('layouts.home')
 @extends('layouts.laramap')
 
 @section('content')
@@ -10,6 +11,9 @@
     
 </form>
 <!--<a href="{{url('admin/createadmin')}}" class="btn btn-info"> Crear ruta</a>-->
+<div Style="padding-top: 40px">
+</div>
+<div class="text-info" Style="padding-top: 40px"></div>
 {!! csrf_field() !!}
 <form method="post" action="{{url('rutacreate')}}" id="formmapa" file="true">
     {!! csrf_field() !!}

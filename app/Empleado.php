@@ -27,4 +27,12 @@ class Empleado extends Model implements AuthenticatableContract, CanResetPasswor
      * @var array
      */
     protected $fillable = ['name', 'apellidoS','documento','email','direccion','telefono','sueldo' ];
+    
+    
+    public function empleadovehiculo(){
+    return $this->belongToMany(EmpleadoVehiculo::class);
+    }
+    public function vehiculo(){
+    return $this->belongToMany(Vehiculo::class);
+    }
 }

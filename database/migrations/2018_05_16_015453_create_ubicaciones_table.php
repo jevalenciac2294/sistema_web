@@ -13,16 +13,16 @@ class CreateUbicacionesTable extends Migration
     public function up()
     {
         Schema::create('ubicaciones', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unique();
             
             $table->string('lat');
             $table->string('lng');
-            $table->Integer('ruta_id');
+            $table->Integer('ruta_id')->unique();
             $table->foreign('ruta_id')->references('id')->on('rutas')
                     ->onUpdate('cascade')->onDelete('cascade');
                     
-            $table->timestamps();
             
+            $table->timestamps();
             $table->primary('id');
         });
     }

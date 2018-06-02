@@ -13,14 +13,14 @@ class CreateRutasTable extends Migration
     public function up()
     {
         Schema::create('rutas', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unique();
             
             $table->string('name');
             $table->string('lat');
             $table->string('lng');
-            $table->timestamps();
             
             $table->primary('id');
+            $table->timestamps();
         });
     }
 

@@ -170,3 +170,28 @@ Route::get('indexubicacion/{ruta_id}', 'RutasController@indexubicacion');
 Route::post('indexubicacion/{ruta_id}', 'RutasController@indexubicacion');
 Route::get('indexubicacion/{ruta_id}', 'RutasController@indexubicacion');
 Route::post('indexubicacion/{ruta_id}', 'RutasController@indexubicacion');
+
+//Route::get('rutaindex', 'RutasVehiculoController@rutavehiculo');
+//Route::post('rutaindex', 'RutasVehiculoController@rutavehiculo');
+Route::get('obtenerRutas', 'RutasController@obtenerRutas');
+
+Route::post('asignarutasvehiculo', 'RutasVehiculoController@asignarutasvehiculo');
+Route::get('asignarutasvehiculo', 'RutasVehiculoController@asignarutasvehiculo');
+
+//Route::post('removerutasvehiculo/{id}', 'RutasVehiculoController@removerutasvehiculo');
+//Route::get('removerutasvehiculo/{id}', 'RutasVehiculoController@removerutasvehiculo');
+//
+//Route::post('destroyRutasVehiculos/{id}', 'RutasVehiculoController@destroyRutasVehiculos');
+//Route::get('destroyRutasVehiculos/{id}', 'RutasVehiculoController@destroyRutasVehiculos');
+
+//-----------------Empleado Vehiculo---------------------------------
+Route::get('obtenerVehiculo', 'VehiculoController@obtenerVehiculo');
+
+Route::post('asignaempleadovehiculo', 'EmpleadoVehiculoController@asignaempleadovehiculo');
+Route::get('asignaempleadovehiculo', 'EmpleadoVehiculoController@asignaempleadovehiculo');
+
+//Route::post('removempleadosvehiculo/{id}', 'EmpleadoVehiculoController@removempleadovehiculo');
+//Route::get('removempleadovehiculo/{id}', 'EmpleadoVehiculoController@removempleadovehiculo');
+//
+//Route::post('destroyRutasVehiculos/{id}', 'RutasVehiculoController@destroyRutasVehiculos');
+//Route::get('destroyRutasVehiculos/{id}', 'RutasVehiculoController@destroyRutasVehiculos');

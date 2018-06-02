@@ -3,8 +3,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUbicacionesTable extends Migration
+
+class AddRutasvehiculosTable extends Migration
 {
+    
+
     /**
      * Run the migrations.
      *
@@ -12,8 +15,10 @@ class AddUbicacionesTable extends Migration
      */
     public function up()
     {
-        Schema::table('ubicaciones', function (Blueprint $table) {
-                        
+        Schema::table('rutasvehiculos', function (Blueprint $table) {
+                    
+                $table->softdeletes(); //Nueva línea, para el borrado lógico
+    
 //            $table->foreign('ruta_id')->references('id')->on('rutas')
 //                    ->onUpdate('cascade')->onDelete('cascade');
                     
@@ -27,6 +32,6 @@ class AddUbicacionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropColumn('ubicaciones');
+        Schema::dropColumn('rutasvehiculos');
     }
 }

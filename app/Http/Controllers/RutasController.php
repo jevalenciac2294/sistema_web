@@ -11,16 +11,17 @@ use App\Http\Controllers\Controller;
 use Validator;
 use App\Comments;
 use App\Ubicacion;
+use App\Rutas_Vehiculos;
 
 class RutasController extends Controller
 {
-    public function searchRutas(Request $request){
-        $lat=$request->lat;
-        $lng=$request->lng;
-        
-        $rutas=Rutas::whereBetween('lat',[lat-0.1, lat+0.1])->whereBetween('lng',[$lng-0.1, lng+0.1])-get();
-        return $rutas;
-    }
+//    public function searchRutas(Request $request){
+//        $lat=$request->lat;
+//        $lng=$request->lng;
+//        
+//        $rutas=Rutas::whereBetween('lat',[lat-0.1, lat+0.1])->whereBetween('lng',[$lng-0.1, lng+0.1])-get();
+//        return $rutas;
+//    }
     public function rutacreate(Request $request){            
     
     if ($request->isMethod('post'))
@@ -124,64 +125,33 @@ public function rutaindex(){
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+   public function obtenerRutas(Request $request){
+        $id_vehiculo = $request->vehiculo_id;
+        $ruta = Ruta::all();
+        // Hay que traer las rutas que tiene asignado este vehiculo $id_vehiculo
+        // Y agregarle un parametro a ruta que indique que ya esta asignado
+        
+        // recorrer todas las rutas buscando que se encuentren en rutas_vehiculo
+        // cuando encuentra tiene estado '1' de lo contrario '0'
+        
+        $rutas_vehiculos = Rutas_Vehiculos::Where('vehiculo_id', '=', $id_vehiculo)->get();
+        foreach($ruta as $key => $r){
+            $estado = '0';
+            foreach($rutas_vehiculos as $rv){
+                if($r['id'] === $rv['ruta_id']){
+                    $estado = '1';
+                    break;
+                }
+            }
+            $ruta[$key]['contiene_ruta'] = $estado;
+        }
+        
+//        foreach($ruta as $key => $rv){
+//            echo 'key: ' . $key . ", rv: " . $rv . "</br>";
+//        }
+//        exit;return;
+        return response(['rutas'=> $ruta]);
+   }
+   
+   
 }

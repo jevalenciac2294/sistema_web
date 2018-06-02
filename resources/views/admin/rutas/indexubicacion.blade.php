@@ -1,3 +1,4 @@
+@extends('layouts.home')
 @extends('layouts.laramap')
 @section('content')
 <script>

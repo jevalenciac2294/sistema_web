@@ -1,5 +1,5 @@
+<script src="{{asset('js/vehiculoscript.js')}}"></script>
 @extends('layouts.home')
-
 @section('content')
 
 
@@ -10,9 +10,7 @@
     @if(Session::has('message'))
     <div class="text-danger"></div>
     <div class="alert-success alert-dismissable" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span>
-            
-        </button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
         
     </div>
         {{Session::get('message')}}
@@ -30,22 +28,20 @@
     <tbody>
         @foreach($vehiculo as $vehiculo)
        <tr>
-           <td> {{$vehiculo->id}}</td>
+        <td> {{$vehiculo->id}}</td>
         <td>{{$vehiculo->matricula}}</td>
         <td>{{$vehiculo->marca}}</td>
         <td>{{$vehiculo->modelo}}</td>
         <td>{{$vehiculo->color}}</td>      
         <td>
             
-        <td><a href="{{ url('editVehiculo', [$vehiculo->id]) }}" class="btn btn-danger">Editar</a>
+        <td><a href="{{ url('editVehiculo', [$vehiculo->id]) }}" class="btn btn-danger">Editar</a>    
+        <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="listarRuta('{{url('obtenerRutas')}}','{{url('asignarutasvehiculo')}}', '{{$vehiculo->id}}', '{{ url('/indexubicacion') }}')">Asignar ruta</a>
         <td><a href="{{ url('destroyVehiculo', [$vehiculo->id]) }}" class="btn btn-warning">Eliminar</a>
-           
         </td>
-
        </tr>
-    </tbody>
+    </tbody> 
     @endforeach;
     
     
-    </div>
 </table>    

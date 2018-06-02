@@ -36,6 +36,13 @@
             <a href="{{url('indexVehiculo')}}" class="list-group-item">Ver vehiculos</a>
         </div>
       </li>
+      <li><a data-toggle="collapse" href="#collapse4" style="font-weight: bold;">Gestion Rutas
+        <span class="caret"></span></a>
+        <div id="collapse4" class="panel-collapse collapse list-group" style="width:220px;float:right;position:absolute;">
+            <a href="{{url('rutacreate')}}" class="list-group-item">Crear ruta</a>
+            <a href="{{url('rutaindex')}}" class="list-group-item">Ver rutas</a>
+        </div>
+      </li>
 <!--      <li style="font-weight: bold;"><a data-toggle="collapse" href="#collapse2">Crear Usuarios prueba 2
         <span class="caret"></span></a>
         <ul id="collapse2" class="panel-collapse collapse dropdown-menu">

@@ -1,4 +1,6 @@
 @extends('layouts.laramap')
+@extends('layouts.home')
+
 @section('content')
 
 
@@ -29,7 +31,7 @@
         <td>{{$ruta->id}}</td>
         <td>{{$ruta->name}}</td>
         <td>
-            
+  
         <td><a href="{{ url('/indexubicacion', [$ruta->id]) }}" class="btn btn-danger">Ver</a>
                     
         </td>

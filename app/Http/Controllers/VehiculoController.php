@@ -17,6 +17,7 @@ use Redirect;
 
 use App\User;
 use App\Empleado;
+use App\EmpleadoVehiculo;
 
 use Auth;
 use Illuminate\Http\html;
@@ -163,4 +164,33 @@ class VehiculoController extends Controller
         //return View('admin.edit' )->with('users',$users);
         //return $id;
     }
+    
+    
+   public function obtenerVehiculo(Request $request){
+        $id_empleado = $request->empleado_id;
+        $vehiculo = Vehiculo::all();
+        // Hay que traer las rutas que tiene asignado este vehiculo $id_vehiculo
+        // Y agregarle un parametro a ruta que indique que ya esta asignado
+        
+        // recorrer todas las rutas buscando que se encuentren en rutas_vehiculo
+        // cuando encuentra tiene estado '1' de lo contrario '0'
+        
+        $empleadovehiculo = EmpleadoVehiculo::Where('empleado_id', '=', $id_empleado)->get();
+        foreach($vehiculo as $key => $r){
+            $estado = '0';
+            foreach($empleadovehiculo as $rv){
+                if($r['id'] === $rv['vehiculo_id']){
+                    $estado = '1';
+                    break;
+                }
+            }
+            $vehiculo[$key]['contiene_vehiculo'] = $estado;
+        }
+        
+//        foreach($ruta as $key => $rv){
+//            echo 'key: ' . $key . ", rv: " . $rv . "</br>";
+//        }
+//        exit;return;
+        return response(['vehiculo'=> $vehiculo]);
+   }
 }

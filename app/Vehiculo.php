@@ -21,4 +21,11 @@ class Vehiculo extends Model implements AuthenticatableContract, CanResetPasswor
      * @var array
      */
     protected $fillable = ['matricula', 'marca','modelo','color'];
+    
+    public function rutasvehiculos(){
+    return $this->belongToMany(Rutas_vehiculos::class);
+    }
+    public function empleado(){
+    return $this->belongToMany(Empleado::class);
+    }
 }

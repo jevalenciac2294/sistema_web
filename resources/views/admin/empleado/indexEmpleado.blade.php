@@ -1,4 +1,6 @@
+<script src="{{asset('js/empleadovehiculoscript.js')}}"></script>
 @extends('layouts.home')
+@extends('layouts.modalv')
 
 @section('content')
 
@@ -44,13 +46,14 @@
         <td>
             
         <td><a href="{{ url('editEmpleado', [$empleado->id]) }}" class="btn btn-danger">Editar</a>
+        <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="listarVehiculo('{{url('obtenerVehiculo')}}','{{url('asignaempleadovehiculo')}}', '{{$empleado->id}}', '{{ url('/indexVehiculo') }}')">Asignar vehiculo</a>
         <td><a href="{{ url('destroyEmpleado', [$empleado->id]) }}" class="btn btn-warning">Eliminar</a>
            
         </td>
 
        </tr>
     </tbody>
-    @endforeach;
+    @endforeach
     
     
     </div>
