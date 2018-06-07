@@ -60,26 +60,5 @@ function agregarVehiculo(boton,url_asignavehiculo, vehiculo_id, empleado_id) {
         }
         
     });
-    
-    
-    
-        /*
-        console.log(vehiculo_id, '2');
-        
-        $.get(boton, function(res){
-            var stringRuta = "<table>";
-            var divRuta = document.getElementById("listaRutas");
-
-
-            for(var i=0; i<res.rutas.length; i++){
-
-                console.log(res.vehiculo_id[i]);  
-                console.log(url_asignaruta);
-            }
-
-        });
-        
-        console.log(vehiculo_id, '2');
-        console.log(rutas_id);    */
   
 }

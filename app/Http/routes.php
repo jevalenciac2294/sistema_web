@@ -11,7 +11,7 @@
 |
 */
 
-
+/*
 Route::get('home/id1/{id1}/id2/{id2}', 'HomeController@getId');
 Route::get('home/showview', 'HomeController@showView');
 
@@ -33,7 +33,15 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('auth/confirm/email/{email}/confirm_token/{confirm_token}', 'Auth\AuthController@confirmRegister');
 
 Route::get('/', 'HomeController@home');
-Route::get('/home', 'HomeController@home');
+Route::get('/home', 'HomeController@home');*/
+
+//Route::get('/', function(){
+//return redirect('auth/login');
+//});
+
+//Auth::routes();
+//
+//Route::group(['middleware' => 'auth'], function () {
 
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
@@ -195,3 +203,38 @@ Route::get('asignaempleadovehiculo', 'EmpleadoVehiculoController@asignaempleadov
 //
 //Route::post('destroyRutasVehiculos/{id}', 'RutasVehiculoController@destroyRutasVehiculos');
 //Route::get('destroyRutasVehiculos/{id}', 'RutasVehiculoController@destroyRutasVehiculos');
+
+//permisos-----------------------------------------
+
+//Route::post('permissions/store', 'PermissionController@store')->name('permissions.store');
+//Route::post('permissions/getAllParents', 'PermissionController@getAllParents')->name('permissions.store');
+//Route::post('permissions/refreshWith', 'PermissionController@refreshWith')->name('permissions.store');
+
+
+
+//});
+
+	Route::get('/home', 'HomeController@index');
+    
+
+    Route::post('buscar_usuario', 'AdminController@buscar_usuario');
+    
+    Route::post('editar_acceso', 'AdminController@editar_acceso');
+  
+
+    Route::post('crear_rol', 'AdminController@crear_rol');
+    Route::post('crear_permiso', 'AdminController@crear_permiso');
+    Route::post('asignar_permiso', 'AdminController@asignar_permiso');
+    Route::get('quitar_permiso/{idrol}/{idper}', 'AdminController@quitar_permiso');
+    
+    
+    Route::get('form_nuevo_usuario', 'AdminController@form_nuevo_usuario');
+    Route::get('form_nuevo_rol', 'AdminController@form_nuevo_rol');//->middleware('rolesshinobi:administrador');
+    Route::get('form_nuevo_permiso', 'AdminController@form_nuevo_permiso');
+    Route::get('form_editar_usuario/{id}', 'AdminController@form_editar_usuario');
+    Route::get('confirmacion_borrado_usuario/{idusuario}', 'AdminController@confirmacion_borrado_usuario');
+    Route::get('asignar_rol/{idusu}/{idrol}', 'AdminController@asignar_rol');
+    Route::get('quitar_rol/{idusu}/{idrol}', 'AdminController@quitar_rol');
+    Route::get('form_borrado_usuario/{idusu}', 'AdminController@form_borrado_usuario');
+    Route::get('borrar_rol/{idrol}', 'AdminController@borrar_rol');
+

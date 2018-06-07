@@ -1,9 +1,22 @@
-@extends('layouts.home')
 
-@section('content')
-<div class="text-info" Style="padding-top: 40px">
-</div>
+@extends('layouts.app')
 
+@extends('layouts.modalv')
+@section('htmlheader_title')
+	
+@endsection
+
+@section('main-content')
+
+
+<section  id="contenido_principal">
+<div class="box box-primary box-gris">
+     <div class="box-header">
+        <h4 class="box-title">Empleados</h4>
+        <div class="table-responsive" >
+            
+		<div class="margin" id="botones_control">
+		</div>
 <form method="POST" action="{{url('updateEmpleado', [$empleado->id])}}">
     {!! csrf_field() !!}
 
@@ -53,4 +66,6 @@
         <button type="submit" class="btn btn-primary">Guardar Empleado </button>
     </div>
 </form>
+        
 @stop
+</div></section>

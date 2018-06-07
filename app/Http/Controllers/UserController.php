@@ -11,7 +11,8 @@ use App\Http\Requests;
 
 use Validator;
 use Auth;
-
+use Caffeinated\Shinobi\Models\Permission;
+use Caffeinated\Shinobi\Models\Role;
 
 class UserController extends Controller{
 	
@@ -45,16 +46,16 @@ class UserController extends Controller{
             return redirect('user/password')->withErrors($validator);
         }
         else{
-            if (Hash::check($request->mypassword, Auth::user()->password)){
+//            if (Hash::check($request->mypassword, Auth::user()->password)){
                 $user = new User;
                 $user->where('email', '=', Auth::user()->email)
                      ->update(['password' => bcrypt($request->password)]);
                 return redirect('user')->with('status', 'Password cambiado con éxito');
-            }
-            else
-            {
-                return redirect('user/password')->with('message', 'Credenciales incorrectas');
-            }
+//            }
+//            else
+//            {
+//                return redirect('user/password')->with('message', 'Credenciales incorrectas');
+//            }
         }
     }
     

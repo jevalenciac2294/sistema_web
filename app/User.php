@@ -2,16 +2,25 @@
 
 namespace App;
 
+use Caffeinated\Shinobi\Traits\ShinobiTrait;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+
+
 use App\TipoUsuario;
+
+
+
+
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
+    
+    use ShinobiTrait;
     use Authenticatable, CanResetPassword;
 
     /**

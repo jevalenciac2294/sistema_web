@@ -114,6 +114,9 @@ return [
          * Laravel Framework Service Providers...
          */
         
+        Caffeinated\Shinobi\ShinobiServiceProvider::class, // For RBAC
+//        Collective\Html\HtmlServiceProvider::class, // For Watchtower Forms to function
+//        Smarch\Watchtower\WatchtowerServiceProvider::class, // For Watchtower
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -194,6 +197,11 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+//        'Form'     => Collective\Html\FormFacade::class,  // required for Watchtower Forms
+//        'HTML'     => Collective\Html\HtmlFacade::class,   // required for Watchtower Forms
+        'Shinobi'  => Caffeinated\Shinobi\Facades\Shinobi::class, // For RBAC functions
+        //'Watchtower'=> Smarch\Watchtower\WatchtowerFacade::class, // not required, but available
+        
 //        'Form' => Collective\Html\FormFacade,
 //      'Html' => Collective\Html\HtmlFacade,        
 

@@ -78,12 +78,12 @@ public function asignaempleadovehiculo(Request $request){
         if($tipo_accion === 'agregar'){
 //            $vehiculo = Vehiculo::find($id_vehiculo);
 //            $ruta = Ruta::find($id_ruta);
-            $empleadovehiculo = new EmpleadoVehiculos();
+            $empleadovehiculo = new EmpleadoVehiculo();
             $empleadovehiculo->vehiculo_id=$id_vehiculo;
             $empleadovehiculo->empleado_id=$id_empleado;
             $salida_respuesta = $empleadovehiculo->save();
         }else{
-            $empleadovehiculo = EmpleadoVehiculos::Where('vehiculo_id', '=', $id_vehiculo)->
+            $empleadovehiculo = EmpleadoVehiculo::Where('vehiculo_id', '=', $id_vehiculo)->
                                             Where('empleado_id', '=', $id_empleado)->first();
 //            foreach($rutavehiculo as $key => $rv){
 //                    echo 'key: ' . $key . ", dato:" . $rv. "</br>";

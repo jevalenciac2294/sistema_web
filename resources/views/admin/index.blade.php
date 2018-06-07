@@ -1,67 +1,127 @@
-@extends('layouts.home')
+<script src="{{asset('js/plusis.js')}}"></script>
 
-@section('content')
+@extends('layouts.app')
 
-<div Style="padding-top: 40px">
-</div>
-<div class="text-info" Style="padding-top: 40px">
-    
-    @if(Session::has('message'))
-    <div class="text-danger"></div>
-    <div class="alert-success alert-dismissable" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span>
-            
-        </button>
-        
+@section('htmlheader_title')
+	
+@endsection
+
+
+@section('main-content')
+
+@if(count($permisos)==0)
+<p>usuario no tiene ningun permiso</p>
+@else
+
+<section  id="contenido_principal">
+
+	
+
+<div class="box box-primary box-gris">
+
+     <div class="box-header">
+        <h4 class="box-title">Usuarios</h4>	        
+        <form   action="{{ url('buscar_usuario') }}"  method="post"  >
+				<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
+				<div class="input-group input-group-sm">
+					<input type="text" class="form-control" id="dato_buscado" name="dato_buscado" required>
+					<span class="input-group-btn">
+					<input type="submit" class="btn btn-primary" value="buscar" >
+					</span>
+
+				</div>
+						
+        </form>
+
+
+		<div class="margin" id="botones_control">
+<!--              <a href="{{url('admin/createuser')}}" class="btn btn-xs btn-primary" onclick="cargar_formulario(1);">Agregar Usuario</a>
+              <a href="{{url('admin/index')}}"  class="btn btn-xs btn-primary" >Listado Usuarios</a> 
+              <a href="{{url('admin/crear_rol')}}" class="btn btn-xs btn-primary" onclick="cargar_formulario(2);">Roles</a> 
+              <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(1);">Agregar Usuario</a>
+              <a href="{{url('admin/index')}}"  class="btn btn-xs btn-primary" >Listado Usuarios</a> 
+              <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(2);">Roles</a> 
+              <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(3);" >Permisos</a>   -->                              
+
+@if(!empty($permisos['agregar_usuario']))
+              <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(1);">Agregar Usuario</a>
+@endif
+@if(!empty($permisos['index']))
+              <a href="{{url('admin/index')}}"  class="btn btn-xs btn-primary" >Listado Usuarios</a> 
+@endif
+@if(!empty($permisos['editar_rol']))
+              <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(2);">Roles</a> 
+@endif
+@if(!empty($permisos['editar_permisos']))
+              <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(3);" >Permisos</a>                                 
+@endif
+		</div>
+
     </div>
-        {{Session::get('message')}}
-    @endif
-    
-</div>
-<a href="{{url('admin/createadmin')}}" class="btn btn-info"> Crear usuario</a>
-{!! csrf_field() !!}
-<form method="get" action="{{url('admin/index')}}">
-    <div class="input-group">
-        <input type='text' value="{{Input::get('name')}}" name='name' class='form-control' placeholder="Buscar usuario"/>
-    <span class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-    </div>
 
-    <button type="submit" class="btn btn-default">Buscar</button>
-</form>
+<div class="box-body box-white">
 
+    <div class="table-responsive" >
 
+	    <table  class="table table-hover table-striped" cellspacing="0" width="100%">
+				<thead>
+						<tr>    <th>codigo</th>
+								<th>Rol</th>
+								<th>Nombre</th>
+								<th>Email</th>
+							    <th>Acción</th>
+						</tr>
+				</thead>
+	    <tbody>
 
-
-<table class="table table-striped">
-    <thead>
-        <th>    Id  </th>
-        <th>    Nombre  </th>
-        <th>    Correo  </th>
-        
-        <th>    Tipo Usuario  </th>
-        
-        
-    </thead>
-    <tbody>
-        @foreach($users as $user)
-       <tr>
-        <td>{{$user->id}}</td>
-        <td>{{$user->name}}</td>
-        <td>{{$user->email}}</td>
-        <td>{{$user->user}}</td>
-        <td>
-        
-    <label for="nombre" ></label><span style="margin-left:15px;"><?= $user->tipo($user->user);   ?></span> </span></li>
-        
-        <td><a href="{{ url('admin/edit', [$user->id]) }}" class="btn btn-danger">Editar</a>
-        <td><a href="{{ url('admin/destroy', [$user->id]) }}" class="btn btn-warning">Eliminar</a>
+	    @foreach($users as $user)
+		<tr role="row" class="odd">
+			<td>{{ $user->id }}</td>
+			<td><span class="label label-default">
+             
+             @foreach($user->getRoles() as $roles)
+			 {{  $roles.","  }}
+             @endforeach
            
-        </td>
+             </span>
+			</td>
+			<td class="mailbox-messages mailbox-name"><a href="javascript:void(0);"  style="display:block"><i class="fa fa-user"></i>&nbsp;&nbsp;{{ $user->name  }}</a></td>
+			<td>{{ $user->email }}</td>
+			<td>
+			
+			<button type="button" class="btn  btn-default btn-xs" onclick="verinfo_usuario({{  $user->id }})" ><i class="fa fa-fw fa-edit"></i></button>
+			<button type="button"  class="btn  btn-danger btn-xs"  onclick="borrado_usuario({{  $user->id }});"  ><i class="fa fa-fw fa-remove"></i></button>
+			</td>
+		</tr>
+	    @endforeach
 
-       </tr>
-    </tbody>
-    @endforeach
-    
-    
-    </div>
-</table>    
+
+
+		</tbody>
+		</table>
+
+	</div>
+</div>
+
+
+@if(count($users)==0)
+
+
+<div class="box box-primary col-xs-12">
+
+<div class='aprobado' style="margin-top:70px; text-align: center">
+ 
+<label style='color:#177F6B'>
+              ... no se encontraron resultados para su busqueda...
+</label> 
+
+</div>
+
+ </div> 
+
+
+@endif
+
+</div></section>
+@endif
+@endsection

@@ -32,6 +32,9 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'usuarioAdmin'=> \App\Http\Middleware\MDusuarioadmin::class,
         'usuarioStandard'=> \App\Http\Middleware\MDusuariostandard::class,
+        'roleshinobi' => \Caffeinated\Shinobi\Middleware\UserHasRole::class,
+        'permissionshinobi' => \Caffeinated\Shinobi\Middleware\UserHasPermission::class,
+
     
     ];
 }

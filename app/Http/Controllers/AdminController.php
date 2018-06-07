@@ -21,6 +21,9 @@ use Validator;
 use Auth;
 use Illuminate\Http\html;
 
+use Caffeinated\Shinobi\Models\Permission;
+use Caffeinated\Shinobi\Models\Role;
+
 class AdminController extends Controller
 {
     
@@ -38,6 +41,8 @@ class AdminController extends Controller
         if (Auth::user()->user == 1) return true;
         else return false;
     }
+
+    
     public function index(Request $request){
 //        $users = User::Where('name', 'ilike ?', array($request->get('name')))->orderBy('name', 'ASC')->paginate(5)->get();
 //        $users = User::Where('name', 'ilike %?%', array($request->get('name')))->get();
@@ -64,7 +69,17 @@ class AdminController extends Controller
 //  return view('posts', ['posts' => $posts]);
 //        $users = User::orderBy('name', 'ASC')->paginate(5);
         //$users = User::filterAndPaginate($request->get('name'));
-        return View('admin.index' )->with('users',$users);//ó return View('admin.index', $users )
+        
+        // Se debe obtener toda la lista de permisos que tiene el usuario loggeado
+        // Como slug es indice (no se repite) se puede comprar por nombre
+        $permisos_asignados = Auth::user()->getPermissions();
+        // Recorrer todos los permisos y crear un array con el nombre como llave del array
+        $permisos_asignados_llaves = array();
+        foreach($permisos_asignados as $nombre){
+            $permisos_asignados_llaves[$nombre] = '1';
+        }
+        
+        return View('admin.index' )->with('users',$users)->with('permisos',$permisos_asignados_llaves);//ó return View('admin.index', $users )
         
         /*dd("test");
         $users = \App\User::All();
@@ -186,7 +201,13 @@ class AdminController extends Controller
      */
     public function edit($id){
         $users = User::find($id);
-        return View('admin.edit', ['users'=>$users]);
+        $roles=Role::all();
+        
+        return view("admin.form_editar_usuario")->with("users",$users)
+	                                              ->with("roles",$roles);
+        
+//        return View('admin.edit', ['users'=>$users]);
+                   
         /*$users = User::findOrFail($id);
         return View('admin.edit', compact('users'));*/
         //$users = User::find($id);
@@ -207,11 +228,26 @@ class AdminController extends Controller
         $users->fill($request->all());
         $users->password = bcrypt($request->password);
         $users->user = $request->user;
-        $users->save();
+//        $users->save();
         
-        $users_all = User::orderBy('name', 'ASC')->paginate(5);
-        Session::flash('message', 'Usuario modificado correctamente.');
-        return View('admin.index', ['users'=>$users_all]);
+        
+        if($request->has("rol")){
+            $rol=$request->input("rol");
+	    $users->revokeAllRoles();
+	    $users->assignRole($rol);
+        }
+        if( $users->save()){
+		return view("admin.msj_usuario_actualizado")->with("msj","Usuario actualizado correctamente")
+	                                                   ->with("user",$user) ;
+    }
+    else
+    {
+		return view("admin.mensaje_error")->with("msj","..Hubo un error al agregar ; intentarlo nuevamente..");
+    }
+        
+//        $users_all = User::orderBy('name', 'ASC')->paginate(5);
+//        Session::flash('message', 'Usuario modificado correctamente.');
+//        return View('admin.index', ['users'=>$users_all]);
 //        return redirect($to = 'admin/index');
     }
 
@@ -224,10 +260,18 @@ class AdminController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        $user->destroy($id);
+//        $user->destroy($id);
         $users_all = User::orderBy('name', 'ASC')->paginate(5);
-        Session::flash('message','Usuario Eliminado Correctamente');
-        return View('admin.index', ['users'=>$users_all]);
+        
+        if($user->delete()){
+             return view("admin.msj_usuario_borrado")->with("msj","Usuario borrado correctamente") ;
+        }
+        else
+        {
+            return view("admin.mensaje_error")->with("msj","..Hubo un error al agregar ; intentarlo nuevamente..");
+        }
+//        Session::flash('message','Usuario Eliminado Correctamente');
+//        return View('admin.index', ['users'=>$users_all]);
     }
     public function createAdmin(Request $request){
   
@@ -312,4 +356,148 @@ class AdminController extends Controller
 //            Session::flash('message','El usuario no existe'); 
 //		}
 //	}
+        
+    public function form_nuevo_usuario(){
+    //carga el formulario para agregar un nuevo usuario
+    $roles=Role::all();
+    return view("admin.form_nuevo_usuario")->with("roles",$roles);
+
+}
+
+public function form_nuevo_rol(){
+    //carga el formulario para agregar un nuevo rol
+    $roles=Role::all();
+    return view("admin.form_nuevo_rol")->with("roles",$roles);
+}
+
+public function form_nuevo_permiso(){
+    //carga el formulario para agregar un nuevo permiso
+     $roles=Role::all();
+     $permisos=Permission::all();
+    return view("admin.form_nuevo_permiso")->with("roles",$roles)->with("permisos", $permisos);
+}
+
+
+public function crear_rol(Request $request){
+
+   $rol=new Role;
+   $rol->name=$request->input("rol_nombre") ;
+   $rol->slug=$request->input("rol_slug") ;
+   $rol->description=$request->input("rol_descripcion") ;
+    if($rol->save())
+    {
+        return view("admin.msj_rol_creado")->with("msj","Rol agregado correctamente") ;
+    }
+    else
+    {
+        return view("admin.mensaje_error")->with("msj","...Hubo un error al agregar ;...") ;
+    }
+    //crear_rol
+//    return View('admin.createuser');
+}
+
+public function crear_permiso(Request $request){
+
+  
+   $permiso=new Permission;
+   $permiso->name=$request->input("permiso_nombre") ;
+   $permiso->slug=$request->input("permiso_slug") ;
+   $permiso->description=$request->input("permiso_descripcion") ;
+    if($permiso->save())
+    {
+        return view("admin.msj_permiso_creado")->with("msj","Permiso creado correctamente") ;
+    }
+    else
+    {
+        return view("admin.mensaje_error")->with("msj","...Hubo un error al agregar ;...") ;
+    }
+
+
+}
+
+public function asignar_permiso(Request $request){
+
+
+
+     $roleid=$request->input("rol_sel");
+     $idper=$request->input("permiso_rol");
+     $rol=Role::find($roleid);
+     $rol->assignPermission($idper);
+    
+    if($rol->save())
+    {
+        return view("admin.msj_permiso_creado")->with("msj","Permiso asignado correctamente") ;
+    }
+    else
+    {
+        return view("admin.mensaje_error")->with("msj","...Hubo un error al agregar ;...") ;
+    }
+}
+
+public function form_editar_usuario($id){
+    $users=User::find($id);
+    $roles=Role::all();
+    return view("admin.form_editar_usuario")->with("users",$users)
+	                                              ->with("roles",$roles);                                 
+}
+
+public function buscar_usuario(Request $request){
+	$dato=$request->input("dato_buscado");
+	$users=User::where("name","like","%".$dato."%")->orwhere("apellidos","like","%".$dato."%")                                              ->paginate(100);
+	return view('admin.listado_usuarios')->with("usuarios",$usuarios);
+      }
+      
+public function asignar_rol($idusu,$idrol){
+        $users=User::find($idusu);
+        $users->assignRole($idrol);
+
+        $users=User::find($idusu);
+        $rolesasignados=$users->getRoles();
+        /*
+         * // Para que solo tenga uno primero recorre
+         * foreach($rolesasignados as $rol)
+         * revoke($rol->id) //se remueven todos
+         * 
+         * // Luego se asigna el que llega
+         * $users->assignRole($idrol);//se asigna el que llega
+         * 
+         * //retornar todos con getroles()...
+         */
+        echo json_encode($rolesasignados);
+}
+
+public function quitar_rol($idusu,$idrol){
+
+    $users=User::find($idusu);
+    $users->revokeRole($idrol);
+    $rolesasignados=$users->getRoles();
+    return json_encode($rolesasignados);
+}
+
+
+public function form_borrado_usuario($id){
+  $users=User::find($id);
+  return view("admin.form_borrado_usuario")->with("usuario",$usuario);
+
+}
+
+public function quitar_permiso($idrole,$idper){ 
+    
+    $role = Role::find($idrole);
+    $role->revokePermission($idper);
+    $role->save();
+
+    return "ok";
+}
+
+
+public function borrar_rol($idrole){
+
+    $role = Role::find($idrole);
+    $role->delete();
+    return "ok";
+}
+
+
+
 }

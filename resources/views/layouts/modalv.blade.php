@@ -116,9 +116,9 @@ $('.opciones_ruta').live('change', function(){
 });             
 </script>-->
 
-        <div class="container" style="padding-top: 40px ">
+        <!--<div class="container" style="padding-top: 40px ">-->
             @yield('content')
             
-        </div>
+<!--        </div>-->
     </body>
 </html>
