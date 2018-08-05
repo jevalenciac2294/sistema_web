@@ -1,18 +1,12 @@
-<script src="{{asset('js/plusis.js')}}"></script>
-
-@extends('layouts.app')
 @extends('layouts.laramap')
-@section('htmlheader_title')
-	
-@endsection
+@extends('layouts.home')
+
+@section('content')
 
 
-@section('main-content')
-
-
-    <section  id="contenido_principal">
-            <!--<div class="text-info">-->
-<!--
+<div Style="padding-top: 40px">
+</div>
+<div class="text-info" Style="padding-top: 40px">
     {!! csrf_field() !!}
     @if(Session::has('message'))
     <div class="text-danger"></div>
@@ -24,18 +18,7 @@
     </div>
         {{Session::get('message')}}
     @endif
-</div>-->
-<div class="box box-primary box-gris">
-     <div class="box-header">
-        
-        <div class="table-responsive" >
-            
-		<div class="margin" id="botones_control">
-
-              <a href="{{url('rutaindex')}}"  class="btn btn-xs btn-primary" >Listado Rutas</a> 
-
-		</div>
-
+</div>
 <table class="table table-striped">
     <thead>
         <th>    Id  </th>
@@ -60,8 +43,3 @@
     
     </div>
 </table>    
-</div>    
-
- </div>
-</div></section>
-@endsection

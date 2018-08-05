@@ -8,12 +8,12 @@ class CreateEmpleadoVehiculoTable extends Migration
     public function up()
     {
         
-        Schema::create('empleadovehiculo', function (Blueprint $table) {
+        Schema::create('role_user', function (Blueprint $table) {
             	$table->increments('id');
-			$table->integer('empleado_id')->unsigned()->index();
-			$table->foreign('empleado_id')->references('id')->on('empleado')->onDelete('cascade');
-			$table->integer('vehiculo_id')->unsigned()->index();
-			$table->foreign('vehiculo_id')->references('id')->on('vehiculo')->onDelete('cascade');
+			$table->integer('role_id')->unsigned()->index();
+			$table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+			$table->integer('user_id')->unsigned()->index();
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			
             $table->timestamps();
             $table->softdeletes(); //Nueva línea, para el borrado lógico
@@ -28,6 +28,6 @@ class CreateEmpleadoVehiculoTable extends Migration
      */
     public function down()
     {
-        Schema::drop('empleadovehiculo');
+        Schema::drop('role_user');
     }
 }

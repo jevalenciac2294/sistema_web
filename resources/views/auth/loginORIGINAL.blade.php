@@ -29,45 +29,17 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-@extends('layouts.auth')
+@extends('layouts.home')
 
 @section('content')
  <h1>Iniciar sesión</h1>
-<div class="col-sm-12 " style="background-color:rgba(0, 0, 0, 0.35); height: 60px; " >
-                   <a class="mybtn-social pull-right" href="{{url('auth/register')}}">Registrarme</a>
-
-<!--                  <a class="mybtn-social pull-right" href="{{ url('auth/login') }}">
-                       Login
-                  </a>-->
-                   <a class="mybtn-social pull-right" href='{{url("password/email")}}'>Olvidé mi contraseña</a>
-            
-            <div class="row">
-              <div class="col-sm-6 col-sm-offset-3 myform-cont" >
-                    <div class="myform-top">
-                        <div class="myform-top-left">
-<!--                         <img  src="{{ url('img/logo_plusis.png') }} " class="img-responsive logo" />
-                          <h3>Ingresa a nuestro sitio.</h3>-->
-                            <p>Digita tu email y contraseña:</p>
-                        </div>
-                        <div class="myform-top-right">
-                          <i class="fa fa-key"></i>
-                        </div>
-                    </div>
-                  
-                  @if (count($errors) > 0)
-                 <div class="col-sm-12" >
-                        <div class="alert alert-danger">
-                            <strong>Whoops!</strong> Error de Accesso 
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                </div>
-                @endif
-<div class="myform-bottom">        
-                
+ 
+ <div class="container text-danger">
+  @if (Session::has('message'))
+   {{Session::get('message')}}
+  @endif
+ </div>
+ <hr />
  <form method="post" action="{{url('auth/login')}}">
   {{csrf_field()}}
   <div class="form-group">
@@ -80,19 +52,16 @@
    <input type="password" name="password" class="form-control" />
    <div class="text-danger">{{$errors->first('password')}}</div>
   </div>
-<!--  <div class="form-group">
+  <div class="form-group">
    <label for="remember">No cerrar sesión:</label>
    <input type="checkbox" name="remember" />
-  </div>-->
+  </div>
   <button type="submit" class="btn btn-primary">Iniciar sesión</button>
  </form>
- 
- </div>
-              </div>
-            </div></div>
-              </div>
-            
-
+ <br /><br />
+ <a href="{{url('auth/register')}}">Registrarme</a>
+ </br>
+ <a href='{{url("password/email")}}'>Olvidé mi contraseña</a>
 
 @stop
 
@@ -115,8 +84,6 @@
     });
   });
 </script>
-<!-- Enlazamos el js de Bootstrap, y otros plugins que usemos siempre al final antes de cerrar el body -->
-    <script src="{{ url('js/bootstrap.min.js') }}"></script>
 </body>
 </html>
 

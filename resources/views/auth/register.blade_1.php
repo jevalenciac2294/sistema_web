@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.home')
 
 @section('content')
 
@@ -9,8 +9,7 @@
         {{Session::get('message')}}
     @endif
 </div>
-<div class="col-sm-6 col-sm-offset-3 myform-cont" >
-<div class="myform-bottom">
+
 <form method="POST" action="{{url('auth/register')}}">
     {{ csrf_field() }}
 
@@ -41,6 +40,4 @@
         <button type="submit" class="btn btn-primary">Registrarme</button>
     </div>
 </form>
-</div>
-</div>
 @stop

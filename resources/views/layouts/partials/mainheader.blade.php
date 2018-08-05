@@ -1,12 +1,15 @@
 <!-- Main Header -->
+<!--<header class="main-header" style="position: fixed; top: 0; width: 100%; height: 100%; overflow: hidden; ">-->
 <header class="main-header">
-
+    
+    
+    
     <!-- Logo -->
-    <a href="{{ url('/home') }}" class="logo">
+    <a href="{{ url('admin/index') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>Plus</b></span>
+        <span class="logo-mini"><b>Proyecto grado</b></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Plusis</b>LTE Laravel </span>
+        <span class="logo-lg"><b>Proyecto grado</b></span>
     </a>
 
     <!-- Header Navbar -->
@@ -133,30 +136,30 @@
                             <!-- Menu Body -->
                             <li class="user-body">
                                 <div class="col-xs-4 text-center">
-                                    <a href="#">{{ trans('adminlte_lang::message.followers') }}</a>
+                                    <a href="#">{{ trans('adminlte_lang::message.followers') }}  Menu body 1111</a>
                                 </div>
                                 <div class="col-xs-4 text-center">
-                                    <a href="#">{{ trans('adminlte_lang::message.sales') }}</a>
+                                    <a href="#">{{ trans('adminlte_lang::message.sales') }}  Menu body 2222</a>
                                 </div>
                                 <div class="col-xs-4 text-center">
-                                    <a href="#">{{ trans('adminlte_lang::message.friends') }}</a>
+                                    <a href="#">{{ trans('adminlte_lang::message.friends') }}  Menu body 3333</a>
                                 </div>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.profile') }}</a>
+                                    <a href="{{url('auth/logout')}}" class="btn btn-default btn-flat">Logout</a>
+                                    <a href="{{url('user/password')}}" class="btn btn-default btn-flat">Cambiar mi password</a>
                                 </div>
                                 <div class="pull-right">
 
-                                   <a href="{{ url('/logout') }}"
-                                            onclick="event.preventDefault();
+                                    
+<!--                                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"  class="btn btn-default btn-flat"  >
-                                            Logout
                                         </a>
-
-                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
+<li><a href="{{url('auth/logout')}}">Logout</a></li>-->
+<form id="logout-form" class='active' method="post"  action="{{url('auth/logout')}}">
+                                            {{ csrf_field() }} 
                                         </form>
                                 
 

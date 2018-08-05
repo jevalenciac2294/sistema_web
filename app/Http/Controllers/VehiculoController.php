@@ -34,6 +34,10 @@ class VehiculoController extends Controller
         return View('admin.vehiculo.indexVehiculo' )->with('vehiculo',$vehiculo);
     }
 
+//            
+//        $empleado = Empleado::orderBy('name', 'ASC')->paginate(5);
+//        return View('admin.empleado.indexEmpleado' )->with('empleado',$empleado);
+//        
     /**
      * Show the form for creating a new resource.
      *

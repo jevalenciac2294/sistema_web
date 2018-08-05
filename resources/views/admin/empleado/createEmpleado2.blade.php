@@ -1,22 +1,12 @@
-<script src="{{asset('js/plusis.js')}}"></script>
-@extends('layouts.app')
+@extends('layouts.home')
+@section('content')
 
-@extends('layouts.modalv')
-@section('htmlheader_title')
-	
-@endsection
+<div class="text-info" Style="padding-top: 40px">
+    @if(Session::has('message'))
+        {{Session::get('message')}}
+    @endif
+</div>
 
-@section('main-content')
-
-
-<section  id="contenido_principal">
-<div class="box box-primary box-gris">
-     <div class="box-header">
-        <h4 class="box-title">Crear Empleados</h4>
-        <div class="table-responsive" >
-            
-		<div class="margin" id="botones_control">
-		</div>
 <div class="panel-body">
         
     <form  method="POST" action="{{url('createEmpleado')}}">
@@ -66,6 +56,6 @@
             </div>
         </div>
     </form>
-        
-@stop
-</div></section>
+</div>
+
+@endsection

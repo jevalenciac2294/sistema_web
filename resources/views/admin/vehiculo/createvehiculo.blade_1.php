@@ -2,7 +2,6 @@
 @section('content')
 
 <div class="text-info" Style="padding-top: 40px">
-<div class="text-info" Style="padding-top: 40px">
     @if(Session::has('message'))
         {{Session::get('message')}}
     @endif
@@ -36,8 +35,9 @@
                 
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-6">
-                <button type="submit" class="btn btn-default">
-                    <i class="fa fa-plus"></i> Registrar Vehiculo</button>
+                <button type="submit" class="btn btn-info">
+                    <i> Registrar vehiculo </i>
+                </button>
             </div>
         </div>
     </form>

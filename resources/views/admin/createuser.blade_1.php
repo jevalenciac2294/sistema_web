@@ -1,18 +1,18 @@
-@extends('layouts.auth')
-
+@extends('layouts.home')
 @section('content')
 
-<h1>Formulario de registro</h1>
 
-<div class="text-info" Style="padding-top: 40px">
+<h1 class="container" Style="padding-top: 80px">Crear un nuevo usuario</h1>
+<hr />
+
+<div class="text-info" Style="padding-top: 30px">
     @if(Session::has('message'))
         {{Session::get('message')}}
     @endif
 </div>
-<div class="col-sm-6 col-sm-offset-3 myform-cont" >
-<div class="myform-bottom">
-<form method="POST" action="{{url('auth/register')}}">
-    {{ csrf_field() }}
+
+<form class="container" method="POST" action="{{url('admin/createuser')}}">
+    {!! csrf_field() !!}
 
     <div class='form-group'>
         <label for="name">Nombre:</label>
@@ -38,9 +38,6 @@
     </div>
 
     <div>
-        <button type="submit" class="btn btn-primary">Registrarme</button>
+        <button type="submit" class="btn btn-primary">Registrar Usuario</button>
     </div>
 </form>
-</div>
-</div>
-@stop

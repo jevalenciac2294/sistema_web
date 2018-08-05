@@ -1,10 +1,6 @@
-<script src="{{asset('js/plusis.js')}}"></script>
-
-@extends('layouts.app')
+@extends('layouts.home')
 @extends('layouts.laramap')
 @section('content')
-@section('main-content')
-
 <script>
     var banderaPintar = false;
     var myvar = '{{$parametro_test[1]}}';
@@ -15,19 +11,21 @@
     
 </script>
 
-
-<section  id="contenido_principal">
-
-<div class="box box-primary box-gris">
-     <div class="box-header">
-        
-        <div class="table-responsive" >
+<div Style="padding-top: 40px">
+</div>
+<div class="text-info" Style="padding-top: 40px">
+    {!! csrf_field() !!}
+    @if(Session::has('message'))
+    <div class="text-danger"></div>
+    <div class="alert-success alert-dismissable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span>
             
-		<div class="margin" id="botones_control">
-
-              <a href="{{url('indexubicacion')}}"  class="btn btn-xs btn-primary" >Listado Rutas</a> 
-
-		</div>
+        </button>
+        
+    </div>
+        {{Session::get('message')}}
+    @endif
+</div>
 <table class="table table-striped" border='1'>
     <thead>
         <th>    Id  </th>
@@ -52,8 +50,3 @@ este es el json {{$parametro_test[1]}}
 
 
 <div id="map"></div>
-</div>    
-
- </div>
-</div></section>
-@endsection

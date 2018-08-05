@@ -10,7 +10,6 @@ use App\Ruta;
 use App\Comments;
 use App\Ubicacion;
 
-use App\Comments;
 class HomeController extends Controller{
     
       public function home(){

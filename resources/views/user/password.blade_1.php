@@ -1,6 +1,5 @@
-@extends('layouts.auth')
+@extends('layouts.home')
 @section('content')
-
 <h1>Cambiar mi password</h1>
 @if (Session::has('message'))
  <div class="text-danger">
@@ -8,8 +7,6 @@
  </div>
 @endif
 <hr />
-<div class="col-sm-6 col-sm-offset-3 myform-cont" >
-<div class="myform-bottom">
 <form method="post" action="{{url('user/updatepassword')}}">
  {{csrf_field()}}
  <div class="form-group">
@@ -28,6 +25,4 @@
  </div>
  <button type="submit" class="btn btn-primary">Cambiar mi password</button>
 </form>
-</div>
-</div>
 @stop

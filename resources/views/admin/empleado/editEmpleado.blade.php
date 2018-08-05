@@ -1,3 +1,5 @@
+<script src="{{asset('js/plusis.js')}}"></script>
+
 
 @extends('layouts.app')
 
@@ -12,7 +14,7 @@
 <section  id="contenido_principal">
 <div class="box box-primary box-gris">
      <div class="box-header">
-        <h4 class="box-title">Empleados</h4>
+        <h4 class="box-title">Editar Empleados</h4>
         <div class="table-responsive" >
             
 		<div class="margin" id="botones_control">

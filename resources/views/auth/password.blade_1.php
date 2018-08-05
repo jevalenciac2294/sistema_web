@@ -1,7 +1,5 @@
-@extends('layouts.auth')
+@extends('layouts.home')
 @section('content')
-
-
  <h1>Resetear el password</h1>
  @if (Session::has('status'))
   <div class="alert alert-success">

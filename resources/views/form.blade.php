@@ -5,5 +5,3 @@
     {{csrf_field()}}
     <button type="submit">Send</button>
 </form>
-
-Valor del campo name: {{$name}}

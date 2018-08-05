@@ -1,11 +1,13 @@
-<script src="{{asset('js/empleadovehiculoscript.js')}}"></script>
+<script src="{{asset('js/vehiculoscript.js')}}"></script>
+<script src="{{asset('js/plusis.js')}}"></script>
 
 @extends('layouts.app')
+@extends('layouts.home')
 
-@extends('layouts.modalv')
 @section('htmlheader_title')
 	
 @endsection
+
 
 @section('main-content')
 
@@ -36,46 +38,38 @@
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(2);">Roles</a> 
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(3);" >Permisos</a>   -->                              
 
-              <a href="{{url('indexEmpleado')}}"  class="btn btn-xs btn-primary" >Listado Empleados</a> 
+              <a href="{{url('indexVehiculo')}}"  class="btn btn-xs btn-primary" >Listado Vehiculos</a> 
 
 		</div>
-<table class="table table-hover table-striped" cellspacing="0" width="100%">
+
+<table class="table table-striped">
     <thead>
-        <th>    Id  </th>
-        <th>    name  </th>
-        <th>    apellidoS  </th>
-        <th>    documento  </th>
-        <th>    Correo  </th>
-        <th>    direccion  </th>
-        <th>    telefono  </th>
-        <th>    saldo  </th>
-        
+        <th>    id       </th>
+        <th>    matricula  </th>
+        <th>    marca  </th>
+        <th>    modelo  </th>
+        <th>    color  </th>
+               
     </thead>
     <tbody>
-        @foreach($empleado as $empleado)
+        @foreach($vehiculo as $vehiculo)
        <tr>
-        <td>{{$empleado->id}}</td>
-        <td>{{$empleado->name}}</td>
-        <td>{{$empleado->apellidoS}}</td>
-        <td>{{$empleado->documento}}</td>      
-        <td>{{$empleado->email}}</td>
-        <td>{{$empleado->direccion}}</td>
-        <td>{{$empleado->telefono}}</td>
-        <td>{{$empleado->sueldo}}</td>
+        <td> {{$vehiculo->id}}</td>
+        <td>{{$vehiculo->matricula}}</td>
+        <td>{{$vehiculo->marca}}</td>
+        <td>{{$vehiculo->modelo}}</td>
+        <td>{{$vehiculo->color}}</td>      
         <td>
             
-        <td><a href="{{ url('editEmpleado', [$empleado->id]) }}" class="btn btn-danger">Editar</a>
-        <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="listarVehiculo('{{url('obtenerVehiculo')}}','{{url('asignaempleadovehiculo')}}', '{{$empleado->id}}', '{{ url('/indexVehiculo') }}')">Asignar vehiculo</a>
-        <td><a href="{{ url('destroyEmpleado', [$empleado->id]) }}" class="btn btn-warning">Eliminar</a>
-           
+        <td><a href="{{ url('editVehiculo', [$vehiculo->id]) }}" class="btn btn-danger">Editar</a>    
+        <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="listarRuta('{{url('obtenerRutas')}}','{{url('asignarutasvehiculo')}}', '{{$vehiculo->id}}', '{{ url('/indexubicacion') }}')">Asignar ruta</a>
+        <td><a href="{{ url('destroyVehiculo', [$vehiculo->id]) }}" class="btn btn-warning">Eliminar</a>
         </td>
-
        </tr>
-    </tbody>
-    @endforeach
+    </tbody> 
+    @endforeach;
     
     
-    </div>
 </table>
 </div>
 </div>    
@@ -90,7 +84,7 @@
 </label> 
 
 </div>
-
- </div> -->
+-->
+ </div>
 </div></section>
 @endsection

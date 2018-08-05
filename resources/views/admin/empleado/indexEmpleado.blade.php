@@ -1,26 +1,46 @@
 <script src="{{asset('js/empleadovehiculoscript.js')}}"></script>
-@extends('layouts.home')
-@extends('layouts.modalv')
+<script src="{{asset('js/plusis.js')}}"></script>
 
-@section('content')
+@extends('layouts.app')
+
+@section('htmlheader_title')
+	
+@endsection
 
 
-<div Style="padding-top: 40px">
-</div>
-<div class="text-info" Style="padding-top: 40px">
-    {!! csrf_field() !!}
-    @if(Session::has('message'))
-    <div class="text-danger"></div>
-    <div class="alert-success alert-dismissable" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span>
+@section('main-content')
+
+<section  id="contenido_principal">
+
+<div class="box box-primary box-gris">
+     <div class="box-header">
+        <h4 class="box-title">Empleados</h4>	        
+        <form   action="{{ url('buscar_usuario') }}"  method="post"  >
+				<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
+				<div class="input-group input-group-sm">
+					<input type="text" class="form-control" id="dato_buscado" name="dato_buscado" required>
+					<span class="input-group-btn">
+					<input type="submit" class="btn btn-primary" value="buscar" >
+					</span>
+
+				</div>
+						
+        </form>
+        <div class="table-responsive" >
             
-        </button>
-        
-    </div>
-        {{Session::get('message')}}
-    @endif
-</div>
-<table class="table table-striped">
+		<div class="margin" id="botones_control">
+<!--              <a href="{{url('admin/createuser')}}" class="btn btn-xs btn-primary" onclick="cargar_formulario(1);">Agregar Usuario</a>
+              <a href="{{url('admin/index')}}"  class="btn btn-xs btn-primary" >Listado Usuarios</a> 
+              <a href="{{url('admin/crear_rol')}}" class="btn btn-xs btn-primary" onclick="cargar_formulario(2);">Roles</a> 
+              <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(1);">Agregar Usuario</a>
+              <a href="{{url('admin/index')}}"  class="btn btn-xs btn-primary" >Listado Usuarios</a> 
+              <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(2);">Roles</a> 
+              <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(3);" >Permisos</a>   -->                              
+
+              <a href="{{url('indexEmpleado')}}"  class="btn btn-xs btn-primary" >Listado Empleados</a> 
+
+		</div>
+<table class="table table-hover table-striped" cellspacing="0" width="100%">
     <thead>
         <th>    Id  </th>
         <th>    name  </th>
@@ -57,4 +77,21 @@
     
     
     </div>
-</table>    
+</table>
+</div>
+</div>    
+
+
+<!--<div class="box box-primary col-xs-12">
+
+<div class='aprobado' style="margin-top:70px; text-align: center">
+ 
+<label style='color:#177F6B'>
+              
+</label> 
+
+</div>
+-->
+ </div>
+</div></section>
+@endsection

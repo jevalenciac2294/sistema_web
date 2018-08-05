@@ -1,42 +1,20 @@
-<script src="{{asset('js/plusis.js')}}"></script>
-
-
-@extends('layouts.app')
+@extends('layouts.home')
 @extends('layouts.laramap')
-@section('htmlheader_title')
-@endsection
 
-@section('main-content')
-
+@section('content')
 <script>
     var banderaPintar = true;
 </script>
-<section  id="contenido_principal">
-            <!--<div class="text-info">-->
-<!--
-    {!! csrf_field() !!}
-    @if(Session::has('message'))
-    <div class="text-danger"></div>
-    <div class="alert-success alert-dismissable" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span>
-            
-        </button>
-        
-    </div>
-        {{Session::get('message')}}
-    @endif
-</div>-->
-<div class="box box-primary box-gris">
-     <div class="box-header">
-        
-        <div class="table-responsive" >
-            
-		<div class="margin" id="botones_control">
-
-              <a href="{{url('rutaindex')}}"  class="btn btn-xs btn-primary" >Listado Rutas</a> 
-
-		</div>
-            <div class="panel-body">
+<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<form  method="post" action="{{url('home/front')}}" class="container">
+    
+    
+</form>
+<!--<a href="{{url('admin/createadmin')}}" class="btn btn-info"> Crear ruta</a>-->
+<div Style="padding-top: 40px">
+</div>
+<div class="text-info" Style="padding-top: 40px"></div>
+{!! csrf_field() !!}
 <form method="post" action="{{url('rutacreate')}}" id="formmapa" file="true">
     {!! csrf_field() !!}
     <div class="form-group">
@@ -66,13 +44,16 @@
 
         <!--<form> <select id="district"></select></form>
         <select id="locationSelect" name="location" style="width: 150px">-->
-        <!--</select>-->
+        </select>
 <ul id="rutasResult">
                 </ul>
-       @section('js')
-<!--<div class="container text-center">
--->     
- 
+@section('content')
+<div class="container text-center">
+    <h2>
+        Laramap
+    </h2>
+                    
+        @section('js')
 <!--<script>
     $(document).ready(function(){
         $('#locationSelect').select2({
@@ -106,11 +87,5 @@
         });
     });
 </script>-->
-
 </div>
-</div>    
-
- </div>
-    @stop
-</div></section>
 @endsection
