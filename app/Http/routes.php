@@ -30,6 +30,10 @@ Route::get('auth/logout', function(){
 Route::get('password/email', 'Auth\PasswordController@getEmail');
 Route::post('password/email', 'Auth\PasswordController@postEmail');
 
+//confirmar email
+Route::get('auth/confirm/email/{email}/confirm_token/{confirm_token}', 'Auth\AuthController@confirmRegister');
+        
+        
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
@@ -221,3 +225,59 @@ Route::get('asignaempleadovehiculo', 'EmpleadoVehiculoController@asignaempleadov
     Route::get('form_borrado_usuario/{idusu}', 'AdminController@form_borrado_usuario');
     Route::get('borrar_rol/{idrol}', 'AdminController@borrar_rol');
 
+
+    //--------------------Buscador Usuarios----------------------------------------------
+ 
+    Route::get('admin/searchredirect', function(){
+
+
+        /* Nuevo: si el argumento search está vacío regresar a la página anterior */
+        if (empty(Input::get('search'))) return redirect()->back();
+
+        $search = urlencode(e(Input::get('search')));
+        $route = "admin/index/$search";
+        return redirect($route);
+    });
+    Route::get("admin/index/{search}", "AdminController@search");
+
+//--------------------Buscador Empleados----------------------------------------------
+ 
+    Route::get('admin/empleado/searchredirect', function(){
+
+
+        /* Nuevo: si el argumento search está vacío regresar a la página anterior */
+        if (empty(Input::get('search'))) return redirect()->back();
+
+        $search = urlencode(e(Input::get('search')));
+        $route = "admin.empleado.indexEmpleado/$search";
+        return redirect($route);
+    });
+    Route::get("admin.empleado.indexEmpleado/{search}", "EmpleadoController@search");
+    
+    
+    //--------------------Buscador rutas----------------------------------------------
+
+        Route::get('admin/ruta/searchredirect', function(){
+
+
+        /* Nuevo: si el argumento search está vacío regresar a la página anterior */
+        if (empty(Input::get('search'))) return redirect()->back();
+
+        $search = urlencode(e(Input::get('search')));
+        $route = "admin.ruta.rutaindex/$search";
+        return redirect($route);
+    });
+    Route::get("admin.ruta.rutaindex/{search}", "RutasController@search");  
+    //--------------------Buscador vehiculos----------------------------------------------
+
+        Route::get('admin/vehiculo/searchredirect', function(){
+
+
+        /* Nuevo: si el argumento search está vacío regresar a la página anterior */
+        if (empty(Input::get('search'))) return redirect()->back();
+
+        $search = urlencode(e(Input::get('search')));
+        $route = "admin.vehiculo.indexVehiculo/$search";
+        return redirect($route);
+    });
+    Route::get("admin.vehiculo.indexVehiculo/{search}", "VehiculoController@search");

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Caffeinated\Shinobi\Traits\ShinobiTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;

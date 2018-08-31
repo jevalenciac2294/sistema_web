@@ -2,16 +2,22 @@
 
 
 @extends('layouts.app')
+@extends('layouts.modalv')
 @extends('layouts.laramap')
+
 @section('htmlheader_title')
 @endsection
 
 @section('main-content')
 
+@if(count($permisos)==0)
+<p>usuario no tiene ningun permiso</p>
+@else
 <script>
     var banderaPintar = true;
 </script>
 <section  id="contenido_principal">
+        @if(!empty($permisos['crear_ruta']))
             <!--<div class="text-info">-->
 <!--
     {!! csrf_field() !!}
@@ -112,5 +118,9 @@
 
  </div>
     @stop
+    @else
+<p>el usuario no tiene permisos</p>
+@endif
 </div></section>
+@endif
 @endsection

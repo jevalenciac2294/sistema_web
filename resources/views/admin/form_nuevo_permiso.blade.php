@@ -61,7 +61,7 @@
 			                <div class="form-group">
 									<label class="col-sm-2" for="apellido">Permiso*</label>
 			                    <div class="col-sm-10" >
-									<input type="text" class="form-control" id="permiso_nombre" name="permiso_nombre" " required >
+									<input type="text" class="form-control" id="permiso_nombre" name="permiso_nombre" required >
 			                    </div>
 							</div><!-- /.form-group -->
 
@@ -71,8 +71,15 @@
 			                <div class="form-group">
 									<label class="col-sm-2" for="apellido">Slug*</label>
 			                    <div class="col-sm-10" >
-									<input type="text" class="form-control" id="permiso_slug" name="permiso_slug" " required >
-			                    </div>
+									<input type="text" class="form-control" id="permiso_slug" name="permiso_slug"  required >
+<!--                                                                        <input type="text" class="form-control" id="permiso_slug" name="permiso_slug" list="permisos"  required >
+                                                                            <datalist id="permisos">
+                                                                              @foreach($permisos as $permiso)
+                                                                              <option value="{{$permiso->editar_usuarios}}">{{$permiso->editar_usuarios}}</option>
+                                                                              @endforeach
+                                                                              <option value="Cambridge">
+                                                                            </datalist>-->
+			                    </div>                          
 							</div><!-- /.form-group -->
 
 					    </div><!-- /.col -->
@@ -81,8 +88,10 @@
 			                <div class="form-group">
 									<label class="col-sm-2" for="apellido">Descripcion*</label>
 			                    <div class="col-sm-10" >
-									<input type="text" class="form-control" id="permiso_descripcion" name="permiso_descripcion" " required >
+									<input type="text" class="form-control" id="permiso_descripcion" name="permiso_descripcion"  required >
+                                                                        
 			                    </div>
+                                                                        
 							</div><!-- /.form-group -->
 
 					    </div><!-- /.col -->

@@ -8,8 +8,12 @@
 
 @section('main-content')
 
-
+@if(count($permisos)==0)
+<p>usuario no tiene ningun permiso</p>
+@else
 <section  id="contenido_principal">
+    @if(!empty($permisos['crear_empleado']))
+    
 <div class="box box-primary box-gris">
      <div class="box-header">
         <h4 class="box-title">Crear Empleados</h4>
@@ -66,6 +70,12 @@
             </div>
         </div>
     </form>
-        
-@stop
+                </div>
+        </div>        </div>
+@else
+<p>el usuario no tiene permisos</p>
+@endif
+
 </div></section>
+@endif
+@endsection

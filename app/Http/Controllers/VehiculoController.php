@@ -21,6 +21,10 @@ use App\EmpleadoVehiculo;
 
 use Auth;
 use Illuminate\Http\html;
+
+use Caffeinated\Shinobi\Models\Permission;
+use Caffeinated\Shinobi\Models\Role;
+
 class VehiculoController extends Controller
 {
     /**
@@ -28,10 +32,24 @@ class VehiculoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexVehiculo()
+    public function indexVehiculo(Request $request)
     {
         $vehiculo = Vehiculo::orderBy('matricula', 'ASC')->paginate(5);
-        return View('admin.vehiculo.indexVehiculo' )->with('vehiculo',$vehiculo);
+        
+        if($request->get('name')){
+            $users = User::Where('name', 'like', '%'.$request->get('name').'%')->get()->search($request->name);
+        }else{
+            $users = User::orderBy('name', 'ASC')->paginate(5);
+        }
+        $permisos_asignados = Auth::user()->getPermissions();
+        // Recorrer todos los permisos y crear un array con el nombre como llave del array
+        $permisos_asignados_llaves = array();
+        foreach($permisos_asignados as $nombre){
+            $permisos_asignados_llaves[$nombre] = '1';
+        }
+        
+        return View('admin.vehiculo.indexVehiculo' )->with('users',$users)->with('permisos',$permisos_asignados_llaves)->with('vehiculo',$vehiculo);
+//        return View('admin.vehiculo.indexVehiculo' )->with('vehiculo',$vehiculo);
     }
 
 //            
@@ -97,8 +115,21 @@ class VehiculoController extends Controller
      return redirect()->back()->with('error', 'Ha ocurrido un error al guardar los datos');
     }
    }
-  }
-        return View('admin.vehiculo.createVehiculo');
+  }else if($request->get('name')){
+            $users = User::Where('name', 'like', '%'.$request->get('name').'%')->get()->search($request->name);
+        }else{
+            $users = User::orderBy('name', 'ASC')->paginate(5);
+        }
+        $permisos_asignados = Auth::user()->getPermissions();
+        // Recorrer todos los permisos y crear un array con el nombre como llave del array
+        $permisos_asignados_llaves = array();
+        foreach($permisos_asignados as $nombre){
+            $permisos_asignados_llaves[$nombre] = '1';
+        }
+        
+        return View('admin.vehiculo.createVehiculo' )->with('users',$users)->with('permisos',$permisos_asignados_llaves);
+
+//        return View('admin.vehiculo.createVehiculo');
   
 
 }
@@ -197,4 +228,24 @@ class VehiculoController extends Controller
 //        exit;return;
         return response(['vehiculo'=> $vehiculo]);
    }
+  
+         public function search($search){
+//          return urldecode($search);
+
+          $vehiculo = Vehiculo::select()
+                ->where('matricula', 'LIKE', '%'.$search.'%')
+                ->orderBy('id', 'desc')
+                ->paginate(10);
+        
+        if (count($vehiculo) == 0){
+            return View('admin.vehiculo.search', compact('vehiculo'), ['vehiculo' => $vehiculo])
+            ->with('message', 'No hay resultados que mostrar')
+            ->with('search', $search);
+        } else{
+            return View('admin.vehiculo.search', compact('vehiculo'), ['$vehiculo' => $vehiculo])
+            ->with('matricula', $vehiculo)
+            ->with('search', $search);
+        }
+        return View('admin.vehiculo.search', compact('vehiculo'), ['vehiculo' => $vehiculo]);
+      }
 }

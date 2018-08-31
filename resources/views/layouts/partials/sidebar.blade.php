@@ -63,12 +63,12 @@
 
                     </li>
                     <li>
-                    <a href="{{ url('admin/createadmin') }}">CREAR USUARIO ADMIN</a>
+                    <a href="{{ url('admin/createadmin') }}">CREAR USUARIO</a>
 
                     </li>
                     
                     <li>
-                        <a href="{{url('admin/createuser')}}">CREAR USUARIO</a>
+                        <!--<a href="{{url('admin/createuser')}}">CREAR USUARIO</a>-->
                     </li>
                 </ul>
         </li>

@@ -5,6 +5,10 @@
 @section('content')
 @section('main-content')
 
+@if(count($permisos)==0)
+<p>usuario no tiene ningun permiso</p>
+@else
+
 <script>
     var banderaPintar = false;
     var myvar = '{{$parametro_test[1]}}';
@@ -15,6 +19,7 @@
     
 </script>
 
+@if(!empty($permisos['index_ubicacion_ruta']))
 
 <section  id="contenido_principal">
 
@@ -24,9 +29,9 @@
         <div class="table-responsive" >
             
 		<div class="margin" id="botones_control">
-
+@if(!empty($permisos['listado_ruta']))
               <a href="{{url('indexubicacion')}}"  class="btn btn-xs btn-primary" >Listado Rutas</a> 
-
+@endif
 		</div>
 <table class="table table-striped" border='1'>
     <thead>
@@ -56,4 +61,8 @@ este es el json {{$parametro_test[1]}}
 
  </div>
 </div></section>
+@else
+<p>El usuario no tiene permisos</p>
+@endif
 @endsection
+@endif

@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 namespace App\Http\Controllers\Auth;
 
 use App\User;
@@ -65,21 +64,36 @@ class AuthController extends Controller
             ->withErrors($validator)
             ->withInput();
         }else{
-            $user = new User;
+//            $user = new User;
+//            $data['name'] = $user->name = $request->name;
+//            $user->name = $request->name;
+//            $user->email = $request->email;
+//            $user->password = bcrypt($request->password);
+//            $user->confirm_token = str_random(100);
+//            $user->remember_token = str_random(100);
+//            $data['confirm_token'] = str_random(100);//$user->confirm_token = str_random(100);
+//            $user->save();
+//            
+//            Mail::send('mails.register', ['user' => $user], function ($mail) use ($user){
+//                //$mail->subject('Confirma tu cuenta');
+//                $mail->to($user['email'], $user['name'])->subject('Por favor confirmar tu cuenta');
+//            });
+//
+
+$user = new User;
             $data['name'] = $user->name = $request->name;
-            $user->name = $request->name;
-            $user->email = $request->email;
+            $data['email'] = $user->email = $request->email;
             $user->password = bcrypt($request->password);
-            $user->confirm_token = str_random(100);
             $user->remember_token = str_random(100);
-            $data['confirm_token'] = str_random(100);//$user->confirm_token = str_random(100);
+            $data['confirm_token'] = $user->confirm_token = str_random(100);
             $user->save();
             
-            Mail::send('emails.register', ['user' => $user], function ($mail) use ($user){
-                //$mail->subject('Confirma tu cuenta');
-                $mail->to($user['email'], $user['name'])->subject('Por favor confirmar tu cuenta');
-            });
-            
+            Mail::send('mails.register', ['data' => $data], function($mail) use($data){
+                $mail->subject('Confirma tu cuenta');
+                $mail->to($data['email'], $data['name']);   
+                
+                });
+                
             return redirect("auth/register")
             ->with("message", "Hemos enviado un mensaje de confimacion a su cuenta");
             
@@ -87,6 +101,7 @@ class AuthController extends Controller
         }
         
     }
+
     public function confirmRegister($email, $confirm_token){
         $user = new User();
         $the_user = $user->select()->where('email', '=', $email)

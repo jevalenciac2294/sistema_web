@@ -4,6 +4,10 @@
 @section('content')
 
 
+@if(count($permisos)==0)
+<p>usuario no tiene ningun permiso</p>
+@else
+
 <div Style="padding-top: 40px">
 </div>
 <div class="text-info" Style="padding-top: 40px">

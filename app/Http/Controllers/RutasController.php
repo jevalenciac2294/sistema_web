@@ -13,6 +13,10 @@ use App\Comments;
 use App\Ubicacion;
 use App\Rutas_Vehiculos;
 
+use Auth;
+use Caffeinated\Shinobi\Models\Permission;
+use Caffeinated\Shinobi\Models\Role;
+
 class RutasController extends Controller
 {
 //    public function searchRutas(Request $request){
@@ -57,27 +61,52 @@ class RutasController extends Controller
      return redirect()->back()->with('error', 'Ha ocurrido un error al guardar los datos');
     }
    
-  }
+  }else        if($request->get('name')){
+            $users = User::Where('name', 'like', '%'.$request->get('name').'%')->get()->search($request->name);
+        }else{
+            $ruta = Ruta::orderBy('name', 'ASC')->paginate(5);
+        }
+        $permisos_asignados = Auth::user()->getPermissions();
+        // Recorrer todos los permisos y crear un array con el nombre como llave del array
+        $permisos_asignados_llaves = array();
+        foreach($permisos_asignados as $nombre){
+            $permisos_asignados_llaves[$nombre] = '1';
+        }
+        
+        return View('admin.rutas.rutacreate' )->with('ruta',$ruta)->with('permisos',$permisos_asignados_llaves);
   
-        return View('admin.rutas.rutacreate');
+//        return View('admin.rutas.rutacreate');
     
 }
-public function rutaindex(){
+public function rutaindex(Request $request){
     
 //    $ruta = Ruta::find('name', 'ASC');
 //        return View('home.rutaindex.indexEmpleado' )->with('empleado',$empleado);
 
     
-        $ruta = Ruta::orderBy('id', 'ASC')->paginate(60);
+        $ruta = Ruta::orderBy('id', 'ASC')->paginate(10);
         
-        return View('admin.rutas.rutaindex' )->with('ruta',$ruta);    
 //            $lat_array=explode('/', $request->lat);
 //            $lng_array=explode('/', $request->lng);
 //    
 //        $ruta = Ruta::orderBy('name', 'ASC')->Where('ruta_id', $request->ruta_id);
 //
 //        return View('admin.rutas.rutaindex')->with('$lat_array',$ruta, '$lng_array' ,$ruta);
-}
+        
+        if($request->get('name')){
+            $users = User::Where('name', 'like', '%'.$request->get('name').'%')->get()->search($request->name);
+        }else{
+            $ruta = Ruta::orderBy('name', 'ASC')->paginate(5);
+        }
+        $permisos_asignados = Auth::user()->getPermissions();
+        // Recorrer todos los permisos y crear un array con el nombre como llave del array
+        $permisos_asignados_llaves = array();
+        foreach($permisos_asignados as $nombre){
+            $permisos_asignados_llaves[$nombre] = '1';
+        }
+        
+        return View('admin.rutas.rutaindex' )->with('permisos',$permisos_asignados_llaves)->with('ruta',$ruta);
+
 
         
         
@@ -93,7 +122,8 @@ public function rutaindex(){
 //    
 //        return View('home.rutaindex', ['ruta'=>$ruta]);
 //    }
-    public function indexubicacion($ruta_id)
+}
+    public function indexubicacion(Request $request, $ruta_id)
     {
         
         $ubicaciones = Ubicacion::Where('ruta_id', '=', $ruta_id)->get();
@@ -112,11 +142,26 @@ public function rutaindex(){
         }
         $json .= "}";
         $enviar = array($ubicaciones, $json);
+        
+        if($request->get('name')){
+            $users = User::Where('name', 'like', '%'.$request->get('name').'%')->get()->search($request->name);
+        }else{
+            $ubicaciones = Ubicacion::Where('ruta_id', '=', $ruta_id)->get();
+        }
+        $permisos_asignados = Auth::user()->getPermissions();
+        // Recorrer todos los permisos y crear un array con el nombre como llave del array
+        $permisos_asignados_llaves = array();
+        foreach($permisos_asignados as $nombre){
+            $permisos_asignados_llaves[$nombre] = '1';
+        }
+        
+        return View('admin.rutas.indexubicacion' )->with('permisos',$permisos_asignados_llaves)->with('parametro_test',$enviar);
+
 //        $ubicacion_obj = \App\Ubicacion::All();
 //        $ubicaciones = $ubicacion_obj->where('ruta_id',$ruta_id);
        //return $users->where('admin.index', Auth::user()->$users);
 //        $ubicacion = Ubicacion::all()->where('ruta_id',$ruta_id);
-        return View('admin.rutas.indexubicacion' )->with('parametro_test',$enviar);
+//        return View('admin.rutas.indexubicacion' )->with('parametro_test',$enviar);
 //        return View('admin.rutas.rutaindex' )->with('ubicacion',$ubicacion);
     }
 
@@ -153,5 +198,25 @@ public function rutaindex(){
         return response(['rutas'=> $ruta]);
    }
    
+   
+         public function search($search){
+//          return urldecode($search);
+
+          $ruta = Ruta::select()
+                ->where('name', 'LIKE', '%'.$search.'%')
+                ->orderBy('id', 'desc')
+                ->paginate(10);
+        
+        if (count($ruta) == 0){
+            return View('admin.rutas.search', compact('ruta'), ['ruta' => $ruta])
+            ->with('message', 'No hay resultados que mostrar')
+            ->with('search', $search);
+        } else{
+            return View('admin.rutas.search', compact('ruta'), ['ruta' => $ruta])
+            ->with('name', $ruta)
+            ->with('search', $search);
+        }
+        return View('admin.rutas.search', compact('ruta'), ['ruta' => $ruta]);
+      }
    
 }

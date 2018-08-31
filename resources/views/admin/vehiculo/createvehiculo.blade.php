@@ -1,12 +1,27 @@
-@extends('layouts.home')
-@section('content')
+<script src="{{asset('js/plusis.js')}}"></script>
 
-<div class="text-info" Style="padding-top: 40px">
-    @if(Session::has('message'))
-        {{Session::get('message')}}
-    @endif
-</div>
+@extends('layouts.app')
 
+@extends('layouts.modalv')
+@section('htmlheader_title')
+	
+@endsection
+
+@section('main-content')
+
+@if(count($permisos)==0)
+<p>usuario no tiene ningun permiso</p>
+@else
+<section  id="contenido_principal">
+    @if(!empty($permisos['crear_vehiculo']))
+    
+<div class="box box-primary box-gris">
+     <div class="box-header">
+        <h4 class="box-title">Crear Vehiculos</h4>
+        <div class="table-responsive" >
+            
+		<div class="margin" id="botones_control">
+		</div>
 <div class="panel-body">
         
     <form  method="POST" action="{{url('createVehiculo')}}">
@@ -41,6 +56,12 @@
             </div>
         </div>
     </form>
-</div>
+</div></div></div>
 
+@else
+<p>el usuario no tiene permisos</p>
+@endif
+
+</div></section>
+@endif
 @endsection

@@ -43,6 +43,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+    
+     protected $dates = ['deleted_at'];
 //
 //    //course\profile
 //     public static function scopeName($query, $name)
@@ -55,14 +57,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 //    }
 
 
-  public static function scopeBusqueda($query,$name)
-     {
-
-            if(trim($name) !=""){ 
-            $query-> where('name',"LIKE","%$name%");
-                               
-            }
-            
+//  public function scopeSearch($query,$name)
+//     {
+//
+//            return $query->where('name',"LIKE","%$name%");
+//            
+//     }
+//     
+     public function scopeName($query, $name){
+         if(trim($name) !=""){
+             $query->where(DB::raw("CONCAT(name, '')"),"LIKE", "%name%" );
+         }
      }
 
      

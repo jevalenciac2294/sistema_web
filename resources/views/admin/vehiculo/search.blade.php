@@ -9,13 +9,17 @@
 
 
 @section('main-content')
-@if(count($permisos)==0)
-<p>usuario no tiene ningun permiso</p>
-@else
 
 <section  id="contenido_principal">
-@if(!empty($permisos['ver_vehiculo']))
+
+    
 <div class="box box-primary box-gris">
+    @if (isset($message))
+<div class='bg-warning' style='padding: 20px'>
+    {{$message}}
+</div>
+
+@endif
      <div class="box-header">
         <h4 class="box-title">Vehiculos</h4>	        
 <!--        <form   action="{{ url('buscar_usuario') }}"  method="post"  >
@@ -71,20 +75,14 @@
         <td>{{$vehiculos->color}}</td>      
         <td>
             
-    @if(!empty($permisos['editar_vehiculo']))
         <td><a href="{{ url('editVehiculo', [$vehiculos->id]) }}" class="btn btn-danger">Editar</a>    
-@endif   
-@if(!empty($permisos['asignar_ruta']))
         <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="listarRuta('{{url('obtenerRutas')}}','{{url('asignarutasvehiculo')}}', '{{$vehiculos->id}}', '{{ url('indexubicacion')}}')">Asignar ruta</a>
-@endif
-@if(!empty($permisos['eliminar_vehiculo']))
         <td><a href="{{ url('destroyVehiculo', [$vehiculos->id]) }}" class="btn btn-warning">Eliminar</a>
- @endif   
         </td>
        </tr>
     </tbody> 
     @endforeach
-
+    
     
 </table>
 </div>
@@ -102,8 +100,6 @@
 
 </div>
 -->
-</div>
-@endif 
+ </div>
 </section>
-@endif
 @endsection

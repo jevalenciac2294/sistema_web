@@ -1,6 +1,7 @@
 <script src="{{asset('js/plusis.js')}}"></script>
 
 @extends('layouts.app')
+@extends('layouts.modalv')
 
 @section('htmlheader_title')
 	
@@ -8,6 +9,7 @@
 
 
 @section('main-content')
+
 
 <section  id="contenido_principal">
 

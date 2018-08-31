@@ -1,5 +1,4 @@
-
-<section  >
+<section>
 <div class="col-md-12">
 
     <div class="box box-primary  box-gris">
@@ -92,10 +91,4 @@
 
 	</div>
 </div>
-
-
 </section>
-
-
-
-

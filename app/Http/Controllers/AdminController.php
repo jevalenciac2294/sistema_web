@@ -46,11 +46,21 @@ class AdminController extends Controller
     public function index(Request $request){
 //        $users = User::Where('name', 'ilike ?', array($request->get('name')))->orderBy('name', 'ASC')->paginate(5)->get();
 //        $users = User::Where('name', 'ilike %?%', array($request->get('name')))->get();
+        
         if($request->get('name')){
-            $users = User::Where('name', 'like', '%'.$request->get('name').'%')->get();
+            $users = User::Where('name', 'like', '%'.$request->get('name').'%')->get()->search($request->name);
         }else{
             $users = User::orderBy('name', 'ASC')->paginate(5);
         }
+        $permisos_asignados = Auth::user()->getPermissions();
+        // Recorrer todos los permisos y crear un array con el nombre como llave del array
+        $permisos_asignados_llaves = array();
+        foreach($permisos_asignados as $nombre){
+            $permisos_asignados_llaves[$nombre] = '1';
+        }
+        
+        return View('admin.index' )->with('users',$users)->with('permisos',$permisos_asignados_llaves);//ó return View('admin.index', $users )
+        
 //        if($request->get('name')){
 //            echo 'nombre: ' .$request->get('name') ;
 //            exit;
@@ -72,15 +82,6 @@ class AdminController extends Controller
         
         // Se debe obtener toda la lista de permisos que tiene el usuario loggeado
         // Como slug es indice (no se repite) se puede comprar por nombre
-        $permisos_asignados = Auth::user()->getPermissions();
-        // Recorrer todos los permisos y crear un array con el nombre como llave del array
-        $permisos_asignados_llaves = array();
-        foreach($permisos_asignados as $nombre){
-            $permisos_asignados_llaves[$nombre] = '1';
-        }
-        
-        return View('admin.index' )->with('users',$users)->with('permisos',$permisos_asignados_llaves);//ó return View('admin.index', $users )
-        
         /*dd("test");
         $users = \App\User::All();
        //return $users->where('admin.index', Auth::user()->$users);
@@ -238,7 +239,7 @@ class AdminController extends Controller
         }
         if( $users->save()){
 		return view("admin.msj_usuario_actualizado")->with("msj","Usuario actualizado correctamente")
-	                                                   ->with("user",$user) ;
+	                                                   ->with("user",$users) ;
     }
     else
     {
@@ -268,7 +269,7 @@ class AdminController extends Controller
         }
         else
         {
-            return view("admin.mensaje_error")->with("msj","..Hubo un error al agregar ; intentarlo nuevamente..");
+            return view("admin.mensaje_error")->with("msj","..Hubo un error al eliminar ; intentarlo nuevamente..");
         }
 //        Session::flash('message','Usuario Eliminado Correctamente');
 //        return View('admin.index', ['users'=>$users_all]);
@@ -327,9 +328,21 @@ class AdminController extends Controller
      return redirect()->back()->with('error', 'Ha ocurrido un error al guardar los datos');
     }
    }
-  }
+  }elseif($request->get('name')){
+            $users = User::Where('name', 'like', '%'.$request->get('name').'%')->get()->search($request->name);
+        }else{
+            $users = User::orderBy('name', 'ASC')->paginate(5);
+        }
+        $permisos_asignados = Auth::user()->getPermissions();
+        // Recorrer todos los permisos y crear un array con el nombre como llave del array
+        $permisos_asignados_llaves = array();
+        foreach($permisos_asignados as $nombre){
+            $permisos_asignados_llaves[$nombre] = '1';
+        }
+        
+        return View('admin.createadmin' )->with('users',$users)->with('permisos',$permisos_asignados_llaves);
   
-  return View('admin.createadmin');
+//  return View('admin.createadmin');
 }
    public function admin(){
         if ($this->isAdmin()){
@@ -370,13 +383,6 @@ public function form_nuevo_rol(){
     return view("admin.form_nuevo_rol")->with("roles",$roles);
 }
 
-public function form_nuevo_permiso(){
-    //carga el formulario para agregar un nuevo permiso
-     $roles=Role::all();
-     $permisos=Permission::all();
-    return view("admin.form_nuevo_permiso")->with("roles",$roles)->with("permisos", $permisos);
-}
-
 
 public function crear_rol(Request $request){
 
@@ -415,6 +421,14 @@ public function crear_permiso(Request $request){
 
 }
 
+public function form_nuevo_permiso(){
+    //carga el formulario para agregar un nuevo permiso
+     $roles=Role::all();
+     $permisos=Permission::all();
+    return view("admin.form_nuevo_permiso")->with("roles",$roles)->with("permisos", $permisos);
+}
+
+
 public function asignar_permiso(Request $request){
 
 
@@ -442,10 +456,72 @@ public function form_editar_usuario($id){
 }
 
 public function buscar_usuario(Request $request){
-	$dato=$request->input("dato_buscado");
-	$users=User::where("name","like","%".$dato."%")->orwhere("apellidos","like","%".$dato."%")                                              ->paginate(100);
-	return view('admin.listado_usuarios')->with("usuarios",$usuarios);
+	
+//      $dato=$request->input("dato_buscado");
+//	$users=User::search($request->name)->orwhere("name","like","%".$dato."%")->paginate(30);
+//      $permisos=User::get();
+//	return view('admin.index')->with("users",$users);//->with('permisos',$permisos);
+            //leccion 12
+//        $users= User::search($dato)->paginate(25);  
+    //------------------------------------------------
+//        $dato= User::search($dato)->paginate(25);  
+//        $dato=User::all();
+//        
+//        return view('admin.index')
+////        ->with("users", $users )
+//        ->with("dato", $dato );       
+//    dd($request->get('name'));
+//        $user = User::ordeeBy('id', 'DESC')->paginate(25);
+//    return view('admin.index', compact('users'));
+//    
+//    $users = \App\User::Name($request->name)
+////            ->leftjoin('name')
+//            ->select('user', 'user.name as name')
+//            ->paginate(25);
+//    return view('admin.index', compact('users'));
       }
+      
+      public function search($search){
+//          return urldecode($search);
+
+//        $permisos = Permission::all();
+  
+//    $permisos = Auth::user()->getPermissions();
+                $users = User::select()
+                ->where('name', 'LIKE', '%'.$search.'%')
+                ->orderBy('id', 'desc')
+                ->paginate(10);
+        
+        if (count($users) == 0){
+            return View('admin.search', compact('users'), ['users' => $users])
+            ->with('message', 'No hay resultados que mostrar')
+            ->with('search', $search);
+        } else{
+            return View('admin.search', compact('users'), ['users' => $users])
+            ->with('name', $users)
+            ->with('search', $search);
+        }
+        // Recorrer todos los permisos y crear un array con el nombre como llave del array
+    
+
+//            $permisos_asignados_llaves = array();
+//        foreach($permisos as $permiso){
+//            $permisos_asignados_llaves[$permiso] = '1';
+//
+//}
+//--------------------------------------------------------------------------------------------------
+        
+//        $permisos = Auth::user()->getPermissions();
+//        // Recorrer todos los permisos y crear un array con el nombre como llave del array
+//        $permisos= array();
+//        foreach($permisos as $nombre){
+//            $permisos[$nombre] = '1';
+//        }
+//        
+//        return View('admin.index' )->with('users',$users)->with('permisos',$permisos);//ó return View('admin.index', $users )
+        return View('admin.search' , compact('users'), ['users' => $users]);
+ 
+}
       
 public function asignar_rol($idusu,$idrol){
         $users=User::find($idusu);

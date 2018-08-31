@@ -13,7 +13,8 @@ class AddUserToUsers extends Migration
     public function up()
     {
        Schema::table('users', function($table){
-            $table->integer('user')->default(0);
+            $table->integer('users')->default(0);
+            //antes $table->integer('user')->default(0);
         });
     }
 

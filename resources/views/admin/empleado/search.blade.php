@@ -1,4 +1,4 @@
-<script src="{{asset('js/vehiculoscript.js')}}"></script>
+<script src="{{asset('js/empleadovehiculoscript.js')}}"></script>
 <script src="{{asset('js/plusis.js')}}"></script>
 
 @extends('layouts.app')
@@ -9,15 +9,21 @@
 
 
 @section('main-content')
-@if(count($permisos)==0)
-<p>usuario no tiene ningun permiso</p>
-@else
 
 <section  id="contenido_principal">
-@if(!empty($permisos['ver_vehiculo']))
+
 <div class="box box-primary box-gris">
+    
+    
+    <h3>Resultado de la búsqueda: {{$search}}</h3>
      <div class="box-header">
-        <h4 class="box-title">Vehiculos</h4>	        
+@if (isset($message))
+<div class='bg-warning' style='padding: 20px'>
+    {{$message}}
+</div>
+
+@endif
+        <h4 class="box-title">Empleados</h4>	        
 <!--        <form   action="{{ url('buscar_usuario') }}"  method="post"  >
 				<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
 				<div class="input-group input-group-sm">
@@ -29,8 +35,7 @@
 				</div>
 						
         </form>-->
-
-<form class="navbar-form navbar-right" role="search" action="{{url('admin/vehiculo/searchredirect')}}">
+<form class="navbar-form navbar-right" role="search" action="{{url('admin/empleado/searchredirect')}}">
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
  <div class="form-group">
   <input type="text" class="form-control" name='search' placeholder="Buscar ..." />
@@ -47,48 +52,49 @@
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(2);">Roles</a> 
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(3);" >Permisos</a>   -->                              
 
-              <a href="{{url('indexVehiculo')}}"  class="btn btn-xs btn-primary" >Listado Vehiculos</a> 
+              <a href="{{url('indexEmpleado')}}"  class="btn btn-xs btn-primary" >Listado Empleados</a> 
 
 		</div>
         <div class="table-responsive" >
-
-<table class="table table-striped">
+<table class="table table-hover table-striped" cellspacing="0" width="100%">
     <thead>
-        <th>    id       </th>
-        <th>    matricula  </th>
-        <th>    marca  </th>
-        <th>    modelo  </th>
-        <th>    color  </th>
-               
+        <th>    Id  </th>
+        <th>    name  </th>
+        <th>    apellidos  </th>
+        <th>    documento  </th>
+        <th>    Correo  </th>
+        <th>    direccion  </th>
+        <th>    telefono  </th>
+        <th>    saldo  </th>
+        
     </thead>
     <tbody>
-        @foreach($vehiculo as $vehiculos)
+        @foreach($empleado as $empleados)
        <tr>
-        <td> {{$vehiculos->id}}</td>
-        <td>{{$vehiculos->matricula}}</td>
-        <td>{{$vehiculos->marca}}</td>
-        <td>{{$vehiculos->modelo}}</td>
-        <td>{{$vehiculos->color}}</td>      
+        <td>{{$empleados->id}}</td>
+        <td>{{$empleados->name}}</td>
+        <td>{{$empleados->apellidoS}}</td>
+        <td>{{$empleados->documento}}</td>      
+        <td>{{$empleados->email}}</td>
+        <td>{{$empleados->direccion}}</td>
+        <td>{{$empleados->telefono}}</td>
+        <td>{{$empleados->sueldo}}</td>
         <td>
             
-    @if(!empty($permisos['editar_vehiculo']))
-        <td><a href="{{ url('editVehiculo', [$vehiculos->id]) }}" class="btn btn-danger">Editar</a>    
-@endif   
-@if(!empty($permisos['asignar_ruta']))
-        <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="listarRuta('{{url('obtenerRutas')}}','{{url('asignarutasvehiculo')}}', '{{$vehiculos->id}}', '{{ url('indexubicacion')}}')">Asignar ruta</a>
-@endif
-@if(!empty($permisos['eliminar_vehiculo']))
-        <td><a href="{{ url('destroyVehiculo', [$vehiculos->id]) }}" class="btn btn-warning">Eliminar</a>
- @endif   
+        <td><a href="{{ url('editEmpleado', [$empleados->id]) }}" class="btn btn-danger">Editar</a>
+        <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="listarVehiculo('{{url('obtenerVehiculo')}}','{{url('asignaempleadovehiculo')}}', '{{$empleados->id}}', '{{ url('/indexVehiculo') }}')">Asignar vehiculo</a>
+        <td><a href="{{ url('destroyEmpleado', [$empleados->id]) }}" class="btn btn-warning">Eliminar</a>
+           
         </td>
-       </tr>
-    </tbody> 
-    @endforeach
 
-    
+       </tr>
+    @endforeach
+    </tbody>
+
 </table>
+            
 </div>
-{!! $vehiculo->render()!!}
+{!! $empleado->render()!!}
 </div>    
 
 
@@ -102,8 +108,7 @@
 
 </div>
 -->
+
 </div>
-@endif 
 </section>
-@endif
 @endsection

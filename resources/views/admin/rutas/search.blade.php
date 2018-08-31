@@ -10,9 +10,6 @@
 
 @section('main-content')
 
-@if(count($permisos)==0)
-<p>usuario no tiene ningun permisosss</p>
-@else
     <section  id="contenido_principal">
             <!--<div class="text-info">-->
 <!--
@@ -28,9 +25,16 @@
         {{Session::get('message')}}
     @endif
 </div>-->
-@if(!empty($permisos['index_ruta']))
 <div class="box box-primary box-gris">
+    
+    
      <div class="box-header">
+    @if (isset($message))
+<div class='bg-warning' style='padding: 20px'>
+    {{$message}}
+</div>
+
+@endif
 
          <h4>Rutas</h4>
          
@@ -63,9 +67,8 @@
         <td>{{$rutas->id}}</td>
         <td>{{$rutas->name}}</td>
         <td>
-@if(!empty($permisos['ver_ruta']))
+  
         <td><a href="{{ url('/indexubicacion', [$rutas->id]) }}" class="btn btn-danger">Ver</a>
-@endif
                     
         </td>
 
@@ -80,10 +83,6 @@
             {!! $ruta->render()!!}
 </div>    
 
-@else
-<p>usuario no tiene ningun permiso</p>
-@endif
  </div>
-</section>
-@endif
+</div></section>
 @endsection

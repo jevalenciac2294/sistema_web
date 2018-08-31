@@ -9,7 +9,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\name;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Http\Requests;
@@ -23,6 +25,10 @@ use App\Empleado;
 use Validator;
 use Auth;
 use Illuminate\Http\html;
+
+
+use Caffeinated\Shinobi\Models\Permission;
+use Caffeinated\Shinobi\Models\Role;
 /**
  * Description of EmpleadoController
  *
@@ -30,12 +36,27 @@ use Illuminate\Http\html;
  */
 class EmpleadoController extends Controller{
     
-     public function indexEmpleado()
+     public function indexEmpleado(Request $request)
     {
         
         $empleado = Empleado::orderBy('name', 'ASC')->paginate(5);
-        return View('admin.empleado.indexEmpleado' )->with('empleado',$empleado);
+//        return View('admin.empleado.indexEmpleado' )->with('empleado',$empleado);
         
+        
+        if($request->get('name')){
+            $users = User::Where('name', 'like', '%'.$request->get('name').'%')->get()->search($request->name);
+        }else{
+            $users = User::orderBy('name', 'ASC')->paginate(5);
+        }
+        $permisos_asignados = Auth::user()->getPermissions();
+        // Recorrer todos los permisos y crear un array con el nombre como llave del array
+        $permisos_asignados_llaves = array();
+        foreach($permisos_asignados as $nombre){
+            $permisos_asignados_llaves[$nombre] = '1';
+        }
+        
+        return View('admin.empleado.indexEmpleado' )->with('users',$users)->with('permisos',$permisos_asignados_llaves)->with('empleado',$empleado);//ó return View('admin.index', $users )
+//        ('admin.empleado.indexEmpleado' )->with('empleado',$empleado);
         /*dd("test");
         $users = \App\User::All();
        //return $users->where('admin.index', Auth::user()->$users);
@@ -111,8 +132,20 @@ class EmpleadoController extends Controller{
      return redirect()->back()->with('error', 'Ha ocurrido un error al guardar los datos');
     }
    }
-  }
-        return View('admin.empleado.createEmpleado');
+  }else        if($request->get('name')){
+            $users = User::Where('name', 'like', '%'.$request->get('name').'%')->get()->search($request->name);
+        }else{
+            $users = User::orderBy('name', 'ASC')->paginate(5);
+        }
+        $permisos_asignados = Auth::user()->getPermissions();
+        // Recorrer todos los permisos y crear un array con el nombre como llave del array
+        $permisos_asignados_llaves = array();
+        foreach($permisos_asignados as $nombre){
+            $permisos_asignados_llaves[$nombre] = '1';
+        }
+        
+        return View('admin.empleado.createEmpleado' )->with('users',$users)->with('permisos',$permisos_asignados_llaves);
+//        return View('admin.empleado.createEmpleado');
   
 }    
        public function destroyEmpleado($id)
@@ -156,5 +189,25 @@ class EmpleadoController extends Controller{
         //return View('admin.edit' )->with('users',$users);
         //return $id;
     }
+    
+      public function search($search){
+//          return urldecode($search);
+
+          $empleado = Empleado::select()
+                ->where('name', 'LIKE', '%'.$search.'%')
+                ->orderBy('id', 'desc')
+                ->paginate(10);
+        
+        if (count($empleado) == 0){
+            return View('admin.empleado.search', compact('empleado'), ['empleado' => $empleado])
+            ->with('message', 'No hay resultados que mostrar')
+            ->with('search', $search);
+        } else{
+            return View('admin.empleado.search', compact('emppleado'), ['empleado' => $empleado])
+            ->with('name', $empleado)
+            ->with('search', $search);
+        }
+        return View('admin.empleado.search', compact('empleado'), ['empleado' => $empleado]);
+      }
 
 }
