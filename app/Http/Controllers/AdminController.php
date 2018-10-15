@@ -141,8 +141,8 @@ class AdminController extends Controller
    $validator = Validator::make($request->all(), $rules, $messages);
    
    //Si la validación no es correcta redireccionar al formulario con los errores
-   if ($validator->fails()){
-    return redirect()->back()->withErrors($validator);
+  if ($validator->fails()){
+    return redirect()->back()->withErrors($validator); 
    }
    else{ // De los contrario guardar al usuario
     $user = new User;

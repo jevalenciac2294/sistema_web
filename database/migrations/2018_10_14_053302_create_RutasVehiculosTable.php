@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRutasvehiculosTable extends Migration
+class CreateRutasVehiculosTable extends Migration
 {
     public function up()
     {
@@ -17,8 +17,8 @@ class CreateRutasvehiculosTable extends Migration
 //            $table->foreign('ruta_id')->references('id')->on('rutas')
 //                    ->onUpdate('cascade')->onDelete('cascade');
             
-            $table->foreign('ruta_id')->references('id')->on('rutas');
-            $table->foreign('vehiculo_id')->references('id')->on('vehiculo');
+            $table->foreign('ruta_id')->references('id')->on('rutas')->onDelete('cascade');
+            $table->foreign('vehiculo_id')->references('id')->on('vehiculo')->onDelete('cascade');
             
 //            $table->foreign('vehiculo_id')->references('id')->on('vehiculo')
 //                    ->onUpdate('cascade')->onDelete('cascade');
@@ -32,7 +32,7 @@ class CreateRutasvehiculosTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
+     
      * @return void
      */
     public function down()

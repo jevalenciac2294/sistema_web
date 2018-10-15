@@ -48,10 +48,10 @@
 </div> -----------------------------------------------------       -->
 
 <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header">MENU DE NAVEGACION</li>
         <li class="treeview">
           <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="fa fa-dashboard">
-              <span>USUARIOS</span>
+              <span>CONFIGURACION</span>
             <span class="pull-right-container">
               <!--<i class="fa fa-angle-left pull-right"></i>-->
                 <i class="fa fa-angle-left" onClick="($(this)[0].className == 'fa fa-angle-left')?$(this)[0].className='fa fa-angle-down':$(this)[0].className='fa fa-angle-left'" style="float: right !important;"></i>
@@ -59,7 +59,7 @@
           </a>
            <ul class="treeview-menu" id="homeSubmenu">
                     <li>
-                    <a href="{{ url('admin/index') }}">USUARIOS</a>
+                    <a href="{{ url('admin/index') }}">CONFIGURACIONES</a>
 
                     </li>
                     <li>
@@ -102,7 +102,7 @@
            <ul class="treeview-menu" id="homeSubmenu3">
 
                     <li>
-                        <a href="{{url('indexVehiculo')}}">VER VEHICULOS</a>
+                        <a href="{{url('indexVehiculo')}}">VEHICULOS</a>
                     </li>
                     <li>
                         <a href="{{url('createVehiculo')}}">CREAR VEHICULOS</a>
@@ -119,7 +119,7 @@
           </a>
            <ul class="treeview-menu" id="homeSubmenu4">
                     <li>
-                    <a href="{{ url('rutaindex') }}">INDEX RUTAS</a>
+                    <a href="{{ url('rutaindex') }}">RUTAS</a>
                     </li>
                     <li>
                         <a href="{{url('rutacreate')}}">CREAR RUTAS</a>

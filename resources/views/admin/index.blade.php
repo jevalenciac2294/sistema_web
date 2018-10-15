@@ -2,7 +2,6 @@
 
 @extends('layouts.app')
 @extends('layouts.modalv')
-
 @section('htmlheader_title')
 	
 @endsection
@@ -10,14 +9,12 @@
 
 @section('main-content')
 
-
 @if(count($permisos)==0)
 <p>usuario no tiene ningun permiso</p>
 @else
 <section  id="contenido_principal">
     @if(!empty($permisos['index_usuario']))
 
-	
 
 <div class="box box-primary box-gris">
 
@@ -82,10 +79,10 @@
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(2);">Roles</a> 
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(3);" >Permisos</a>                                 -->
 <!--permisos para agregar usuario-->
-@if(!empty($permisos['agregar_usuario']))
+<!--@if(!empty($permisos['agregar_usuario']))
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(1);">Agregar Usuario</a>
 @endif
-<!--@if(!empty($permisos['salir']))
+@if(!empty($permisos['salir']))
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="alert('se sale');">Salir</a>
 @endif-->
 @if(!empty($permisos['index']))
@@ -111,7 +108,7 @@
 								<th>Rol</th>
 								<th>Nombre</th>
 								<th>Email</th>
-                                                                <th>Acción</th>
+                                <th>Acción</th>
 						</tr>
 				</thead>
 	    <tbody>
@@ -127,7 +124,7 @@
            
              </span>
 			</td>
-			<td class="mailbox-messages mailbox-name"><a href="javascript:void(0);"  style="display:block"><i class="fa fa-user"></i>&nbsp;&nbsp;{{ $user->name  }}</a></td>
+			<td class="mailbox-messages mailbox-name"><i class="fa fa-user"></i>&nbsp;&nbsp;{{ $user->name  }}</td>
 			<td>{{ $user->email }}</td>
 			<td>
 <!--boton editar index-->

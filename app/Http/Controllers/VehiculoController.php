@@ -64,9 +64,11 @@ class VehiculoController extends Controller
     public function createVehiculo(Request $request)
     {
 
+   //Roles de validación
+
   if ($request->isMethod('post'))
   {
-   //Roles de validación
+ 
    $rules = [
     'matricula' => 'required|min:6|max:6|regex:/^[a-záéíóúàèìòùäëïöüñ123456789\s]+$/i',
     'marca' => 'required|min:3|max:16|regex:/^[a-záéíóúàèìòùäëïöüñ\s]+$/i',
@@ -109,7 +111,9 @@ class VehiculoController extends Controller
     //$user->active = 1;
     //El valor 1 en la columna determina si el usuario es administrador o no
     //$user->user = 1;
+          // echo '<script>alert("gggguardado");</script>';
     if ($vehiculo->save()){
+
      return redirect()->back()->with('message', 'Ha creado al vehiculo correctamente');
     } else{
      return redirect()->back()->with('error', 'Ha ocurrido un error al guardar los datos');
@@ -209,7 +213,26 @@ class VehiculoController extends Controller
         
         // recorrer todas las rutas buscando que se encuentren en rutas_vehiculo
         // cuando encuentra tiene estado '1' de lo contrario '0'
+        /*        $rutas_vehiculos = Rutas_Vehiculos::Where('vehiculo_id', '=', $id_vehiculo)->get();
+        foreach($ruta as $key => $r){
+            $estado = '0';
+            foreach($rutas_vehiculos as $rv){
+                if($r['id'] === $rv['ruta_id']){
+                    $estado = '1';
+                    break;
+                }
+            }
+            $ruta[$key]['contiene_ruta'] = $estado;
+        }
         
+//        foreach($ruta as $key => $rv){
+//            echo 'key: ' . $key . ", rv: " . $rv . "</br>";
+//        }
+//        exit;return;
+        return response(['rutas'=> $ruta]);
+   }*/
+
+
         $empleadovehiculo = EmpleadoVehiculo::Where('empleado_id', '=', $id_empleado)->get();
         foreach($vehiculo as $key => $r){
             $estado = '0';

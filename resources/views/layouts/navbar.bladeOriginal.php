@@ -16,8 +16,8 @@
       <li><a data-toggle="collapse" href="#collapse1" style="font-weight: bold;">Crear Usuarios
         <span class="caret"></span></a>
         <div id="collapse1" class="panel-collapse collapse list-group" style="width:220px;float:right;position:absolute;">
-            <a href="{{url('admin/createadmin')}}" class="list-group-item">Crear usuario administrador</a>
-            <a href="{{url('admin/createuser')}}" class="list-group-item">Crear usuario</a>
+            <a href="{{url('admin/createadmin')}}" class="list-group-item">Crear usuario</a>
+            
         </div>
       </li>
       <li><a data-toggle="collapse" href="#collapse2" style="font-weight: bold;">Empleado

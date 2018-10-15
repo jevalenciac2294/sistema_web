@@ -1,12 +1,12 @@
 function  verinfo_usuario(arg){
 
 
-	var urlraiz=$("#url_raiz_proyecto").val();
-	var miurl =urlraiz+"/form_editar_usuario/"+arg+""; 
-	$("#capa_modal").show();
-	$("#capa_formularios").show();
-	var screenTop = $(document).scrollTop();
-	$("#capa_formularios").css('top', screenTop);
+  var urlraiz=$("#url_raiz_proyecto").val();
+  var miurl =urlraiz+"/form_editar_usuario/"+arg+""; 
+  $("#capa_modal").show();
+  $("#capa_formularios").show();
+  var screenTop = $(document).scrollTop();
+  $("#capa_formularios").css('top', screenTop);
   $("#capa_formularios").html($("#cargador_empresa").html());
 
     $.ajax({
@@ -17,7 +17,7 @@ function  verinfo_usuario(arg){
    
     }).fail( function() 
    {
-    $("#capa_formularios").html('<span>...HHa ocurrido un error, revise su conexión y vuelva a intentarlo...</span>');
+    $("#capa_formularios").html('<span>...Ha ocurrido un error, revise su conexión y vuelva a intentarlo...</span>');
    }) ;
  
 }
@@ -26,9 +26,9 @@ function  verinfo_usuario(arg){
 
 
 $(document).on("click",".div_modal", function(e){
-	$(this).hide();
-	$("#capa_formularios").hide();
-	$("#capa_formularios").html("");
+  $(this).hide();
+  $("#capa_formularios").hide();
+  $("#capa_formularios").html("");
 });
 
 

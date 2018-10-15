@@ -49,7 +49,7 @@
         <label for=""> Nombre ruta </label>
         <input type='text' class="form-control input-sm" name='name' id="name" required="" />     
     </div>
-
+<p>Seleccione el punto de inicio y los puntos parciales de cada recorrido</p>
         <div id="map"></div>
     
  
@@ -64,7 +64,9 @@
     
     
     <!--<button type="submit" class="btn btn-default"> Guardar </button>-->
-    <button type="button" onclick="guardarmapa()" class="btn btn-default"> Guardar </button>
+    <div class="form-group"  align="right">
+    <input type="submit" class="btn btn-primary" value="Guardar " onclick="guardarmapa()">
+    </div>
 
 </form>
     <a href="front.blade.php"></a>

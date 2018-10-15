@@ -16,8 +16,8 @@
 
               <form method="post" action="{{ url('borrar_usuario') }}" id="f_borrar_usuario" class="formentrada" >
 
-               <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                <input type="hidden" name="id_usuario" value="{{ $usuario->id }}">
+               <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" required>
+                <input type="hidden" name="id_usuario" value="{{ $usuario->id }}" required>
 
                 <button type="button" class="btn btn-default" onclick="javascript:$('.div_modal').click();" >Cancelar</button>
                 <button type="submit" class="btn btn-danger" style="margin-left:20px;" >Borrar Usuario</button> </form>

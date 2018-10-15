@@ -12,21 +12,21 @@
             <div class="box-body">
               
             <form   action="{{ url('crear_rol') }}"  method="post" id="f_crear_rol" class="formentrada"  >
-				<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
+				<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" required> 
                 
                 <div class="col-md-12">	  
-	                <div class="form-group">
+	              <div class="form-group">
 							<label class="col-sm-2" for="apellido">Nombre del Rol*</label>
 	                    <div class="col-sm-10" >
 							<input type="text" class="form-control" id="rol_nombre" name="rol_nombre" required >
 	                    </div>
-					</div><!-- /.form-group -->
+					</div>
 
 			    </div><!-- /.col -->
 
 			      <div class="col-md-12">	  
 	                <div class="form-group">
-							<label class="col-sm-2" for="apellido">Slug*</label>
+							<label class="col-sm-2" for="apellido">Nombre del Rol*</label>
 	                    <div class="col-sm-10" >
 							<input type="text" class="form-control" id="rol_slug" name="rol_slug" " required >
 	                    </div>
@@ -64,8 +64,8 @@
 	    <table  class="table table-hover table-striped" cellspacing="0" width="100%">
 				<thead>
 						<tr>    <th>codigo</th>
+								<th></th>
 								<th>nombre</th>
-								<th>slug</th>
 								<th>descripcion</th>
 							    <th>Acción</th>
 						</tr>

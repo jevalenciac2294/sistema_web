@@ -26,6 +26,8 @@ Route::get('auth/logout', function(){
    Auth::logout();
    return Redirect::to('auth/login');
 });
+Route::get('home', 'HomeController@home');
+
 
 Route::get('password/email', 'Auth\PasswordController@getEmail');
 Route::post('password/email', 'Auth\PasswordController@postEmail');
@@ -161,6 +163,11 @@ Route::post('rutaindex', 'RutasController@rutaindex');
 //Mostrar rutas
 //Route::get('prueba/indexruteo', 'HomeController@rutaindex');
 //Route::post('prueba/indexruteo', 'HomeController@rutaindex
+
+Route::get('destroyruta/{id}', 'RutasController@destroyruta');
+Route::post('destroyruta/{id}', 'RutasController@destroyruta');
+
+
 Route::get('indexubicacion/{ruta_id}', 'RutasController@indexubicacion');
 Route::post('indexubicacion/{ruta_id}', 'RutasController@indexubicacion');
 Route::get('indexubicacion/{ruta_id}', 'RutasController@indexubicacion');
@@ -201,7 +208,7 @@ Route::get('asignaempleadovehiculo', 'EmpleadoVehiculoController@asignaempleadov
 
 //});
 
-	Route::get('/home', 'HomeController@index');
+//	Route::get('/home', 'HomeController@index');
     
 
     Route::post('buscar_usuario', 'AdminController@buscar_usuario');
@@ -281,3 +288,80 @@ Route::get('asignaempleadovehiculo', 'EmpleadoVehiculoController@asignaempleadov
         return redirect($route);
     });
     Route::get("admin.vehiculo.indexVehiculo/{search}", "VehiculoController@search");
+    
+    //-----------------------------Calledar
+    Route::get('/evento/get', 'HomeController@get_events');
+    Route::post('home', 'HomeController@create_events');
+    Route::get('home', 'HomeController@create_events');  
+Route::post('home/fetch', 'HomeController@fetch')->name('dynamicdependent.fetch');
+Route::post('select',['uses'=>'HomeController@postSelect','as'=>'postSelect']);
+
+//Route::get('createEmpleado', 'EmpleadoController@createEmpleado');
+Route::post('eventoPost', 'HomeController@create_events2');
+
+    //Route::post('prueba', 'HomeController@create_events2');
+    //Route::get('prueba', 'HomeController@create_events2');   
+
+    Route::post('prueba', 'HomeController@prueba');
+    Route::get('prueba', 'HomeController@prueba');    
+
+    //Route::get('home', ['as' => 'empleadoVehiculo.create_events2', 'uses' => 'HomeController@create_events2']);
+
+    Route::resource('home', 'HomeController@empleado');
+  //  Route::get('empleadoVehiculo/{id}', 'HomeController@empleadoVehiculo');
+
+    Route::get('api/dependent-dropdown','APIController@index');
+Route::get('getempleadoVehiculoList','HomeController@getempleadoVehiculoList');
+Route::get('api/get-city-list','APIController@getCityList');
+
+Route::get('json-empleadoVehiculo', function(){
+    $emp_id = Input::get('emp_id');
+
+    $empleadoVehiculo = DB::table('empleado')->join('empleadoVehiculo', 'empleado.id', '=', 'empleadoVehiculo.empleado_id')->join('vehiculo', 'empleadoVehiculo.id', '=', 'vehiculo.id' );
+
+    return response::json($empleadoVehiculo);
+});
+Route::get('obtenerVehiculos/{empleado_id}', 'HomeController@obtenerVehiculos');
+Route::get('obtenerRutas/{vehiculo_id}', 'HomeController@obtenerRutas');
+
+
+// generar pdf
+//Route::get('generarpdf', 'HomeController@generarpdf');
+
+Route::get('generarpdfempleados', function(){
+    $empleado = App\Empleado::all();
+    $pdf = PDF::loadView('generarpdfempleados', ['empleado' => $empleado]);
+    return $pdf->download('empleados.pdf');
+});
+
+
+Route::get('generarpdfvehiculos', function(){
+    $vehiculo = App\Vehiculo::all();
+    $pdf = PDF::loadView('generarpdfvehiculos', ['vehiculo' => $vehiculo]);
+    return $pdf->download('vehiculos.pdf');
+});
+
+Route::get('generarpdfrutas', function(){
+    $ruta = App\Ruta::all();
+    $pdf = PDF::loadView('generarpdfrutas', ['ruta' => $ruta]);
+    return $pdf->download('rutas.pdf');
+});
+
+//Horas extras
+
+Route::get('HorasExtras', 'HomeController@hora');
+
+//buscar empleados para saber horas trabajadas
+/*    Route::get('searchredirect', function(){
+
+
+        Nuevo: si el argumento search está vacío regresar a la página anterior 
+        if (empty(Input::get('search'))) return redirect()->back();
+
+        $search = urlencode(e(Input::get('search')));
+        $route = "HorasExtras/$search";
+        return redirect($route);
+    });*/
+    Route::post("HorasExtrasBuscar", "HomeController@search");
+    // Route::get("HorasExtrasBuscar", "HomeController@search")->name('search');
+    

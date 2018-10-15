@@ -47,6 +47,8 @@
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(3);" >Permisos</a>   -->                              
 
               <a href="{{url('indexEmpleado')}}"  class="btn btn-xs btn-primary" >Listado Empleados</a> 
+              <a href="{{url('generarpdfempleados')}}"  class="btn btn-xs btn-primary" >Listado PDF Empleados</a> 
+
 
 		</div>
         <div class="table-responsive" >
@@ -79,8 +81,11 @@
 @endif   
 
 @if(!empty($permisos['asignar_vehiculo']))
-        <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="listarVehiculo('{{url('obtenerVehiculo')}}','{{url('asignaempleadovehiculo')}}', '{{$empleados->id}}', '{{ url('/indexVehiculo') }}')">Asignar vehiculo</a>
+        <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal1" onclick="listarVehiculo('{{url('obtenerVehiculo')}}','{{url('asignaempleadovehiculo')}}', '{{$empleados->id}}', '{{ url('indexVehiculo') }}')">Asignar vehiculo</a>
 @endif
+
+
+
 @if(!empty($permisos['eliminar_vehiculo']))
         <td><a href="{{ url('destroyEmpleado', [$empleados->id]) }}" class="btn btn-warning">Eliminar</a>
  @endif          

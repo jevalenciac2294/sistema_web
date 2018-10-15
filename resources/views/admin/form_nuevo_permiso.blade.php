@@ -13,7 +13,7 @@
 
                 <div class="col-md-6">
 		             <form   action="{{ url('asignar_permiso') }}"  method="post" id="f_asignar_permiso" class="formentrada"  >
-						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
+						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" required> 
 						<div class="form-group">
 							<label class="col-sm-2" for="rol">Rol*</label>
 		    			<div class="col-sm-10" >
@@ -58,27 +58,27 @@
 
 		                
 		                <div class="col-md-12">	  
-			                <div class="form-group">
+			           <div class="form-group">
 									<label class="col-sm-2" for="apellido">Permiso*</label>
 			                    <div class="col-sm-10" >
 									<input type="text" class="form-control" id="permiso_nombre" name="permiso_nombre" required >
 			                    </div>
-							</div><!-- /.form-group -->
+							</div> 
 
 					    </div><!-- /.col -->
 
 					      <div class="col-md-12">	  
 			                <div class="form-group">
-									<label class="col-sm-2" for="apellido">Slug*</label>
+									<label class="col-sm-2" for="apellido">Nombre Permiso*</label>
 			                    <div class="col-sm-10" >
 									<input type="text" class="form-control" id="permiso_slug" name="permiso_slug"  required >
-<!--                                                                        <input type="text" class="form-control" id="permiso_slug" name="permiso_slug" list="permisos"  required >
+                                                                    <input type="text" class="form-control" id="permiso_slug" name="permiso_slug" list="permisos"  required >
                                                                             <datalist id="permisos">
                                                                               @foreach($permisos as $permiso)
                                                                               <option value="{{$permiso->editar_usuarios}}">{{$permiso->editar_usuarios}}</option>
                                                                               @endforeach
                                                                               <option value="Cambridge">
-                                                                            </datalist>-->
+                                                                            </datalist>
 			                    </div>                          
 							</div><!-- /.form-group -->
 
@@ -122,8 +122,8 @@
                 </thead>
 				<thead>
 						    <th>codigo</th>
-								<th>nombre</th>
-								<th>slug</th>
+								<th></th>
+								<th>Nombre</th>
 								<th>descripcion</th>
 							    <th>Acción</th>
 						
@@ -152,6 +152,3 @@
 @endforeach
 
 </div>
-
-
-

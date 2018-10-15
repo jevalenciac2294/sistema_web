@@ -32,7 +32,7 @@ class EmpleadoVehiculoController extends Controller
             
             console.log('holaaaa');
         
-        if ($empleado->save()){
+        if ($vehiculo->save()){
             $salida = true;
             console.log('holaaaa');
 
@@ -79,8 +79,8 @@ public function asignaempleadovehiculo(Request $request){
 //            $vehiculo = Vehiculo::find($id_vehiculo);
 //            $ruta = Ruta::find($id_ruta);
             $empleadovehiculo = new EmpleadoVehiculo();
-            $empleadovehiculo->vehiculo_id=$id_vehiculo;
-            $empleadovehiculo->empleado_id=$id_empleado;
+            $empleadovehiculo->vehiculo_id=$id_empleado;
+            $empleadovehiculo->empleado_id=$id_vehiculo;
             $salida_respuesta = $empleadovehiculo->save();
         }else{
             $empleadovehiculo = EmpleadoVehiculo::Where('vehiculo_id', '=', $id_vehiculo)->

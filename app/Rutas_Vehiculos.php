@@ -29,5 +29,8 @@ class Rutas_Vehiculos extends Model implements AuthenticatableContract, CanReset
     public function rutas(){
     return $this->belongToMany(Ruta::class);
     }
+        public function rutasVehiculos(){
+        return EmpleadoVehiculo::where('ruta_id', '=', $id)->get();
+    }
     
 }

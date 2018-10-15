@@ -47,6 +47,7 @@
 		<div class="margin" id="botones_control">
 
               <a href="{{url('rutaindex')}}"  class="btn btn-xs btn-primary" >Listado Rutas</a> 
+              <a href="{{url('generarpdfrutas')}}"  class="btn btn-xs btn-primary" >Listado PDF Rutas</a> 
 
 		</div>
 
@@ -66,7 +67,7 @@
 @if(!empty($permisos['ver_ruta']))
         <td><a href="{{ url('/indexubicacion', [$rutas->id]) }}" class="btn btn-danger">Ver</a>
 @endif
-                    
+         <td><a href="{{ url('/destroyruta', [$rutas->id]) }}" class="btn btn-warning">Eliminar</a>            
         </td>
 
        </tr>

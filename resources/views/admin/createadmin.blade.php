@@ -15,7 +15,7 @@
     @if(!empty($permisos['crear_usuario']))
 <div class="box box-primary box-gris">
      <div class="box-header">
-        <h4 class="box-title">Crear usuario admin</h4>
+        <h4 class="box-title">Crear usuario</h4>
         <div class="table-responsive" >
             
 		<div class="margin" id="botones_control">
@@ -27,31 +27,36 @@
 
     <div class='form-group'>
         <label for="name">Nombre:</label>
-        <input type="text" name="name" class="form-control" value="{{ old('name') }}" />
+        <input type="text" required name="name" class="form-control" value="{{ old('name') }}" / >
         <div class="text-danger">{{$errors->first('name')}}</div>
     </div>
 
     <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" name="email" class="form-control" value="{{ old('email') }}" />
+        <input type="email"  required name="email" class="form-control" value="{{ old('email') }}" />
         <div class="text-danger">{{$errors->first('email')}}</div>
     </div>
 
     <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" class="form-control" name="password">
+        <input type="password" required class="form-control" name="password">
         <div class="text-danger">{{$errors->first('password')}}</div>
     </div>
 
     <div class="form-group">
         <label for="password_confirmation">Confirmar Password:</label>
-        <input type="password" class="form-control" name="password_confirmation">
+        <input type="password" required class="form-control" name="password_confirmation">
     </div>
 
 
-    <div>
+   <!-- <div>
         <button type="submit" class="btn btn-primary">Crear administrador</button>
-    </div>
+    </div>-->
+<div class="form-group" align="right">
+<div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Crear administrador " onclick="llamar();">
+        </div>
+</div>
 </form>
 
 </div>

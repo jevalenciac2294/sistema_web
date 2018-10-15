@@ -16,7 +16,7 @@ class EmpleadoVehiculo extends Model implements AuthenticatableContract, CanRese
 {
     use Authenticatable, CanResetPassword;
     
-    protected $table = 'empleadovehiculo';
+    protected $table = 'empleadoVehiculo';
     
     protected $dates = ['deleted_at']; 
     
@@ -28,6 +28,10 @@ class EmpleadoVehiculo extends Model implements AuthenticatableContract, CanRese
     
     public function empleado(){
     return $this->belongToMany(Empleado::class);
+    }
+
+    public function empleadoVehiculo(){
+        return EmpleadoVehiculo::where('vehiculo_id', '=', $id)->get();
     }
     
 }

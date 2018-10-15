@@ -8,6 +8,7 @@ use App\Ruta;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Session;
 use Validator;
 use App\Comments;
 use App\Ubicacion;
@@ -123,6 +124,18 @@ public function rutaindex(Request $request){
 //        return View('home.rutaindex', ['ruta'=>$ruta]);
 //    }
 }
+
+
+ public function destroyruta($id)
+    {
+        $ruta = Ruta::find($id);
+        $ruta ->delete();
+        $ruta_all = Ruta::orderBy('name', 'ASC')->paginate(5);
+        Session::flash('message','Ruta Eliminada Correctamente');
+        return View('admin.rutas.indexubicacion')->with('permisos',$permisos_asignados_llaves)->with('parametro_test',$enviar);
+    }
+
+
     public function indexubicacion(Request $request, $ruta_id)
     {
         

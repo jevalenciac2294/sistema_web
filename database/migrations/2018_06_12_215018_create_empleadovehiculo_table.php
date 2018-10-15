@@ -9,10 +9,10 @@ class CreateEmpleadovehiculoTable extends Migration
     {
         
         Schema::create('empleadovehiculo', function (Blueprint $table) {
-            	$table->increments('id');
-			$table->integer('empleado_id')->unsigned()->index();
+            	$table->increments('id')->unique();
+			$table->integer('empleado_id')->unsigned();
 			$table->foreign('empleado_id')->references('id')->on('empleado')->onDelete('cascade');
-			$table->integer('vehiculo_id')->unsigned()->index();
+			$table->integer('vehiculo_id')->unsigned();
 			$table->foreign('vehiculo_id')->references('id')->on('vehiculo')->onDelete('cascade');
 			
             $table->timestamps();

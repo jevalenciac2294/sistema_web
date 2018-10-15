@@ -36,4 +36,7 @@ class Empleado extends Model implements AuthenticatableContract, CanResetPasswor
     public function vehiculo(){
     return $this->belongToMany(Vehiculo::class);
     }
+    public function evento(){
+    return $this->belongsToMany(Evento::class);
+    }
 }
