@@ -12,6 +12,12 @@
 
 
 <section  id="contenido_principal">
+<div class="text-info" Style="padding-top: 40px">
+    @if(Session::has('message'))
+        {{Session::get('message')}}
+    @endif
+</div>
+    
 <div class="box box-primary box-gris">
      <div class="box-header">
         <h4 class="box-title">Editar Empleados</h4>

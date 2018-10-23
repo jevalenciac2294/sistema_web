@@ -8,15 +8,24 @@
 
 @section('main-content')
 
-@if(count($permisos)==0)
-<p>usuario no tiene ningun permiso</p>
-@else
+
 <section  id="contenido_principal">
-    @if(!empty($permisos['crear_empleado']))
+ 
+ <div class="text-info" Style="padding-top: 40px">
+    @if(Session::has('message'))
+        {{Session::get('message')}}
+    @endif
+</div>
     
 <div class="box box-primary box-gris">
      <div class="box-header">
         <h4 class="box-title">Crear Empleados</h4>
+
+            <ol class="breadcrumb">
+                <li><a href="{{url('user')}}">Inicio</a></li>
+                <li><a href="{{url('indexEmpleado')}}">Empleados</a></li>
+                <li class="active">Ver Empleados</li>
+            </ol> 
         <div class="table-responsive" >
             
 		<div class="margin" id="botones_control">
@@ -65,14 +74,12 @@
                 <input   type="submit" class="btn btn-primary" value="Registrar conductor">
 
             </div>
-        </div>
+        
     </form>
                 </div>
         </div>        </div>
-@else
-<p>el usuario no tiene permisos</p>
-@endif
+</div>
 
 </div></section>
-@endif
+
 @endsection

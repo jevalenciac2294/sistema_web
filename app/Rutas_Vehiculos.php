@@ -15,6 +15,9 @@ use Hash;
 class Rutas_Vehiculos extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword;
+      use SoftDeletes;
+
+
     
     protected $table = 'rutasvehiculos';
     

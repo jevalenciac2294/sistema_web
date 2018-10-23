@@ -9,26 +9,24 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-
+use Illuminate\Database\Eloquent\SoftDeletes; //línea necesaria
+      
 
 use App\TipoUsuario;
-
-
-
-
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     
     use ShinobiTrait;
     use Authenticatable, CanResetPassword;
+    
+    use SoftDeletes;
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -45,47 +43,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $hidden = ['password', 'remember_token'];
     
      protected $dates = ['deleted_at'];
-//
-//    //course\profile
-//     public static function scopeName($query, $name)
-//    {
-//         
-//        if(trim($name) !="")
-//        {
-//            $query->where('name', 'LIKE', "%$name%");
-//        }
-//    }
 
-
-//  public function scopeSearch($query,$name)
-//     {
-//
-//            return $query->where('name',"LIKE","%$name%");
-//            
-//     }
-//     
-     public function scopeName($query, $name){
-         if(trim($name) !=""){
-             $query->where(DB::raw("CONCAT(name, '')"),"LIKE", "%name%" );
-         }
-     }
-
-     
-      public function tipo($idtipo)
-      {
-        $resul=TipoUsuario::find($idtipo);
-        if(isset($resul)){
-         return $resul->nombre;
-        }
-        else
-        {
-          return "Estandar";
-        }
-        
-      }
-
-
-
-
-
+//Query Scope
+     public function scopeName($query, $name)
+    {
+        if($name)
+            return $query->where('name', 'LIKE', "%$name%");
+    }
 }

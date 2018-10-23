@@ -8,13 +8,20 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Hash;
+use Illuminate\Database\Eloquent\SoftDeletes; //línea necesaria
+      
+
 
 
 class Vehiculo extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword;
-    protected $table = 'vehiculo';
 
+    use SoftDeletes;
+
+      protected $dates = ['deleted_at']; 
+    protected $table = 'vehiculo';
+  
     /**
      * The attributes that are mass assignable.
      *

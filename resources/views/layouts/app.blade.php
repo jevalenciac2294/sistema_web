@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     
     
-
+@section('htmlheader')
     @include('layouts.partials.htmlheader')
 @show
 
@@ -143,7 +143,7 @@ desired effect
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          <h4 class="modal-title">Asignar Rutas</h4>
         </div>
           <div class="modal-body" id="listaRutas">
           <p>Cargando rutas...</p>
@@ -172,7 +172,7 @@ desired effect
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          <h4 class="modal-title">Asignar vehiculos</h4>
         </div>
           <div class="modal-body" id="listaVehiculos">
           <p>Cargando vehiculos...</p>

@@ -156,7 +156,7 @@ class AdminController extends Controller
     //El valor 1 en la columna determina si el usuario es administrador o no
     //$user->user = 1;
     if ($user->save()){
-     return redirect()->back()->with('message', 'Enhorabuena nuevo administrador creado correctamente');
+     return redirect()->back()->with('message', 'Enhorabuena nuevo Usuario creado correctamente');
     } else{
      return redirect()->back()->with('error', 'Ha ocurrido un error al guardar los datos');
     }
@@ -193,6 +193,69 @@ class AdminController extends Controller
     {
         //
     }
+    public function register(Request $request) {
+        $rules = [
+          'name'  => 'required|min:3|max:16|regex:/^[a-záéíóúàèìòùäëïöüñ\s]+$/i',
+            'email'=> 'required|email|max:255|unique:users,email',
+            'password'=> 'required|min:3|max:18|confirmed',
+        ];
+        $messages = [
+            'name.required' => 'El campo es reuqerido',
+            'name.min' => 'El minimo de caracter permitidos son 3',
+            'name.max' => 'El maximo de caracter permitidos son 16',
+            'name.regex' => 'solo se aceptan letras',
+            'email.required' => 'El campo es requerido',
+            'email.email' => 'El formato de email es incorrecto',
+            'email.max' => 'El maximo de caracteres permitidos son 255',
+            'email.unique' => 'El email ya existe',
+            'password.required' => 'El campo es requerido',
+            'password.min' => 'El minimo de caracteres permitidos son 3',
+            'password.max' => 'El maximo de caracteres permitidos son 18',
+            'password.confirmed' => 'La contraseña no coincide',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()){
+            return view("register")
+            ->withErrors($validator)
+            ->withInput();
+        }else{
+//            $user = new User;
+//            $data['name'] = $user->name = $request->name;
+//            $user->name = $request->name;
+//            $user->email = $request->email;
+//            $user->password = bcrypt($request->password);
+//            $user->confirm_token = str_random(100);
+//            $user->remember_token = str_random(100);
+//            $data['confirm_token'] = str_random(100);//$user->confirm_token = str_random(100);
+//            $user->save();
+//            
+//            Mail::send('mails.register', ['user' => $user], function ($mail) use ($user){
+//                //$mail->subject('Confirma tu cuenta');
+//                $mail->to($user['email'], $user['name'])->subject('Por favor confirmar tu cuenta');
+//            });
+//
+
+$user = new User;
+            $data['name'] = $user->name = $request->name;
+            $data['email'] = $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->remember_token = str_random(100);
+            $data['confirm_token'] = $user->confirm_token = str_random(100);
+            $user->save();
+            
+           // Mail::send('mails.register', ['data' => $data], function($mail) use($data){
+             //   $mail->subject('Confirma tu cuenta');
+               // $mail->to($data['email'], $data['name']);   
+                
+                //});
+                
+            return view("admin/register")
+            ->with("message", "Hemos enviado un mensaje de confimacion a su cuenta");
+            
+            
+        }
+        
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -201,12 +264,15 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id){
+
+
         $users = User::find($id);
-        $roles=Role::all();
+        $roles=Role::get();
         
-        return view("admin.form_editar_usuario")->with("users",$users)
-	                                              ->with("roles",$roles);
+       // return view("admin.form_editar_usuario")->with("users",$users)
+        return View('admin.edit', ['users'=>$users],['roles' =>$roles]);
         
+
 //        return View('admin.edit', ['users'=>$users]);
                    
         /*$users = User::findOrFail($id);
@@ -227,24 +293,34 @@ class AdminController extends Controller
     {
         $users = User::find($id);
         $users->fill($request->all());
-        $users->password = bcrypt($request->password);
+       // $users->password = bcrypt($request->password);
         $users->user = $request->user;
-//        $users->save();
+      //  $users->save();
         
+        $users->roles()->sync($request->get('roles'));
         
-        if($request->has("rol")){
+
+        $users->name = $request->name;
+       
+        $users->save();
+//        
+        $users_all = User::orderBy('name', 'ASC')->paginate(5);
+        Session::flash('message', 'Usuario modificado correctamente.');
+        return View('admin.index', ['users'=>$users_all])->with('info','Usuario Guardado');
+        
+  /*      if($request->has("rol")){
             $rol=$request->input("rol");
 	    $users->revokeAllRoles();
 	    $users->assignRole($rol);
-        }
-        if( $users->save()){
-		return view("admin.msj_usuario_actualizado")->with("msj","Usuario actualizado correctamente")
-	                                                   ->with("user",$users) ;
-    }
-    else
-    {
-		return view("admin.mensaje_error")->with("msj","..Hubo un error al agregar ; intentarlo nuevamente..");
-    }
+        }*/
+      //  if( $users->save()){
+		//return view("admin.msj_usuario_actualizado")->with("msj","Usuario actualizado correctamente")
+	      //                                             ->with("user",$users) ;
+   // }
+    //else
+    //{
+	//	return view("admin.mensaje_error")->with("msj","..Hubo un error al agregar ; intentarlo nuevamente..");
+    //}
         
 //        $users_all = User::orderBy('name', 'ASC')->paginate(5);
 //        Session::flash('message', 'Usuario modificado correctamente.');
@@ -323,7 +399,7 @@ class AdminController extends Controller
     //$user->user = 1;
     
     if ($user->save()){
-     return redirect()->back()->with('message', 'Enhorabuena nuevo administrador creado correctamente');
+     return redirect()->back()->with('message', 'Enhorabuena nuevo usuario creado correctamente');
     } else{
      return redirect()->back()->with('error', 'Ha ocurrido un error al guardar los datos');
     }

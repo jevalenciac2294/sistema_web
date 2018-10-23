@@ -1,3 +1,5 @@
+<script src="{{asset('js/plusis.js')}}"></script>
+
 <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
 
@@ -58,14 +60,29 @@
             </span>
           </a>
            <ul class="treeview-menu" id="homeSubmenu">
+
+            @if('users.index')
                     <li>
                     <a href="{{ url('admin/index') }}">CONFIGURACIONES</a>
 
                     </li>
+            @endif
+            @if('users.createuser')
                     <li>
-                    <a href="{{ url('admin/createadmin') }}">CREAR USUARIO</a>
+                    <!--<a href="{{url('admin/createadmin')}}">CREAR USUARIO</a>-->
+<a href="{{url('usuario/create')}}">CREAR USUARIO</a>
+                    </li>
+            @else
+            <h1>El usuario no tiene permisos</h1>
+            @endelse
+            @endif
+            @if('home.agendar')
+                    <li>
+                    <a href="{{url('home')}}">AGENDAR</a>
 
                     </li>
+            @endif
+
                     
                     <li>
                         <!--<a href="{{url('admin/createuser')}}">CREAR USUARIO</a>-->
@@ -82,13 +99,22 @@
             </span>
           </a>
            <ul class="treeview-menu" id="homeSubmenu2">
+                @if('empleado.indexEmpleado')
                     <li>
                     <a href="{{ url('indexEmpleado') }}">CONDUCTORES</a>
                     </li>
-
+                    @else
+            <h1>El usuario no tiene permisos</h1>
+            @endelse
+                @endif
+                @if('empleado.createEmpleado')
                     <li>
                         <a href="{{url('createEmpleado')}}">CREAR CONDUCTORES</a>
                     </li>
+                     @else
+            <h1>El usuario no tiene permisos</h1>
+            @endelse
+                @endif
                 </ul>
         </li>
         <li class="treeview">
@@ -100,13 +126,17 @@
             </span>
           </a>
            <ul class="treeview-menu" id="homeSubmenu3">
-
+                 @if('vehiculo.indexVehiculo')
                     <li>
-                        <a href="{{url('indexVehiculo')}}">VEHICULOS</a>
+                        <a href="{{url('indexVehiculos')}}">VEHICULOS</a>
                     </li>
+
+                @endif
+                @if('vehiculo.createVehiculo')
                     <li>
                         <a href="{{url('createVehiculo')}}">CREAR VEHICULOS</a>
                     </li>
+                @endif
                 </ul>
         </li>
         <li class="treeview">
@@ -118,17 +148,61 @@
             </span>
           </a>
            <ul class="treeview-menu" id="homeSubmenu4">
+                @if('rutas.rutaindex') 
                     <li>
                     <a href="{{ url('rutaindex') }}">RUTAS</a>
                     </li>
+                @endif
+                @if('rutas.rutacreate')
+
                     <li>
                         <a href="{{url('rutacreate')}}">CREAR RUTAS</a>
                     </li>
+                @endif
 <!--                    <li>
                         <a href="{{url('rutaindex')}}">lISTADO DE RUTAS</a>
                     </li>-->
                 </ul>
         </li>
+        <li class="treeview">
+          <a href="#homeSubmenu5" data-toggle="collapse" aria-expanded="false" class="fa fa-dashboard">
+              <span>REPORTES</span>
+            <span class="pull-right-container">
+              <!--<i class="fa fa-angle-left pull-right"></i>-->
+                <i class="fa fa-angle-left" onClick="($(this)[0].className == 'fa fa-angle-left')?$(this)[0].className='fa fa-angle-down':$(this)[0].className='fa fa-angle-left'" style="float: right !important;"></i>
+            </span>
+          </a>
+           <ul class="treeview-menu" id="homeSubmenu5">
+                @if('home.horas_extras') 
+                    <li>
+                    <a href="{{ url('HorasExtras') }}">HORAS EXTRAS</a>
+                    </li>
+                @endif
+                @if('home.rutas_conductor') 
+                
+
+                    <li>
+                        <a href="{{url('reporte_Ruta_Conductor')}}">RUTAS POR CONDUCTOR</a>
+                    </li>
+                @endif
+                @if('home.conductores_vehiculos') 
+                
+
+                    <li>
+                        <a href="{{url('reporte_vehiculo_ruta')}}">VEHICULOS POR RUTA</a>
+                    </li>
+                @endif
+<!--                    <li>
+                        <a href="{{url('rutaindex')}}">lISTADO DE RUTAS</a>
+                    </li>-->
+                </ul>
+        </li>
+
+
+
+
+
+
 </ul>
 <!--<ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>

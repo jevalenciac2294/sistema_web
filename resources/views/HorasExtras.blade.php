@@ -16,14 +16,17 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="{{asset('js/plusis.js')}}"></script>
+
+
 @extends('layouts.app')
 @extends('layouts.modalv')
 @section('htmlheader_title')
     
 @endsection
 
-
 @section('main-content')
+
+
 
 <section  id="contenido_principal">
 
@@ -80,20 +83,21 @@
 <form class="navbar-form navbar-right" role="search" method="post" action="{{url('HorasExtrasBuscar')}}">
     {{csrf_field()}}
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
- <div class="form-group">
-  <input type="text" class="form-control" name='search' id="empleado" placeholder="Buscar ..." />
- </div>
-
-           <div class="col-md-4">
+   
+           <div class="col-md-3">
                 <label for="" > Fecha Inicio</label>
-                <input type="text" name="fecha_inicio" id="fecha_inicio" autocomplete="off" class="form-control">
+                <input type="text" name="fecha_inicio" id="fecha_inicio" autocomplete="off" class="form-control" required>
             </div> 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="" > Fecha Final</label>
-                <input type="text" name="fecha_final" id="fecha_final" autocomplete="off" class="form-control">
+                <input type="text" name="fecha_final" id="fecha_final" autocomplete="off" class="form-control" required>
             </div> 
-
- <button type="submit" class="btn btn-default">Buscar</button>
+            <div class="col-md-3">
+                <label for="" > Nombre Empleado</label>
+                <input type="text" class="form-control" name='empleado' id="empleado" placeholder="Buscar" />
+            </div> 
+<br>
+            <button type="submit" class="btn btn-sm btn-primary">Buscar</button>
 </form>
    </div>          
    
@@ -101,22 +105,26 @@
 <table class="table table-hover table-striped" cellspacing="0" width="100%">
     <thead>
         <th>    Fecha  </th>
-        <th>    name  </th>
+        <th>    nombre  </th>
         <th>    Horas  </th>
         <th>    Horas Extras  </th>
         
     </thead>
     <tbody>
 
-         @foreach($datos as $empleadoss)
+        @foreach($datos as $e_key => $empleados)
+            
+            @foreach($empleados as $n_key => $emp)
        <tr>
 
-        <td>{{$empleadoss['fecha']}}</td>
-        <td>{{$empleadoss['nombre']}}</td>
-        <td>{{$empleadoss['horas']}}</td>     
-        <td>{{$empleadoss['extras']}}</td>
+        <td>{{$e_key}}</td>
+        <td>{{$emp['nombre']}}</td>
+        <td>{{$emp['horas']}}</td>     
+        <td>{{$emp['extras']}}</td>
        </tr>
-    @endforeach
+             @endforeach
+
+         @endforeach
 
     </tbody>
 

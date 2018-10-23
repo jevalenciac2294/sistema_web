@@ -1,73 +1,56 @@
-<script src="{{asset('js/plusis.js')}}"></script>
-@extends('layouts.app')
+@extends('layouts.home')
+@section('content')
 
-@extends('layouts.modalv')
-@section('htmlheader_title')
-	
-@endsection
 
-@section('main-content')
 
-@if(count($permisos)==0)
-<p>usuario no tiene ningun permiso</p>
-@else
-<section  id="contenido_principal">
-    @if(!empty($permisos['crear_usuario']))
-<div class="box box-primary box-gris">
-     <div class="box-header">
-        <h4 class="box-title">Crear usuario</h4>
-        <div class="table-responsive" >
-            
-		<div class="margin" id="botones_control">
-		</div>
-<div class="panel-body">
-    
+<h1 Style="padding-top: 40px">Crear un nuevo usuario</h1>
+<hr />
+
+@if (Session::has('message'))
+ <div class='bg-info' style='padding: 20px'>
+  {{Session::get('message')}}
+ </div>
+ <hr />
+@endif
+@if (Session::has('error'))
+ <div class='bg-danger' style='padding: 20px'>
+  {{Session::get('error')}}
+ </div>
+ <hr />
+@endif
 <form class="container" method="POST" action="{{url('admin/createadmin')}}">
     {!! csrf_field() !!}
 
     <div class='form-group'>
         <label for="name">Nombre:</label>
-        <input type="text" required name="name" class="form-control" value="{{ old('name') }}" / >
+        <input type="text" name="name" class="form-control" value="{{ old('name') }}" />
         <div class="text-danger">{{$errors->first('name')}}</div>
     </div>
 
     <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email"  required name="email" class="form-control" value="{{ old('email') }}" />
+        <input type="email" name="email" class="form-control" value="{{ old('email') }}" />
         <div class="text-danger">{{$errors->first('email')}}</div>
     </div>
 
     <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" required class="form-control" name="password">
+        <input type="password" class="form-control" name="password">
         <div class="text-danger">{{$errors->first('password')}}</div>
     </div>
 
     <div class="form-group">
         <label for="password_confirmation">Confirmar Password:</label>
-        <input type="password" required class="form-control" name="password_confirmation">
+        <input type="password" class="form-control" name="password_confirmation">
+    </div>
+    <div class="form-group">
+        <label for="user">Tipo de usuario:</label>
+        <input type="text" class="form-control" name="user">
     </div>
 
-
-   <!-- <div>
+    <div>
         <button type="submit" class="btn btn-primary">Crear administrador</button>
-    </div>-->
-<div class="form-group" align="right">
-<div class="modal-footer">
-        <input type="submit" class="btn btn-primary" value="Crear administrador " onclick="llamar();">
-        </div>
-</div>
+    </div>
 </form>
-
-</div>
-</div>
-</div>
-
-
-@else
-<p>el usuario no tiene permisos</p>
-@endif
-
-</div></section>
-@endif
-@endsection
+<br /><br /><br /><br />
+@stop

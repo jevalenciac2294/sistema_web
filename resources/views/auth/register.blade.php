@@ -9,6 +9,17 @@
         {{Session::get('message')}}
     @endif
 </div>
+<div class="col-sm-12 " style="background-color:rgba(0, 0, 0, 0.35); height: 60px; " >
+
+                   <a class="mybtn-social pull-right" href='{{url("auth/login")}}'>Iniciar Sesion</a>
+
+                   <a class="mybtn-social pull-right" href="{{url('auth/register')}}">Registrarme</a>
+
+<!--                  <a class="mybtn-social pull-right" href="{{ url('auth/login') }}">
+                       Login
+                  </a>-->
+                   <a class="mybtn-social pull-right" href='{{url("password/email")}}'>Olvidé mi contraseña</a>
+ <div>                 
 <div class="col-sm-6 col-sm-offset-3 myform-cont" >
 <div class="myform-bottom">
 <form method="POST" action="{{url('auth/register')}}">
@@ -41,6 +52,9 @@
         <button type="submit" class="btn btn-primary">Registrarme</button>
     </div>
 </form>
+</div>
+</div>
+</div>
 </div>
 </div>
 @stop

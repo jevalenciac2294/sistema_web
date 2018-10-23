@@ -5,9 +5,6 @@
 @section('content')
 @section('main-content')
 
-@if(count($permisos)==0)
-<p>usuario no tiene ningun permiso</p>
-@else
 
 <script>
     var banderaPintar = false;
@@ -19,21 +16,27 @@
     
 </script>
 
-@if(!empty($permisos['index_ubicacion_ruta']))
+
 
 <section  id="contenido_principal">
-
+ 
 <div class="box box-primary box-gris">
      <div class="box-header">
         
+         <h4>Ubicacion rutas</h4>
+            <ol class="breadcrumb">
+                <li><a href="{{url('rutaindex')}}">Rutas</a></li>
+                <li class="active">Ver Rutas</li>
+            </ol> 
         <div class="table-responsive" >
             
 		<div class="margin" id="botones_control">
-@if(!empty($permisos['listado_ruta']))
-              <a href="{{url('indexubicacion')}}"  class="btn btn-xs btn-primary" >Listado Rutas</a> 
-@endif
+
+              <a href="{{url('rutaindex')}}"  class="btn btn-xs btn-primary" >Listado Rutas</a> 
+
 		</div>
-<table class="table table-striped" border='1'>
+
+<!--<table class="table table-striped" border='1'>
     <thead>
         <th>    Id  </th>
         <th>    lat  </th>
@@ -52,17 +55,14 @@
     
     
     </div>
-</table>    
+</table>
 este es el json {{$parametro_test[1]}}
-
+-->    
 
 <div id="map"></div>
 </div>    
 
  </div>
 </div></section>
-@else
-<p>El usuario no tiene permisos</p>
-@endif
+
 @endsection
-@endif

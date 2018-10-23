@@ -9,12 +9,10 @@
 
 
 @section('main-content')
-@if(count($permisos)==0)
-<p>usuario no tiene ningun permiso</p>
-@else
+
 
 <section  id="contenido_principal">
-@if(!empty($permisos['ver_vehiculo']))
+
 <div class="box box-primary box-gris">
      <div class="box-header">
         <h4 class="box-title">Vehiculos</h4>	        
@@ -25,7 +23,6 @@
 					<span class="input-group-btn">
 					<input type="submit" class="btn btn-primary" value="buscar" >
 					</span>
-
 				</div>
 						
         </form>-->
@@ -48,7 +45,9 @@
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(3);" >Permisos</a>   -->                              
 
               <a href="{{url('indexVehiculo')}}"  class="btn btn-xs btn-primary" >Listado Vehiculos</a> 
-              <a href="{{url('generarpdfvehiculos')}}"  class="btn btn-xs btn-primary" >Listado PDF Vehiculos</a> 
+              <a href="{{url('generarpdfvehiculos')}}"  class="btn btn-xs btn-primary" >Listado PDF Vehiculos</a>
+              
+
 
 
 		</div>
@@ -73,16 +72,22 @@
         <td>{{$vehiculos->color}}</td>      
         <td>
             
-    @if(!empty($permisos['editar_vehiculo']))
-        <td><a href="{{ url('editVehiculo', [$vehiculos->id]) }}" class="btn btn-danger">Editar</a>    
-@endif   
-@if(!empty($permisos['asignar_ruta']))
-        <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal2" onclick="listarRuta('{{url('obtenerRutas')}}','{{url('asignarutasvehiculo')}}', '{{$vehiculos->id}}', '{{ url('indexubicacion')}}')">Asignar ruta</a>
-@endif
-@if(!empty($permisos['eliminar_vehiculo']))
+        @if('vehiculo.editVehiculo')
+        
+        <td><a href="{{ url('editVehiculo', [$vehiculos->id]) }}" class="btn btn-danger">Editar</a>    </td>
+ 
+        
+        @endif
+        @if('rutasvehiculos.asignarutasvehiculo')
+        <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal2" onclick="listarRuta('{{url('obtenerRutas')}}','{{url('asignarutasvehiculo')}}', '{{$vehiculos->id}}', '{{ url('indexubicacion')}}')">Asignar ruta</a></td>
+
+        
+        @endif
+        @if('vehiculo.destroyVehiculo')
         <td><a href="{{ url('destroyVehiculo', [$vehiculos->id]) }}" class="btn btn-warning">Eliminar</a>
- @endif   
+
         </td>
+        @endif
        </tr>
     </tbody> 
     @endforeach
@@ -90,22 +95,19 @@
     
 </table>
 </div>
-{!! $vehiculo->render()!!}
 </div>    
 
 
 <!--<div class="box box-primary col-xs-12">
-
 <div class='aprobado' style="margin-top:70px; text-align: center">
  
 <label style='color:#177F6B'>
               
 </label> 
-
 </div>
 -->
 </div>
-@endif 
+
 </section>
-@endif
+
 @endsection

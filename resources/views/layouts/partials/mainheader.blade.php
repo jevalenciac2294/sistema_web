@@ -45,7 +45,7 @@
                 <!-- Tasks Menu -->
                 
                 @if (Auth::guest())
-                    <li><a href="{{ url('/register') }}">/a></li>
+                    <li><a href="{{ url('/register') }}"></a></li>
                     <li><a href="{{ url('/login') }}"></a></li>
                 @else
                     <!-- User Account Menu -->

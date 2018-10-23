@@ -128,11 +128,14 @@ public function rutaindex(Request $request){
 
  public function destroyruta($id)
     {
-        $ruta = Ruta::find($id);
+      
+
+       $ruta = Ruta::find($id);
         $ruta ->delete();
         $ruta_all = Ruta::orderBy('name', 'ASC')->paginate(5);
         Session::flash('message','Ruta Eliminada Correctamente');
-        return View('admin.rutas.indexubicacion')->with('permisos',$permisos_asignados_llaves)->with('parametro_test',$enviar);
+        return View('admin.rutas.indexubicacion');
+
     }
 
 
@@ -177,6 +180,10 @@ public function rutaindex(Request $request){
 //        return View('admin.rutas.indexubicacion' )->with('parametro_test',$enviar);
 //        return View('admin.rutas.rutaindex' )->with('ubicacion',$ubicacion);
     }
+
+
+
+
 
     /**
      * Show the form for creating a new resource.

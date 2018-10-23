@@ -14,14 +14,17 @@
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="{{asset('js/plusis.js')}}"></script>
+
 @extends('layouts.app')
 @extends('layouts.modalv')
 @section('htmlheader_title')
     
 @endsection
 
-
 @section('main-content')
+
+
 
 
 <section  id="contenido_principal">
@@ -161,21 +164,12 @@ function cargarRutas(select_Vehiculo){
         var option = document.createElement('option');
         option.text = 'Seleccionar';
         select_Ruta.add(option);
-
-
     });
-
-
 }
  
      
 </script>
-<script type="text/javascript">
-    function llamar(){
-        console.log("llega llamar");
-        formulario_evento.submit();
-    }
-</script>
+
   <!-- Modal -->
  <div class="modal" tabindex="-1" role="dialog" id="mdlEvent">
     <div class="modal-dialog">
@@ -234,15 +228,13 @@ function cargarRutas(select_Vehiculo){
               <option value="" disable="true" selected="true">Seleccionar</option>
             </select>
           </div>
-<a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(3);" >Permisos</a>
-
-   <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(2);">Roles</a> 
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="Guardar ">
+           </div>
         </form>
         </div>
       </div>
-      <div class="modal-footer">
-        <input type="submit" class="btn btn-primary" value="Guardar " onclick="llamar();">
-        </div>
+      
     </div>
   </div>
 </div>

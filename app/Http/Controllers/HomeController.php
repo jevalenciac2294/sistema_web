@@ -10,7 +10,7 @@ use App\Ruta;
 use App\Comments;
 use App\Ubicacion;
 use App\Evento;
-use App\vehiculo;
+use App\Vehiculo;
 
 use Illuminate\Http\name;
 
@@ -76,10 +76,10 @@ class HomeController extends Controller{
 //echo $fecha->format('%S');
 
 
-$f_pp = strtotime($f_inicio);
+/*$f_pp = strtotime($f_inicio);
 $f_ppf = strtotime($f_final);
 echo $f_ppf - $f_pp;
-return;
+return;*/
         if($input->fecha_inicio<$input->fecha_final){
 
 
@@ -257,17 +257,20 @@ return $pdf->download('invoice.pdf');
     }
 
     public function search(Request $request){
+
           $evento = Evento::select()
                 ->where('fecha_inicio', '>=', $request->fecha_inicio)
                 ->where('fecha_final', '<=', $request->fecha_final.' 23:59:59')
-                ->orderBy('id', 'desc')
+                ->orderBy('fecha_inicio', 'asc')
                 ->paginate(10);
+  //  echo '<pre>';print_r($request->fecha_inicio);die(); 
 
         $datos_salida = array();
         foreach ($evento as $e) {
             $empleado = Empleado::find($e->empleados);
             $empleado_nombre = $empleado->name.' '.$empleado->apellidoS;
-              if (stripos($empleado_nombre, $request->empleado) !== false || empty($request->empleado)) { 
+            
+              if (strpos($empleado_nombre, $request->empleado) !== false || empty($request->empleado)) { 
                 $f_pp = strtotime($e->fecha_inicio);
                 $f_ppf = strtotime($e->fecha_final);
 
@@ -275,6 +278,8 @@ return $pdf->download('invoice.pdf');
 
                 $salida = array();
                 $fecha = explode(' ', $e->fecha_inicio);
+
+                $salida['id'] = $empleado->id;
                 $salida['fecha'] = $fecha[0];
                 $salida['nombre'] = $empleado_nombre;
                 $salida['horas'] = $horas_totales/3600;//3600 = 1 hora
@@ -289,7 +294,37 @@ return $pdf->download('invoice.pdf');
                 $datos_salida[]=$salida;
             }
         }
-        return View('HorasExtras', ['datos' => $datos_salida]);
+        $datos_salida_suma = array();
+        foreach ($datos_salida as $fila) {
+            if(isset($datos_salida_suma[$fila['fecha']])){
+                if(isset($datos_salida_suma[$fila['fecha']][$fila['id']])){
+
+                    $datos_salida_suma[$fila['fecha']][$fila['id']]['horas'] += $fila['horas'];
+                }else{
+                    $datos_salida_suma[$fila['fecha']][$fila['id']]['horas'] = $fila['horas'];
+                    $datos_salida_suma[$fila['fecha']][$fila['id']]['nombre'] = $fila['nombre'];
+                    $datos_salida_suma[$fila['fecha']][$fila['id']]['extras'] = 0;
+                    
+                }
+            }else{
+                $datos_salida_suma[$fila['fecha']][$fila['id']]['horas'] = $fila['horas'];
+                $datos_salida_suma[$fila['fecha']][$fila['id']]['nombre'] = $fila['nombre'];
+                $datos_salida_suma[$fila['fecha']][$fila['id']]['extras'] = 0;
+
+            }
+        }
+        foreach ($datos_salida_suma as $f_key => $salida_fechas) {
+            foreach ($salida_fechas as $id_key => $salida_id) {
+                if($salida_id['horas']>8){
+                    $datos_salida_suma[$f_key][$id_key]['extras'] = $salida_id['horas'] - 8;
+                    $datos_salida_suma[$f_key][$id_key]['horas'] = 8;
+                }
+            }
+        }
+
+//echo '<pre>';print_r($datos_salida_suma);die();
+
+        return View('HorasExtras', ['datos' => $datos_salida_suma]);
 
 /*
 
@@ -316,5 +351,102 @@ public function search(Request $req){
     }
 }
 */
+
+
+public function ruta_vehiculo(){
+
+/*
+    public function hora(){
+
+         return View('HorasExtras', compact('empleado'), ['datos' => array()]);
+    }
+*/  
+
+        $ruta_conductor = DB::table('empleado')
+
+        ->join('empleadoVehiculo', 'empleadoVehiculo.empleado_id', '=', 'empleado.id')
+
+        ->join('vehiculo', 'vehiculo.id', '=', 'empleadoVehiculo.vehiculo_id')
+
+        ->join('rutasvehiculos', 'rutasvehiculos.vehiculo_id', '=', 'vehiculo.id')
+
+        ->join('rutas', 'rutas.id', '=', 'rutasvehiculos.ruta_id')
+
+        ->select('rutas.name','rutas.id',  'empleado.name as name_emp')
+    
+        ->get();           
+        
+      //  echo '<pre>';print_r($ruta_conductor);die();    
+
+        return View('reporte_Ruta_Conductor',['datos' => array()])->with('ruta_conductor',$ruta_conductor); //['datos' => $ruta_conductor]);//)->with('ruta_conductor',$ruta_conductor);
+
+    }
+      /*public function reporte(){
+
+         return View('reporte_Ruta_Conductor', compact('empleado'), ['datos' => array()]);
+    }*/
+public function search_ruta_vehiculo(Request $request){
+         $ruta_conductor = Empleado::select()
+        ->join('empleadoVehiculo', 'empleadoVehiculo.empleado_id', '=', 'empleado.id')
+
+        ->join('vehiculo', 'vehiculo.id', '=', 'empleadoVehiculo.vehiculo_id')
+
+        ->join('rutasvehiculos', 'rutasvehiculos.vehiculo_id', '=', 'vehiculo.id')
+
+        ->join('rutas', 'rutas.id', '=', 'rutasvehiculos.ruta_id')
+
+
+        ->where('empleado.name', "LIKE", $request->empleado)
+        
+        ->get();           
+ //echo '<pre>';print_r($ruta_conductor);die(); 
+// echo '<pre>';print_r($request->empleado);die(); 
+
+        $datos_salida = array();
+        foreach ($ruta_conductor as $rc) {
+            $empleado = Empleado::find($rc->empleados);
+            //$empleado_nombre = $empleado->name.' '.$empleado->apellidoS;
+            
+              if (strpos($empleado, $request->empleado) !== false || empty($request->empleado)) { 
+                $salida = array();
+                
+                $salida['id'] = $empleado->id;
+                $salida['name_emp'] = $empleado->name;
+                $salida['name'] = $rutas->name;
+               
+                $datos_salida[]=$salida;
+            }
+
+        }
+//echo '<pre>';print_r($ruta_conductor);die(); 
+
+        return View('reporte_Ruta_Conductor',  ['datos' => $datos_salida]);//->with('ruta_conductor',$ruta_conductor)->with('search_ruta_vehiculo', $ruta_conductor);
+    }
+
+
+public function vehiculo_ruta(){
+
+        $vehiculo_ruta = DB::table('vehiculo')
+
+        ->join('rutasvehiculos', 'rutasvehiculos.vehiculo_id', '=', 'vehiculo.id')
+
+        ->join('rutas', 'rutas.id', '=', 'rutasvehiculos.ruta_id')
+
+        ->select('rutas.name','rutas.id',  'vehiculo.matricula')
+    
+        ->get();             
+        
+        //echo '<pre>';print_r($vehiculo_ruta);die();    
+
+        return View('reporte_vehiculo_ruta' )->with('vehiculo_ruta',$vehiculo_ruta);
+
+    }
+
+
+
+
+
+
+
 
 }

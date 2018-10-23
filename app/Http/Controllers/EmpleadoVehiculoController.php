@@ -98,9 +98,7 @@ public function asignaempleadovehiculo(Request $request){
             
             $salida_respuesta = true;
         }
-        
-        
-        
+    
         // salida
         if ($salida_respuesta){
             echo 'ok';

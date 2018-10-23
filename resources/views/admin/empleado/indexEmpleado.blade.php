@@ -9,15 +9,19 @@
 
 @section('main-content')
 
-@if(count($permisos)==0)
-<p>usuario no tiene ningun permiso</p>
-@else
+
 
 <section  id="contenido_principal">
-@if(!empty($permisos['ver_empleado']))
+
 <div class="box box-primary box-gris">
      <div class="box-header">
-        <h4 class="box-title">Empleados</h4>	        
+        <h4 class="box-title">Empleados</h4>	
+
+            <ol class="breadcrumb">
+                <li><a href="{{url('user')}}">Inicio</a></li>
+                <li class="active">Ver Empleados</li>
+            </ol> 
+        
 <!--        <form   action="{{ url('buscar_usuario') }}"  method="post"  >
 				<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
 				<div class="input-group input-group-sm">
@@ -45,23 +49,26 @@
               <a href="{{url('admin/index')}}"  class="btn btn-xs btn-primary" >Listado Usuarios</a> 
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(2);">Roles</a> 
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(3);" >Permisos</a>   -->                              
-
+              @if('empleado.indexEmpleado')
               <a href="{{url('indexEmpleado')}}"  class="btn btn-xs btn-primary" >Listado Empleados</a> 
+              @endif
+              @if('empleado.indexEmpleado')
               <a href="{{url('generarpdfempleados')}}"  class="btn btn-xs btn-primary" >Listado PDF Empleados</a> 
-
+              @endif
 
 		</div>
-        <div class="table-responsive" >
-<table class="table table-hover table-striped" cellspacing="0" width="100%">
+
+                <div class="panel-body">
+                    <table class="table table-striped table-hover">
     <thead>
         <th>    Id  </th>
-        <th>    name  </th>
-        <th>    apellidos  </th>
-        <th>    documento  </th>
+        <th>    Nombre  </th>
+        <th>    Apellidos  </th>
+        <th>    Documento  </th>
         <th>    Correo  </th>
-        <th>    direccion  </th>
-        <th>    telefono  </th>
-        <th>    saldo  </th>
+        <th>    Direccion  </th>
+        <th>    Telefono  </th>
+        <th>    Saldo  </th>
         
     </thead>
     <tbody>
@@ -75,30 +82,38 @@
         <td>{{$empleados->direccion}}</td>
         <td>{{$empleados->telefono}}</td>
         <td>{{$empleados->sueldo}}</td>
-        <td>
-@if(!empty($permisos['editar_empleado']))
-        <td><a href="{{ url('editEmpleado', [$empleados->id]) }}" class="btn btn-danger">Editar</a></td>
-@endif   
-
-@if(!empty($permisos['asignar_vehiculo']))
-        <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal1" onclick="listarVehiculo('{{url('obtenerVehiculo')}}','{{url('asignaempleadovehiculo')}}', '{{$empleados->id}}', '{{ url('indexVehiculo') }}')">Asignar vehiculo</a>
-@endif
+        
 
 
+        @if('empleado.editEmpleado')
+        <td  width="10px"><a href="{{ url('editEmpleado', [$empleados->id]) }}" class="btn btn-danger">Editar</a></td>
+ 
+        @endif
+        @if('empleadoVehiculo.asignaempleadovehiculo')
 
-@if(!empty($permisos['eliminar_vehiculo']))
-        <td><a href="{{ url('destroyEmpleado', [$empleados->id]) }}" class="btn btn-warning">Eliminar</a>
- @endif          
+        <td  width="10px"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1" onclick="listarVehiculo('{{url('obtenerVehiculo')}}','{{url('asignaempleadovehiculo')}}', '{{$empleados->id}}', '{{ url('indexVehiculo') }}')">Asignar vehiculo</a></td>
+
+
+
+
+        @endif
+        
+        @if('empleado.destroyEmpleado')
+
+         <td  width="10px"><a href="{{ url('destroyEmpleado', [$empleados->id]) }}" class="btn btn-warning">Eliminar</a>
+     
         </td>
-
+        @endif
+              
        </tr>
     @endforeach
     </tbody>
 
 </table>
             
-</div>
+
 {!! $empleado->render()!!}
+</div>
 </div>    
 
 
@@ -114,7 +129,7 @@
 -->
 
 </div>
-@endif 
+
 </section>
-@endif
+
 @endsection

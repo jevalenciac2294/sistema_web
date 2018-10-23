@@ -2,15 +2,23 @@
 
 @section('main-content')
 
-@if(count($permisos)==0)
-<p>usuario no tiene ningun permiso</p>
-@else
+
 <section  id="contenido_principal">
-    @if(!empty($permisos['crear_vehiculo']))
+
+<div class="text-info" Style="padding-top: 40px">
+    @if(Session::has('message'))
+        {{Session::get('message')}}
+    @endif
+</div>
     
 <div class="box box-primary box-gris">
      <div class="box-header">
         <h4 class="box-title">Crear Vehiculos</h4>
+            <ol class="breadcrumb">
+                <li><a href="{{url('indexVehiculos')}}">Vehiculos</a></li>
+                <li class="active">Crear Vehiculos</li>
+            </ol> 
+        <div class="table-responsi
         <div class="table-responsive" >
             
 		<div class="margin" id="botones_control">
@@ -49,12 +57,10 @@
     </form>
 </div></div></div>
 
-@else
-<p>el usuario no tiene permisos</p>
-@endif
+
 
 </div></section>
-@endif
+
 
 
 @endsection

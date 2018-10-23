@@ -32,7 +32,10 @@ class VehiculoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexVehiculo(Request $request)
+
+
+//index de vehiculos asignados
+    public function indexVehiculo(Request $request, $id)
     {
         $vehiculo = Vehiculo::orderBy('matricula', 'ASC')->paginate(5);
         
@@ -40,6 +43,7 @@ class VehiculoController extends Controller
             $users = User::Where('name', 'like', '%'.$request->get('name').'%')->get()->search($request->name);
         }else{
             $users = User::orderBy('name', 'ASC')->paginate(5);
+            $vehiculo = Vehiculo::Where('id', '=', $id)->get();
         }
         $permisos_asignados = Auth::user()->getPermissions();
         // Recorrer todos los permisos y crear un array con el nombre como llave del array
@@ -47,11 +51,34 @@ class VehiculoController extends Controller
         foreach($permisos_asignados as $nombre){
             $permisos_asignados_llaves[$nombre] = '1';
         }
-        
-        return View('admin.vehiculo.indexVehiculo' )->with('users',$users)->with('permisos',$permisos_asignados_llaves)->with('vehiculo',$vehiculo);
-//        return View('admin.vehiculo.indexVehiculo' )->with('vehiculo',$vehiculo);
-    }
+           // $users = DB::table('users')->paginate(15);
 
+        //return view('admin.vehiculo.indexVehiculo', ['vehiculo' => $vehiculo]);
+        return View('admin.vehiculo.indexVehiculo' )->with('users',$users)->with('permisos',$permisos_asignados_llaves)->with('vehiculo',$vehiculo);
+        //return View('admin.vehiculo.indexVehiculos' )->with('vehiculo',$vehiculo);
+    }
+  /*  public function indexVehiculos(Request $request, $id)
+    {
+        $vehiculo = Vehiculo::orderBy('matricula', 'ASC')->paginate(5);
+        
+        if($request->get('name')){
+            $users = User::Where('name', 'like', '%'.$request->get('name').'%')->get()->search($request->name);
+        }else{
+            $users = User::orderBy('name', 'ASC')->paginate(5);
+            $vehiculo = Vehiculo::Where('id', '=', $id)->get();
+        }
+        $permisos_asignados = Auth::user()->getPermissions();
+        // Recorrer todos los permisos y crear un array con el nombre como llave del array
+        $permisos_asignados_llaves = array();
+        foreach($permisos_asignados as $nombre){
+            $permisos_asignados_llaves[$nombre] = '1';
+        }
+           // $users = DB::table('users')->paginate(15);
+
+       // return view('admin.vehiculo.indexVehiculos', ['vehiculo' => $vehiculo]);
+        //return View('admin.vehiculo.indexVehiculo' )->with('users',$users)->with('permisos',$permisos_asignados_llaves)->with('vehiculo',$vehiculo);
+        return View('admin.vehiculo.indexVehiculos' )->with('vehiculo',$vehiculo);
+    }*/
 //            
 //        $empleado = Empleado::orderBy('name', 'ASC')->paginate(5);
 //        return View('admin.empleado.indexEmpleado' )->with('empleado',$empleado);
@@ -85,9 +112,9 @@ class VehiculoController extends Controller
     'marca.min' => 'El mínimo de caracteres permitidos son 3',
     'marca.max' => 'El máximo de caracteres permitidos son 16',
     'marca.regex' => 'Sólo se aceptan letras','marca.required' => 'El campo es requerido',
-    'modelo.min' => 'mminimo 4 numeros',
+    'modelo.min' => 'minimo 4 numeros',
     'modelo.max' => 'El máximo de numeros permitidos son 4',
-    'modelo.regex' => 'Sólo se aceptan numeros','modelo.required' => 'El campo es requerido',
+    'modelo.regex' => 'Sólo se aceptan numeros',
     'color.min' => 'El mínimo de caracteres permitidos son 3',
     'color.max' => 'El máximo de caracteres permitidos son 16',
     'color.regex' => 'Sólo se aceptan letras y numeros','name.required' => 'El campo es requerido'
@@ -131,7 +158,7 @@ class VehiculoController extends Controller
             $permisos_asignados_llaves[$nombre] = '1';
         }
         
-        return View('admin.vehiculo.createVehiculo' )->with('users',$users)->with('permisos',$permisos_asignados_llaves);
+        return View('admin.vehiculo.createVehiculo' )->with('users',$users);//->with('permisos',$permisos_asignados_llaves);
 
 //        return View('admin.vehiculo.createVehiculo');
   
@@ -173,6 +200,7 @@ class VehiculoController extends Controller
         $vehiculo_all = Vehiculo::orderBy('matricula', 'ASC')->paginate(2);
         Session::flash('message','Vehiculo Eliminado Correctamente');
         return View('admin.vehiculo.indexVehiculo', ['vehiculo'=>$vehiculo_all]);
+
     }
     
     
@@ -231,8 +259,6 @@ class VehiculoController extends Controller
 //        exit;return;
         return response(['rutas'=> $ruta]);
    }*/
-
-
         $empleadovehiculo = EmpleadoVehiculo::Where('empleado_id', '=', $id_empleado)->get();
         foreach($vehiculo as $key => $r){
             $estado = '0';
@@ -271,4 +297,29 @@ class VehiculoController extends Controller
         }
         return View('admin.vehiculo.search', compact('vehiculo'), ['vehiculo' => $vehiculo]);
       }
+
+
+      //index vehiculos
+
+
+
+    public function indexVehiculos(Request $request)
+    {
+        $vehiculo = Vehiculo::orderBy('matricula', 'ASC')->paginate(5);
+        
+        if($request->get('name')){
+            $users = User::Where('name', 'like', '%'.$request->get('name').'%')->get()->search($request->name);
+        }else{
+            $users = User::orderBy('name', 'ASC')->paginate(5);
+        }
+        $permisos_asignados = Auth::user()->getPermissions();
+        // Recorrer todos los permisos y crear un array con el nombre como llave del array
+        $permisos_asignados_llaves = array();
+        foreach($permisos_asignados as $nombre){
+            $permisos_asignados_llaves[$nombre] = '1';
+        }
+        
+        return View('admin.vehiculo.indexVehiculos' )->with('users',$users)->with('permisos',$permisos_asignados_llaves)->with('vehiculo',$vehiculo);
+//        return View('admin.vehiculo.indexV
+    }
 }

@@ -6,20 +6,23 @@
 	
 @endsection
 
-
 @section('main-content')
 
-@if(count($permisos)==0)
-<p>usuario no tiene ningun permiso</p>
-@else
+
+ @if('users.index')
 <section  id="contenido_principal">
-    @if(!empty($permisos['index_usuario']))
+
 
 
 <div class="box box-primary box-gris">
 
      <div class="box-header">
-        <h4 class="box-title">Usuarios</h4>	        
+        <h4 class="box-title">Usuarios</h4>	
+
+        <ol class="breadcrumb">
+  			<li><a href="user">Inicio</a></li>
+  			<li class="active">Usuarios</li>
+		</ol>        
 <!--        <form   action="{{ url('buscar_usuario') }}"  method="post"  >
 				<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
 				<div class="input-group input-group-sm">
@@ -84,17 +87,24 @@
 @endif
 @if(!empty($permisos['salir']))
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="alert('se sale');">Salir</a>
-@endif-->
-@if(!empty($permisos['index']))
-              <a href="{{url('admin/index')}}"  class="btn btn-xs btn-primary" >Listado Usuarios</a> 
 @endif
-@if(!empty($permisos['editar_rol']))
+
+             
+
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(2);">Roles</a> 
-@endif
-@if(!empty($permisos['editar_permisos']))
+
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(3);" >Permisos</a>                                 
-@endif
-                </div>
+--> 
+ @if('users.index')
+                  <a href="{{url('admin/index')}}"  class="btn btn-xs btn-primary" >Listado Usuarios</a> 
+            @endif
+			
+ @if('roles.index')
+                    <a href="{{url('roles')}}"  class="btn btn-xs btn-primary" >Roles</a> 
+            @endif
+			
+			
+        </div>
 
     </div>
 
@@ -130,16 +140,18 @@
 <!--boton editar index-->
     
 
-@if(!empty($permisos['editar_usuarios']))
-			<!--<button type="button" class="btn  btn-default btn-xs" onclick="verinfo_usuario({{  $user->id }})" ><i class="fa fa-fw fa-edit"></i></button>-->
-                        <a class="btn  btn-default btn-xs" onclick="verinfo_usuario({{$user->id }})" style='width:40px; height:15px; background-color: #FAFAFA' ><i class="fa fa-fw fa-edit"></i></a>
-@endif
-<!--boton eliminar index-->
-@if(!empty($permisos['borrar_usuarios']))
-			<!--<button href="{{ url('admin/destroy', [$user->id]) }}" type="button"  class="btn  btn-danger btn-xs"  ><i class="fa fa-fw fa-remove"></i></button>-->
+
+			<!--<button type="button" class="btn  btn-default btn-xs" onclick="verinfo_usuario({{  $user->id }})" ><i class="fa fa-fw fa-edit"></i></button>
+                        <a class="btn  btn-default btn-xs" onclick="verinfo_usuario({{$user->id }})" style='width:40px; height:15px; background-color: #FAFAFA' ><i class="fa fa-fw fa-edit"></i></a>-->
+        @if('users.edit')              
+   		<a class="btn  btn-default btn-xs"  href="{{ url('edit', [$user->id]) }}" class="btn btn-warning" style='width:40px; height:15px;  background-color: #FAFAFA' ><i class="fa fa-fw fa-edit"></i></a>
+			
+   		@endif
+		<!--boton eliminar index<button href="{{ url('admin/destroy', [$user->id]) }}" type="button"  class="btn  btn-danger btn-xs"  ><i class="fa fa-fw fa-remove"></i></button>-->
                          <!--onclick="borrado_usuario({{  $user->id }});"--> 
+        @if('users.destroy')     
                          <a class="btn  btn-default btn-xs"  href="{{ url('admin/destroy', [$user->id]) }}" class="btn btn-warning" style='width:40px; height:15px; color: #FFFFFF; background-color: #FE9A2E' ><i class="fa fa-fw fa-remove"></i></a>
-@endif
+        @endif
 			
 		</tr>
 	    @endforeach
@@ -178,8 +190,5 @@
 @endif
 
 </div></section>
-@else
-<p>el usuario no tiene permisos</p>
-@endif
 @endif
 @endsection

@@ -1,7 +1,7 @@
-
-<?php 
+<?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -22,8 +22,12 @@ class UserController extends Controller{
 	}
 	
 	public function user(){
-		return View('user.user');
-	}
+        return View('user.user');
+    }
+
+    public function adminuser(){
+        return View('admin.user');
+    }
         public function password(){
         return View('user.password');
         }
@@ -64,8 +68,69 @@ class UserController extends Controller{
         
     }
  
-    public function store(Request $request){
-        return View('');
+    public function create()
+    {
+        return view('usuario.create');
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+  $rules = [
+          'name'  => 'required|min:3|max:16|regex:/^[a-záéíóúàèìòùäëïöüñ\s]+$/i',
+            'email'=> 'required|email|max:255|unique:users,email',
+            'password'=> 'required|min:3|max:18|confirmed',
+        ];
+        $messages = [
+            'name.required' => 'El campo es reuqerido',
+            'name.min' => 'El minimo de caracter permitidos son 3',
+            'name.max' => 'El maximo de caracter permitidos son 16',
+            'name.regex' => 'solo se aceptan letras',
+            'email.required' => 'El campo es requerido',
+            'email.email' => 'El formato de email es incorrecto',
+            'email.max' => 'El maximo de caracteres permitidos son 255',
+            'email.unique' => 'El email ya existe',
+            'password.required' => 'El campo es requerido',
+            'password.min' => 'El minimo de caracteres permitidos son 3',
+            'password.max' => 'El maximo de caracteres permitidos son 18',
+            'password.confirmed' => 'La contraseña no coincide',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()){
+            return redirect("usuario/create")
+            ->withErrors($validator)
+            ->withInput();
+        }else{
+//            $user = new User;
+//            $data['name'] = $user->name = $request->name;
+//            $user->name = $request->name;
+//            $user->email = $request->email;
+//            $user->password = bcrypt($request->password);
+//            $user->confirm_token = str_random(100);
+//            $user->remember_token = str_random(100);
+//            $data['confirm_token'] = str_random(100);//$user->confirm_token = str_random(100);
+//            $user->save();
+//            
+//            Mail::send('mails.register', ['user' => $user], function ($mail) use ($user){
+//                //$mail->subject('Confirma tu cuenta');
+//                $mail->to($user['email'], $user['name'])->subject('Por favor confirmar tu cuenta');
+//            });
+//
+
+$user = new User;
+            $data['name'] = $user->name = $request->name;
+            $data['email'] = $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->remember_token = str_random(100);
+            $data['confirm_token'] = $user->confirm_token = str_random(100);
+            $user->save();
+            
+return redirect('admin/index');
+        }
     }
     
     public function show($id){

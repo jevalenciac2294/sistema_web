@@ -10,14 +10,17 @@
 
 @section('main-content')
 
-@if(count($permisos)==0)
-<p>usuario no tiene ningun permiso</p>
-@else
+
 <script>
     var banderaPintar = true;
 </script>
 <section  id="contenido_principal">
-        @if(!empty($permisos['crear_ruta']))
+
+<div class="text-info" Style="padding-top: 40px">
+    @if(Session::has('message'))
+        {{Session::get('message')}}
+    @endif
+</div>
             <!--<div class="text-info">-->
 <!--
     {!! csrf_field() !!}
@@ -35,6 +38,12 @@
 <div class="box box-primary box-gris">
      <div class="box-header">
         
+         <h4>Crear ruta</h4>
+            <ol class="breadcrumb">
+                <li><a href="{{url('user')}}">Inicio</a></li>
+                <li><a href="{{url('rutaindex')}}">Rutas</a></li>
+                <li class="active">Crear Rutas</li>
+            </ol> 
         <div class="table-responsive" >
             
 		<div class="margin" id="botones_control">
@@ -120,9 +129,7 @@
 
  </div>
     @stop
-    @else
-<p>el usuario no tiene permisos</p>
-@endif
+
 </div></section>
-@endif
+
 @endsection

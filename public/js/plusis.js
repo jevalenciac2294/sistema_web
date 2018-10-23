@@ -31,6 +31,24 @@ $(document).on("click",".div_modal", function(e){
   $("#capa_formularios").html("");
 });
 
+//reportes rutas por conductor
+
+function cargarlistado(listado){
+
+    //funcion para cargar los diferentes  en general
+if(listado==1){ var url = "listado_usuarios"; }
+if(listado==2){ var url = "listado_publicaciones/0"; }
+if(listado==3){ var url = "reportes"; }
+
+$("#contenido_principal").html($("#cargador_empresa").html());
+$.get(url,function(resul){
+
+        $("#contenido_principal").html(resul); 
+})
+
+}
+
+
 
 
 
@@ -218,5 +236,5 @@ function borrar_rol(idrol){
    }) ;
 
 
-
 }
+

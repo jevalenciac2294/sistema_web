@@ -47,7 +47,7 @@
                         <div class="myform-top-left">
 <!--                         <img  src="{{ url('img/logo_plusis.png') }} " class="img-responsive logo" />
                           <h3>Ingresa a nuestro sitio.</h3>-->
-                            <p>Digita tu email y contraseña:</p>
+                            <p>Digita su email y contraseña:</p>
                         </div>
                         <div class="myform-top-right">
                           <i class="fa fa-key"></i>
@@ -69,7 +69,7 @@
 <div class="myform-bottom">        
                 
  <form method="post" action="{{url('auth/login')}}">
-  {{csrf_field()}}
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
   <div class="form-group">
    <label for="email">Email:</label>
    <input type="email" name="email" class="form-control" value="{{Input::old('email')}}" />
@@ -119,8 +119,3 @@
     <script src="{{ url('js/bootstrap.min.js') }}"></script>
 </body>
 </html>
-
-
-
-
-

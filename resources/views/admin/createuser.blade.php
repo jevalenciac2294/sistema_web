@@ -1,23 +1,15 @@
-<script src="{{asset('js/plusis.js')}}"></script>
-@extends('layouts.app')
-
-@extends('layouts.modalv')
-@section('htmlheader_title')
-	
-@endsection
-
-@section('main-content')
+@extends('layouts.home')
+@section('content')
 
 
-<section  id="contenido_principal">
-<div class="box box-primary box-gris">
-     <div class="box-header">
-        <h4 class="box-title">Crear usuario admin</h4>
-        <div class="table-responsive" >
-            
-		<div class="margin" id="botones_control">
-		</div>
-<div class="panel-body">
+<h1 class="container" Style="padding-top: 80px">Crear un nuevo usuario</h1>
+<hr />
+
+<div class="text-info" Style="padding-top: 30px">
+    @if(Session::has('message'))
+        {{Session::get('message')}}
+    @endif
+</div>
 
 <form class="container" method="POST" action="{{url('admin/createuser')}}">
     {!! csrf_field() !!}
@@ -49,5 +41,3 @@
         <button type="submit" class="btn btn-primary">Registrar Usuario</button>
     </div>
 </form>
-@stop
-</div></section>
