@@ -13,6 +13,7 @@
 
 <div class="box box-primary box-gris">
      <div class="box-header">
+<<<<<<< HEAD
         <h4 class="box-title">Crear Roles</h4> 
 
 
@@ -22,6 +23,9 @@
                 <li><a href="{{url('roles')}}">Roles</a></li>
                 <li class="active">Crear Roles</li>
             </ol>  
+=======
+        <h4 class="box-title">Roles</h4>  
+>>>>>>> origin/master
 
                 <div class="panel-body">                    
                     {!! Form::open(['route' => 'roles.store']) !!}

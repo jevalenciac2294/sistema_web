@@ -19,7 +19,10 @@ class DatabaseSeeder extends Seeder
         $this->call(EmpleadoTableSeeder::class);
         $this->call(VehiculoTableSeeder::class);
         $this->call(RutaTableSeeder::class);
+<<<<<<< HEAD
         $this->call(HomeTableSeeder::class);
+=======
+>>>>>>> origin/master
        
 
 

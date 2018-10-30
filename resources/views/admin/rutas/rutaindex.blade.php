@@ -70,11 +70,19 @@
         @if('rutas.indexubicacion')
           
 
+<<<<<<< HEAD
         <td  width="10px"><a href="{{ url('/indexubicacion', [$rutas->id]) }}" class="btn btn-danger">Ver</a></td>
         @endif
         @if('rutas.destroyruta')
 
          <td  width="10px"><a href="{{ url('/destroyruta', [$rutas->id]) }}" class="btn btn-warning">Eliminar</a>            
+=======
+        <td><a href="{{ url('/indexubicacion', [$rutas->id]) }}" class="btn btn-danger">Ver</a></td>
+        @endif
+        @if('rutas.destroyruta')
+
+         <td><a href="{{ url('/destroyruta', [$rutas->id]) }}" class="btn btn-warning">Eliminar</a>            
+>>>>>>> origin/master
         </td>
         @endif
 

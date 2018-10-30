@@ -14,11 +14,15 @@
 <div class="box box-primary box-gris">
      <div class="box-header">
         <h4 class="box-title">Roles</h4>  
+<<<<<<< HEAD
             
             <ol class="breadcrumb">
                 <li><a href="{{url('roles')}}">Roles</a></li>
                 <li class="active">Ver Rol</li>
             </ol>  
+=======
+
+>>>>>>> origin/master
                 <div class="panel-body">                    
                     {!! Form::model($role, ['route' => ['roles.update', $role->id],
                     'method' => 'PUT']) !!}

@@ -12,20 +12,26 @@
 
 <section  id="contenido_principal">
 
+<<<<<<< HEAD
 <div class="text-info" Style="padding-top: 40px">
     @if(Session::has('message'))
         {{Session::get('message')}}
     @endif
 </div>
+=======
+>>>>>>> origin/master
     
 <div class="box box-primary box-gris">
      <div class="box-header">
         <h4 class="box-title">Editar Vehiculos</h4>
+<<<<<<< HEAD
 
             <ol class="breadcrumb">
                 <li><a href="{{url('indexVehiculos')}}">Vehiculos</a></li>
                 <li class="active">Editar Vehiculos</li>
             </ol> 
+=======
+>>>>>>> origin/master
         <div class="table-responsive" >
             
         <div class="margin" id="botones_control">

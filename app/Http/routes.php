@@ -68,6 +68,21 @@ Route::resource('usuario','UserController', ['names' => [
    // Route::get('usuario/create', 'UserController@create');
 
 
+Route::resource('usuario','UserController', ['names' => [
+   'create' => 'users.createuser'
+]]);
+//Route::resource('usuario','UserController')->name('users.createuser')
+  // ->middleware('permissionshinobi:users.createuser');
+/*Route::group(['prefix' => 'api'], function () {
+    Route::resource('usuario','UserController', ['name' => [
+        'usuario.create' => 'users.createuser',
+    ]]);
+});*/
+ //   Route::any('usuario/store', 'UserController@store');
+
+   // Route::get('usuario/create', 'UserController@create');
+
+
 Route::get('user/password', 'UserController@password');
 Route::post('user/updatepassword', 'UserController@updatePassword');
 //Crear usuario
@@ -97,10 +112,17 @@ Route::post('admin/index', 'AdminController@index')->name('users.index')
 
 Route::post('update/{id}', 'AdminController@update')->name('users.edit')
         ->middleware('permissionshinobi:users.edit');
+<<<<<<< HEAD
 
 Route::get('edit/{id}', 'AdminController@edit')->name('users.edit')
         ->middleware('permissionshinobi:users.edit');
 
+=======
+
+Route::get('edit/{id}', 'AdminController@edit')->name('users.edit')
+        ->middleware('permissionshinobi:users.edit');
+
+>>>>>>> origin/master
 Route::post('admin/destroy/{id}', 'AdminController@destroy')->name('users.destroy')
         ->middleware('permissionshinobi:users.destroy');
 Route::get('admin/destroy/{id}', 'AdminController@destroy')->name('users.destroy')
@@ -167,9 +189,12 @@ Route::post('createVehiculo', 'VehiculoController@createVehiculo')->name('vehicu
 //Mostrar vehiculos asignados a los empleados
 Route::get('indexVehiculo/{id}', 'VehiculoController@indexVehiculo')->name('vehiculo.indexVehiculo')
         ->middleware('permissionshinobi:vehiculo.indexVehiculo');
+<<<<<<< HEAD
 
 Route::get('indexVehiculo', 'VehiculoController@indexVehiculos')->name('vehiculo.indexVehiculo')
         ->middleware('permissionshinobi:vehiculo.indexVehiculo');
+=======
+>>>>>>> origin/master
 //Buscar en el index, usuarios creados
 Route::post('indexVehiculo/{id}', 'VehiculoController@indexVehiculo')->name('vehiculo.indexVehiculo')
         ->middleware('permissionshinobi:vehiculo.indexVehiculo');
@@ -505,6 +530,7 @@ Route::post("HorasExtrasBuscar", "HomeController@search")->name('home.horas_extr
         $route = "reporte/search_ruta_vehiculo";
         return redirect($route);
     });*/
+<<<<<<< HEAD
 //    Route::get("reporte/{search_ruta_vehiculo}", "HomeController@search_ruta_vehiculo");
 
 
@@ -656,3 +682,69 @@ Route::post('reporte_vehiculo_ruta', function(){
     }*/
 });
 
+=======
+    Route::post("HorasExtrasBuscar", "HomeController@search");
+    // Route::get("HorasExtrasBuscar", "HomeController@search")->name('search');
+    
+
+
+
+
+
+//Routes roles y permisos------------------------------------------
+
+    //   'roleshinobi'
+//   'permissionshinobi'
+
+//Roles
+    Route::post('roles/store', 'RoleController@store')->name('roles.store')
+        ->middleware('permissionshinobi:roles.create');
+
+    Route::get('roles', 'RoleController@index')->name('roles.index')
+        ->middleware('permissionshinobi:roles.index');
+
+    Route::get('roles/create', 'RoleController@create')->name('roles.create')
+        ->middleware('permissionshinobi:roles.create');
+
+    Route::put('roles/{role}', 'RoleController@update')->name('roles.update')
+        ->middleware('permissionshinobi:roles.edit');
+
+    Route::get('roles/{role}', 'RoleController@show')->name('roles.show')
+        ->middleware('permissionshinobi:roles.show');
+
+    Route::delete('roles/{role}', 'RoleController@destroy')->name('roles.destroy')
+        ->middleware('permissionshinobi:roles.destroy');
+
+    Route::get('roles/{role}/edit', 'RoleController@edit')->name('roles.edit')
+        ->middleware('permissionshinobi:roles.edit');
+
+        //Extra de usuarios Show, para permisos
+
+        Route::get('admin/{admins}', 'AdminController@show')->name('users.show')
+        ->middleware('permissionshinobi:users.show');
+
+
+        //Reportes
+
+
+Route::get('reporte_Ruta_Conductor', 'HomeController@ruta_vehiculo');
+
+
+
+//Buscador reportes
+  Route::get('reporte/searchredirect', function(){
+
+
+        /* Nuevo: si el argumento search está vacío regresar a la página anterior */
+        if (empty(Input::get('search_ruta_vehiculo'))) return redirect()->back();
+
+        $search = urlencode(e(Input::get('search_ruta_vehiculo')));
+        $route = "reporte/search_ruta_vehiculo";
+        return redirect($route);
+    });
+    Route::get("reporte/{search_ruta_vehiculo}", "HomeController@search_ruta_vehiculo");
+
+
+Route::get('reporte_vehiculo_ruta', 'HomeController@vehiculo_ruta');
+    
+>>>>>>> origin/master

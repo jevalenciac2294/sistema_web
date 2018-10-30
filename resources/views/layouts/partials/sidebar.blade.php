@@ -68,6 +68,7 @@
                     </li>
             @endif
             @if('users.createuser')
+<<<<<<< HEAD
                     <li>
                     <!--<a href="{{url('admin/createadmin')}}">CREAR USUARIO</a>-->
 <a href="{{url('usuario/create')}}">CREAR USUARIO</a>
@@ -83,6 +84,30 @@
                     </li>
             @endif
 
+=======
+                    <li>
+                    <!--<a href="{{url('admin/createadmin')}}">CREAR USUARIO</a>-->
+<a href="{{url('usuario/create')}}">CREAR USUARIO</a>
+                    </li>
+            @else
+            <h1>El usuario no tiene permisos</h1>
+            @endelse
+            @endif
+            @if('users.index')
+                    <li>
+                    <a href="{{url('home')}}">AGENDAR</a>
+
+                    </li>
+            @endif
+            
+            @if('users.index')
+                    <li>
+                    <a href="{{url('HorasExtras')}}">HORAS EXTRAS</a>
+
+                    </li>
+            @endif
+            
+>>>>>>> origin/master
                     
                     <li>
                         <!--<a href="{{url('admin/createuser')}}">CREAR USUARIO</a>-->
@@ -159,6 +184,7 @@
                         <a href="{{url('rutacreate')}}">CREAR RUTAS</a>
                     </li>
                 @endif
+<<<<<<< HEAD
 <!--                    <li>
                         <a href="{{url('rutaindex')}}">lISTADO DE RUTAS</a>
                     </li>-->
@@ -192,6 +218,8 @@
                         <a href="{{url('reporte_vehiculo_ruta')}}">VEHICULOS POR RUTA</a>
                     </li>
                 @endif
+=======
+>>>>>>> origin/master
 <!--                    <li>
                         <a href="{{url('rutaindex')}}">lISTADO DE RUTAS</a>
                     </li>-->

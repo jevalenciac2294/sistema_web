@@ -11,11 +11,14 @@
 
 <section  id="contenido_principal">
  
+<<<<<<< HEAD
  <div class="text-info" Style="padding-top: 40px">
     @if(Session::has('message'))
         {{Session::get('message')}}
     @endif
 </div>
+=======
+>>>>>>> origin/master
     
 <div class="box box-primary box-gris">
      <div class="box-header">
@@ -78,7 +81,11 @@
     </form>
                 </div>
         </div>        </div>
+<<<<<<< HEAD
 </div>
+=======
+
+>>>>>>> origin/master
 
 </div></section>
 

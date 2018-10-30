@@ -44,7 +44,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     
      protected $dates = ['deleted_at'];
 
+<<<<<<< HEAD
 //Query Scope
+=======
+//Scope
+>>>>>>> origin/master
      public function scopeName($query, $name)
     {
         if($name)

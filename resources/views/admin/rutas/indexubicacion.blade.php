@@ -16,6 +16,10 @@
     
 </script>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 
 
 <section  id="contenido_principal">
@@ -32,7 +36,11 @@
             
 		<div class="margin" id="botones_control">
 
+<<<<<<< HEAD
               <a href="{{url('rutaindex')}}"  class="btn btn-xs btn-primary" >Listado Rutas</a> 
+=======
+              <a href="{{url('indexubicacion')}}"  class="btn btn-xs btn-primary" >Listado Rutas</a> 
+>>>>>>> origin/master
 
 		</div>
 

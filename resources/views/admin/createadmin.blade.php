@@ -3,7 +3,11 @@
 
 
 
+<<<<<<< HEAD
 <h1 Style="padding-top: 40px">Crear un nuevo usuario</h1>
+=======
+<h1 Style="padding-top: 40px">Crear un nuevo administrador</h1>
+>>>>>>> origin/master
 <hr />
 
 @if (Session::has('message'))
