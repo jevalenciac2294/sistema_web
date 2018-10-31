@@ -48,7 +48,7 @@
   </div>
         
 </div> -----------------------------------------------------       -->
-
+<!---->
 <ul class="sidebar-menu">
         <li class="header">MENU DE NAVEGACION</li>
         <li class="treeview">
@@ -68,7 +68,7 @@
                     </li>
             @endif
             @if('users.createuser')
-<<<<<<< HEAD
+
                     <li>
                     <!--<a href="{{url('admin/createadmin')}}">CREAR USUARIO</a>-->
 <a href="{{url('usuario/create')}}">CREAR USUARIO</a>
@@ -84,7 +84,7 @@
                     </li>
             @endif
 
-=======
+
                     <li>
                     <!--<a href="{{url('admin/createadmin')}}">CREAR USUARIO</a>-->
 <a href="{{url('usuario/create')}}">CREAR USUARIO</a>
@@ -106,8 +106,7 @@
 
                     </li>
             @endif
-            
->>>>>>> origin/master
+
                     
                     <li>
                         <!--<a href="{{url('admin/createuser')}}">CREAR USUARIO</a>-->
@@ -184,7 +183,7 @@
                         <a href="{{url('rutacreate')}}">CREAR RUTAS</a>
                     </li>
                 @endif
-<<<<<<< HEAD
+
 <!--                    <li>
                         <a href="{{url('rutaindex')}}">lISTADO DE RUTAS</a>
                     </li>-->
@@ -218,8 +217,7 @@
                         <a href="{{url('reporte_vehiculo_ruta')}}">VEHICULOS POR RUTA</a>
                     </li>
                 @endif
-=======
->>>>>>> origin/master
+
 <!--                    <li>
                         <a href="{{url('rutaindex')}}">lISTADO DE RUTAS</a>
                     </li>-->

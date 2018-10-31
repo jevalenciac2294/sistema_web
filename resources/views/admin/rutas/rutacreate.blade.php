@@ -16,14 +16,14 @@
 </script>
 <section  id="contenido_principal">
 
-<<<<<<< HEAD
+
 <div class="text-info" Style="padding-top: 40px">
     @if(Session::has('message'))
         {{Session::get('message')}}
     @endif
 </div>
-=======
->>>>>>> origin/master
+
+
             <!--<div class="text-info">-->
 <!--
     {!! csrf_field() !!}
@@ -126,7 +126,7 @@
         });
     });
 </script>-->
-
+<!---->
 </div>
 </div>    
 

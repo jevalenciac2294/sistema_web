@@ -40,12 +40,5 @@ class Empleado extends Model implements AuthenticatableContract, CanResetPasswor
     return $this->belongsToMany(Evento::class);
     }
 
-<<<<<<< HEAD
-=======
-    public function scopeName($query, $name)
-    {
-        if($name)
-            return $query->where('name', 'LIKE', "%$name%");
-    }
->>>>>>> origin/master
+//
 }

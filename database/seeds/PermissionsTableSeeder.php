@@ -66,15 +66,13 @@ class PermissionsTableSeeder extends Seeder
         	'slug' => 'users.createuser',
         	'description' => 'Crea usuario en el sistema',
         ]);
-<<<<<<< HEAD
+
         Permission::create([
             'name' => 'Agendar',
             'slug' => 'home.agendar',
             'description' => 'Agendamiento de conductores y rutas en el sistema',
         ]);
 
-=======
->>>>>>> origin/master
         //Conductores
 
         Permission::create([
@@ -139,7 +137,7 @@ class PermissionsTableSeeder extends Seeder
         //Rutas
 
         Permission::create([
-<<<<<<< HEAD
+
             'name' => 'Navegar rutas',
             'slug' => 'rutas.rutaindex',
             'description' => 'Lista y navega todos los nombres de las rutas del sistema',
@@ -180,7 +178,7 @@ class PermissionsTableSeeder extends Seeder
             'description' => 'Reporte de conductores por vehiculos en rutas en el sistema',
         ]);
         
-=======
+
         	'name' => 'Navegar rutas',
         	'slug' => 'rutas.rutaindex',
         	'description' => 'Lista y navega todos los nombres de las rutas del sistema',
@@ -201,6 +199,6 @@ class PermissionsTableSeeder extends Seeder
         	'slug' => 'rutas.indexubicacion',
         	'description' => 'lista de ubicacion de rutas',
         ]);
->>>>>>> origin/master
+
     }
 }

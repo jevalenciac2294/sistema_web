@@ -15,13 +15,12 @@
      <div class="box-header">
         <h4 class="box-title">Rol</h4>  
 
-<<<<<<< HEAD
+
             <ol class="breadcrumb">
                 <li><a href="{{url('roles')}}">Roles</a></li>
                 <li class="active">Ver Rol</li>
             </ol>  
-=======
->>>>>>> origin/master
+<!---->
                 <div class="panel-body">                                        
                     <p><strong>Nombre</strong>     {{ $role->name }}</p>
                     <p><strong>Slug</strong>       {{ $role->slug }}</p>

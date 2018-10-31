@@ -17,17 +17,14 @@
 </div>
 <div class="box box-primary box-gris">
      <div class="box-header">
-<<<<<<< HEAD
+
         <h4 class="box-title">Crear Usuario</h4>
 
             <ol class="breadcrumb">
                 <li><a href="user">Inicio</a></li>
                 <li class="active">Crear usuario</li>
-            </ol> 
+            </ol> <!---->
 
-=======
-        <h4 class="box-title">Crear Usuarios</h4>
->>>>>>> origin/master
         <div class="table-responsive" >
             
 		<div class="margin" id="botones_control">
@@ -62,11 +59,9 @@
     </div>
 
     <div>
-<<<<<<< HEAD
+
         <button type="submit" class="btn btn-primary">Registrar</button>
-=======
-        <button type="submit" class="btn btn-primary">Registrarme</button>
->>>>>>> origin/master
+
     </div>
  </div>
 {!!Form::close()!!}

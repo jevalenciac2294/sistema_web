@@ -355,7 +355,7 @@ public function search(Request $req){
 
 public function ruta_vehiculo(){
 
-<<<<<<< HEAD
+
 /*
     public function hora(){
 
@@ -363,8 +363,6 @@ public function ruta_vehiculo(){
     }
 */  
 
-=======
->>>>>>> origin/master
         $ruta_conductor = DB::table('empleado')
 
         ->join('empleadoVehiculo', 'empleadoVehiculo.empleado_id', '=', 'empleado.id')
@@ -377,7 +375,6 @@ public function ruta_vehiculo(){
 
         ->select('rutas.name','rutas.id',  'empleado.name as name_emp')
     
-<<<<<<< HEAD
         ->get();           
         
       //  echo '<pre>';print_r($ruta_conductor);die();    
@@ -392,7 +389,7 @@ public function ruta_vehiculo(){
 public function search_ruta_vehiculo(Request $request){
          $ruta_conductor = Empleado::select()
         ->join('empleadoVehiculo', 'empleadoVehiculo.empleado_id', '=', 'empleado.id')
-=======
+
         ->get();             
         
         //echo '<pre>';print_r($ruta_conductor);die();    
@@ -405,7 +402,7 @@ public function search_ruta_vehiculo($search_ruta_vehiculo){
 
 
          $ruta_conductor = Empleado::join('empleadoVehiculo', 'empleadoVehiculo.empleado_id', '=', 'empleado.id')
->>>>>>> origin/master
+
 
         ->join('vehiculo', 'vehiculo.id', '=', 'empleadoVehiculo.vehiculo_id')
 
@@ -413,7 +410,6 @@ public function search_ruta_vehiculo($search_ruta_vehiculo){
 
         ->join('rutas', 'rutas.id', '=', 'rutasvehiculos.ruta_id')
 
-<<<<<<< HEAD
 
         ->where('empleado.name', "LIKE", $request->empleado)
         
@@ -440,7 +436,7 @@ public function search_ruta_vehiculo($search_ruta_vehiculo){
 //echo '<pre>';print_r($ruta_conductor);die(); 
 
         return View('reporte_Ruta_Conductor',  ['datos' => $datos_salida]);//->with('ruta_conductor',$ruta_conductor)->with('search_ruta_vehiculo', $ruta_conductor);
-=======
+
         ->select()
         ->where('rutas.name', 'LIKE', '%'.$search_ruta_vehiculo->name.'%')
         ->get();           
@@ -460,7 +456,7 @@ public function search_ruta_vehiculo($search_ruta_vehiculo){
 
         return View('reporte_Ruta_Conductor' )->with('ruta_conductor',$ruta_conductor)->with('search_ruta_vehiculo', $search_ruta_vehiculo);
 
->>>>>>> origin/master
+
     }
 
 
@@ -482,14 +478,4 @@ public function vehiculo_ruta(){
 
     }
 
-
-
-<<<<<<< HEAD
-
-
-
-
-
-=======
->>>>>>> origin/master
 }

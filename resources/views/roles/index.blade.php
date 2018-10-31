@@ -13,7 +13,7 @@
 
 <div class="box box-primary box-gris">
      <div class="box-header">
-<<<<<<< HEAD
+<!---->
         <h4 class="box-title">Roles</h4> 
 
             <ol class="breadcrumb">
@@ -21,9 +21,9 @@
                 <li><a href="{{url('admin/index')}}">Usuarios</a></li>
                 <li class="active">Roles</li>
             </ol>        
-=======
+
         <h4 class="box-title">Roles</h4>       
->>>>>>> origin/master
+
                     @if('roles.create')
                     <a href="{{ route('roles.create') }}" 
                     class="btn btn-sm btn-primary pull-right">

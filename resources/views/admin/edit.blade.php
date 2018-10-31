@@ -15,7 +15,7 @@
 <div class="box box-primary box-gris">
      <div class="box-header">
         <h4 class="box-title">Editar Usuarios</h4>
-<<<<<<< HEAD
+<!---->
 
             <ol class="breadcrumb">
                 <li><a href="user">Inicio</a></li>
@@ -23,8 +23,6 @@
                 <li class="active">Editar usuarios</li>
             </ol> 
 
-=======
->>>>>>> origin/master
         <div class="table-responsive" >
             
         <div class="margin" id="botones_control">
