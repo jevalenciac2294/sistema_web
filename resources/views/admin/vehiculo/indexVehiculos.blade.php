@@ -21,9 +21,7 @@
             <ol class="breadcrumb">
                 <li><a href="user">Inicio</a></li>
                 <li class="active">Vehiculos</li>
-            </ol>         
-
-        <h4 class="box-title">Vehiculos</h4>	        
+            </ol>                
 
 <!--        <form   action="{{ url('buscar_usuario') }}"  method="post"  >
 				<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
@@ -90,30 +88,17 @@
         @if('vehiculo.editVehiculo')
         
         <td  width="10px"><a href="{{ url('editVehiculo', [$vehiculos->id]) }}" class="btn btn-danger">Editar</a>    </td>
-
-        <td>
-            
-        @if('vehiculo.editVehiculo')
-        
-        <td><a href="{{ url('editVehiculo', [$vehiculos->id]) }}" class="btn btn-danger">Editar</a>    </td>
-
- 
         
         @endif
         @if('rutasvehiculos.asignarutasvehiculo')
 
         <td  width="10px"><a class="btn btn-info" data-toggle="modal" data-target="#myModal2" onclick="listarRuta('{{url('obtenerRutas')}}','{{url('asignarutasvehiculo')}}', '{{$vehiculos->id}}', '{{ url('indexubicacion')}}')">Asignar ruta</a></td>
 
-        <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal2" onclick="listarRuta('{{url('obtenerRutas')}}','{{url('asignarutasvehiculo')}}', '{{$vehiculos->id}}', '{{ url('indexubicacion')}}')">Asignar ruta</a></td>
-
-
         
         @endif
         @if('vehiculo.destroyVehiculo')
 
         <td  width="10px"><a href="{{ url('destroyVehiculo', [$vehiculos->id]) }}" class="btn btn-warning">Eliminar</a>
-
-        <td><a href="{{ url('destroyVehiculo', [$vehiculos->id]) }}" class="btn btn-warning">Eliminar</a>
 
 
         </td>

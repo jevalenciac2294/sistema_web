@@ -7,7 +7,7 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Database\Eloquent\SoftDeletes; //línea necesaria
+
 
 use Hash;
 
@@ -15,13 +15,13 @@ use Hash;
 class Rutas_Vehiculos extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword;
-      use SoftDeletes;
+
 
 
     
     protected $table = 'rutasvehiculos';
     
-    protected $dates = ['deleted_at']; 
+
     
     protected $fillable=['ruta_id', 'vehiculo_id'];
     

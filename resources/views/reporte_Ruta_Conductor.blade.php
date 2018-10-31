@@ -44,37 +44,8 @@
   
         <td>{{$empleados['name']}}</td>
         <td>{{$empleados['nombre_ruta']}}</td>
-       
-
-        <form class="navbar-form navbar-right" role="name" action="{{url('reporte/searchredirect')}}">
-                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
-                     <div class="form-group">
-                         <input type="text" class="form-control" name='name' placeholder="Buscar ..." />
-                     </div>
-                         <button type="submit" class="btn btn-default">Buscar</button>
-        </form>
-               </div>          
    
-        <div class="table-responsive" >
-<table class="table table-hover table-striped" cellspacing="0" width="100%">
-    <thead>
-        <th>    id  </th>
-        <th>    nombre  </th>
-        <th>    ruta  </th>
-        
-    </thead>
-    <tbody>
-
-        @foreach($ruta_conductor as $key => $empleados)
-            
-       <tr>
-
-        <td>{{$empleados->id}}</td>
-        <td>{{$empleados->name_emp}}</td>
-        <td>{{$empleados->name}}</td>     
-
-       </tr>
-
+   
          @endforeach
 <!---->
     </tbody>

@@ -385,7 +385,7 @@ public function ruta_vehiculo(){
       /*public function reporte(){
 
          return View('reporte_Ruta_Conductor', compact('empleado'), ['datos' => array()]);
-    }*/
+    }
 public function search_ruta_vehiculo(Request $request){
          $ruta_conductor = Empleado::select()
         ->join('empleadoVehiculo', 'empleadoVehiculo.empleado_id', '=', 'empleado.id')
@@ -396,7 +396,7 @@ public function search_ruta_vehiculo(Request $request){
 
         return View('reporte_Ruta_Conductor' )->with('ruta_conductor',$ruta_conductor);
 
-    }
+    }*/
 public function search_ruta_vehiculo($search_ruta_vehiculo){
          
 
@@ -435,7 +435,7 @@ public function search_ruta_vehiculo($search_ruta_vehiculo){
         }
 //echo '<pre>';print_r($ruta_conductor);die(); 
 
-        return View('reporte_Ruta_Conductor',  ['datos' => $datos_salida]);//->with('ruta_conductor',$ruta_conductor)->with('search_ruta_vehiculo', $ruta_conductor);
+        return View('reporte_Ruta_Conductor',  ['datos' => $datos_salida])//->with('ruta_conductor',$ruta_conductor)->with('search_ruta_vehiculo', $ruta_conductor);
 
         ->select()
         ->where('rutas.name', 'LIKE', '%'.$search_ruta_vehiculo->name.'%')
@@ -477,5 +477,5 @@ public function vehiculo_ruta(){
         return View('reporte_vehiculo_ruta' )->with('vehiculo_ruta',$vehiculo_ruta);
 
     }
-
+//
 }

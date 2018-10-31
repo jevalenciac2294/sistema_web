@@ -79,7 +79,7 @@
         
         @endif
         @if('rutasvehiculos.asignarutasvehiculo')
-        <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal2" onclick="listarRuta('{{url('obtenerRutas')}}','{{url('asignarutasvehiculo')}}', '{{$vehiculos->id}}', '{{ url('indexubicacion')}}')">Asignar ruta</a></td>
+        <td><a class="btn btn-info" data-toggle="modal2" data-target="#myModal2" onclick="listarRuta('{{url('obtenerRutas')}}','{{url('asignarutasvehiculo')}}', '{{$vehiculos->id}}', '{{ url('indexubicacion')}}')">Asignar ruta</a></td>
 
         
         @endif
@@ -88,9 +88,10 @@
 
         </td>
         @endif
-       </tr>
+       </tr> 
+       @endforeach
     </tbody> 
-    @endforeach
+   
 
     
 </table>

@@ -341,7 +341,7 @@ $user = new User;
         $users_all = User::orderBy('name', 'ASC')->paginate(5);
         
         if($user->delete()){
-             return view("admin.msj_usuario_borrado")->with("msj","Usuario borrado correctamente") ;
+             return redirect()->back();//("admin.msj_usuario_borrado")->with("msj","Usuario borrado correctamente") ;
         }
         else
         {

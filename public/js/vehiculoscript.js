@@ -36,7 +36,7 @@ function listarRuta(url, url_asignaruta, vehiculo_id, url_rutas_ver) {
 function agregarRuta(boton,url_asignaruta, vehiculo_id, rutas_id) {
     // Se desactiva el boton antes de empezar el proceso
     // con la intencion de que no se envien mas peticiones al servidor
-    boton.disabled = true;
+   boton.disabled = true;
     
     // tipo_accion representa que pasa con la ruta 'agregar' => inserta en la bd 'remover' => elimina
     var tipo_accion = 'agregar';

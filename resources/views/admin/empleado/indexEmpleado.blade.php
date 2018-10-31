@@ -90,15 +90,6 @@
 
 
         @if('empleado.editEmpleado')
-        <td><a href="{{ url('editEmpleado', [$empleados->id]) }}" class="btn btn-danger">Editar</a></td>
- 
-        @endif
-        @if('empleadoVehiculo.asignaempleadovehiculo')
-
-        <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal1" onclick="listarVehiculo('{{url('obtenerVehiculo')}}','{{url('asignaempleadovehiculo')}}', '{{$empleados->id}}', '{{ url('indexVehiculo') }}')">Asignar vehiculo</a></td>
-
-
-        @if('empleado.editEmpleado')
         <td  width="10px"><a href="{{ url('editEmpleado', [$empleados->id]) }}" class="btn btn-danger">Editar</a></td>
  
         @endif
@@ -106,16 +97,15 @@
 
         <td  width="10px"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1" onclick="listarVehiculo('{{url('obtenerVehiculo')}}','{{url('asignaempleadovehiculo')}}', '{{$empleados->id}}', '{{ url('indexVehiculo') }}')">Asignar vehiculo</a></td>
 
-
-        @endif
+         @endif
         
         @if('empleado.destroyEmpleado')
 
 
          <td  width="10px"><a href="{{ url('destroyEmpleado', [$empleados->id]) }}" class="btn btn-warning">Eliminar</a>
 
-         <td><a href="{{ url('destroyEmpleado', [$empleados->id]) }}" class="btn btn-warning">Eliminar</a>
-<!---->     
+<!--         <td><a href="{{ url('destroyEmpleado', [$empleados->id]) }}" class="btn btn-warning">Eliminar</a>-->     
+
         </td>
         @endif
               

@@ -71,11 +71,9 @@
 
                     <li>
                     <!--<a href="{{url('admin/createadmin')}}">CREAR USUARIO</a>-->
-<a href="{{url('usuario/create')}}">CREAR USUARIO</a>
+                    <a href="{{url('usuario/create')}}">CREAR USUARIO</a>
                     </li>
-            @else
-            <h1>El usuario no tiene permisos</h1>
-            @endelse
+            
             @endif
             @if('home.agendar')
                     <li>
@@ -84,28 +82,6 @@
                     </li>
             @endif
 
-
-                    <li>
-                    <!--<a href="{{url('admin/createadmin')}}">CREAR USUARIO</a>-->
-<a href="{{url('usuario/create')}}">CREAR USUARIO</a>
-                    </li>
-            @else
-            <h1>El usuario no tiene permisos</h1>
-            @endelse
-            @endif
-            @if('users.index')
-                    <li>
-                    <a href="{{url('home')}}">AGENDAR</a>
-
-                    </li>
-            @endif
-            
-            @if('users.index')
-                    <li>
-                    <a href="{{url('HorasExtras')}}">HORAS EXTRAS</a>
-
-                    </li>
-            @endif
 
                     
                     <li>
@@ -127,17 +103,14 @@
                     <li>
                     <a href="{{ url('indexEmpleado') }}">CONDUCTORES</a>
                     </li>
-                    @else
-            <h1>El usuario no tiene permisos</h1>
-            @endelse
+    
+           
                 @endif
                 @if('empleado.createEmpleado')
                     <li>
                         <a href="{{url('createEmpleado')}}">CREAR CONDUCTORES</a>
                     </li>
-                     @else
-            <h1>El usuario no tiene permisos</h1>
-            @endelse
+                    
                 @endif
                 </ul>
         </li>
