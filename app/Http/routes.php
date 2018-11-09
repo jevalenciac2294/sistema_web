@@ -26,7 +26,7 @@ Route::get('auth/logout', function(){
    Auth::logout();
    return Redirect::to('auth/login');
 });
-Route::get('home', 'HomeController@home');
+//Route::get('home', 'HomeController@home');
 
 
 Route::get('password/email', 'Auth\PasswordController@getEmail');
@@ -53,9 +53,11 @@ Route::post('register', 'AdminController@getRegister')->name('users.createuser')
 Route::get('user', 'UserController@user');
 Route::get('admin/user', 'UserController@adminuser');
 
+
 Route::resource('usuario','UserController', ['names' => [
    'create' => 'users.createuser'
-]]);
+]], ['middleware' => [
+   'permissionshinobi' => 'users.createuser']]);
 //Route::resource('usuario','UserController')->name('users.createuser')
   // ->middleware('permissionshinobi:users.createuser');
 /*Route::group(['prefix' => 'api'], function () {
@@ -70,7 +72,8 @@ Route::resource('usuario','UserController', ['names' => [
 
 Route::resource('usuario','UserController', ['names' => [
    'create' => 'users.createuser'
-]]);
+]], ['middleware' => [
+   'permissionshinobi:users.createuser' => 'users.createuser']]);
 //Route::resource('usuario','UserController')->name('users.createuser')
   // ->middleware('permissionshinobi:users.createuser');
 /*Route::group(['prefix' => 'api'], function () {
@@ -78,9 +81,13 @@ Route::resource('usuario','UserController', ['names' => [
         'usuario.create' => 'users.createuser',
     ]]);
 });*/
- //   Route::any('usuario/store', 'UserController@store');
+// Route::any('usuario/store', 'UserController@store')->name('users.createuser')
+  //      ->middleware('permissionshinobi:users.createuser');
 
-   // Route::get('usuario/create', 'UserController@create');
+
+ Route::get('usuario/create', 'UserController@create')->name('users.createuser')
+        ->middleware('permissionshinobi:users.createuser');
+
 
 
 Route::get('user/password', 'UserController@password');
@@ -398,15 +405,26 @@ Route::get('asignaempleadovehiculo', 'EmpleadoVehiculoController@asignaempleadov
     Route::get("admin.vehiculo.indexVehiculo/{search}", "VehiculoController@search");
     
     //-----------------------------Calledar
-    Route::get('/evento/get', 'HomeController@get_events');
-    Route::post('home', 'HomeController@create_events');
+Route::get('/evento/get', 'HomeController@get_events')->name('home.agendar')
+        ->middleware('permissionshinobi:home.agendar');
+
+Route::post('home', 'HomeController@create_events')->name('home.agendar')
+        ->middleware('permissionshinobi:home.agendar');
     Route::get('home', 'HomeController@create_events')->name('users.agendar')
-        ->middleware('permissionshinobi:users.agendar'); 
+      ->middleware('permissionshinobi:users.agendar'); 
 Route::post('home/fetch', 'HomeController@fetch')->name('dynamicdependent.fetch');
 Route::post('select',['uses'=>'HomeController@postSelect','as'=>'postSelect']);
 
 //Route::get('createEmpleado', 'EmpleadoController@createEmpleado');users.agendar
+Route::get('eventoPost', 'HomeController@create_events2')->name('home.agendar')
+        ->middleware('permissionshinobi:home.agendar');
+
 Route::post('eventoPost', 'HomeController@create_events2')->name('home.agendar')
+        ->middleware('permissionshinobi:home.agendar');
+Route::get('home', 'HomeController@create_events2')->name('home.agendar')
+        ->middleware('permissionshinobi:home.agendar');
+
+Route::post('home', 'HomeController@create_events2')->name('home.agendar')
         ->middleware('permissionshinobi:home.agendar');
 
     //Route::post('prueba', 'HomeController@create_events2');
@@ -417,7 +435,7 @@ Route::post('eventoPost', 'HomeController@create_events2')->name('home.agendar')
 
     //Route::get('home', ['as' => 'empleadoVehiculo.create_events2', 'uses' => 'HomeController@create_events2']);
 
-    Route::resource('home', 'HomeController@empleado');
+  Route::resource('home', 'HomeController@empleado');
   //  Route::get('empleadoVehiculo/{id}', 'HomeController@empleadoVehiculo');
 
     Route::get('api/dependent-dropdown','APIController@index');
@@ -566,7 +584,8 @@ Route::get('reporte_Ruta_Conductor', function(){
         }
         return View('reporte_Ruta_Conductor', ['datos' => $salida]);//array()]);//$ruta_conductor]);//->with('ruta_conductor',$ruta_conductor);
     //return view('reporte_Ruta_Conductor');
-});
+})->name('home.rutas_conductor')
+       ->middleware('permissionshinobi:home.rutas_conductor');
 
 Route::post('reporte_Ruta_Conductor', function(){
     $keyword = Input::get('keyword');
@@ -603,7 +622,8 @@ Route::post('reporte_Ruta_Conductor', function(){
         //$rutas->name;
        
     }*/
-});
+})->name('home.rutas_conductor')
+      ->middleware('permissionshinobi:home.rutas_conductor');
 //-----------------------------------------
 //Reporte Rutas
 Route::get('reporte_vehiculo_ruta', function(){
@@ -635,7 +655,8 @@ Route::get('reporte_vehiculo_ruta', function(){
         }
         return View('reporte_vehiculo_ruta', ['datos' => $salida]);//array()]);//$ruta_conductor]);//->with('ruta_conductor',$ruta_conductor);
     //return view('reporte_Ruta_Conductor');
-});
+})->name('home.conductores_vehiculos')
+       ->middleware('permissionshinobi:home.conductores_vehiculos');
 
 Route::post('reporte_vehiculo_ruta', function(){
     $keyword = Input::get('keyword');
@@ -677,4 +698,5 @@ Route::post('reporte_vehiculo_ruta', function(){
         //$rutas->name;
        
     }*/
-});
+})->name('home.conductores_vehiculos')
+        ->middleware('permissionshinobi:home.conductores_vehiculos');

@@ -81,14 +81,14 @@ class UserController extends Controller{
     public function store(Request $request)
     {
   $rules = [
-          'name'  => 'required|min:3|max:16|regex:/^[a-záéíóúàèìòùäëïöüñ\s]+$/i',
-            'email'=> 'required|email|max:255|unique:users,email',
-            'password'=> 'required|min:3|max:18|confirmed',
+             'name' => ['required', 'min:3', 'max:60',  'regex:/^[A-ZÀÂÇÉÈÊËÎÏÔÛÙÜŸÑÆŒa-zàâçéèêëîïôûùüÿñæœ_.,() ]+$/'],
+    'email' => ['required|email|max:255|unique:users,email'],
+    'password' => ['required|min:6|max:18|confirmed'],
         ];
         $messages = [
             'name.required' => 'El campo es reuqerido',
             'name.min' => 'El minimo de caracter permitidos son 3',
-            'name.max' => 'El maximo de caracter permitidos son 16',
+            'name.max' => 'El maximo de caracter permitidos son 60',
             'name.regex' => 'solo se aceptan letras',
             'email.required' => 'El campo es requerido',
             'email.email' => 'El formato de email es incorrecto',

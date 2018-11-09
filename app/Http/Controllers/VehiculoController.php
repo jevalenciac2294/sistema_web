@@ -97,10 +97,10 @@ class VehiculoController extends Controller
   {
  
    $rules = [
-    'matricula' => 'required|min:6|max:6|regex:/^[a-záéíóúàèìòùäëïöüñ123456789\s]+$/i',
-    'marca' => 'required|min:3|max:16|regex:/^[a-záéíóúàèìòùäëïöüñ\s]+$/i',
-    'modelo' => 'required|min:4|max:4|regex:/^[1-9]+$/i',
-    'color' => 'required|min:3|max:20|regex:/^[a-záéíóúàèìòùäëïöüñ\s]+$/i'  
+    'matricula' => ['required', 'min:6', 'max:6',  'regex:/^[A-ZÀÂÇÉÈÊËÎÏÔÛÙÜŸÑÆŒa-zàâçéèêëîïôûùüÿñæœ0-9_.,() ]+$/'],
+    'marca' => ['required', 'min:3', 'max:30', 'regex:/^[A-ZÀÂÇÉÈÊËÎÏÔÛÙÜŸÑÆŒa-zàâçéèêëîïôûùüÿñæœ_.,() ]+$/'],
+    'modelo' => ['required', 'min:4', 'max:4',  'regex:/(^([0-9]+)(\d+)?$)/u'],
+    'color' => ['required', 'min:3', 'max:30', 'regex:/^[A-ZÀÂÇÉÈÊËÎÏÔÛÙÜŸÑÆŒa-zàâçéèêëîïôûùüÿñæœ_.,() ]+$/'],
    ];
    
    //Posibles mensajes de error de validación

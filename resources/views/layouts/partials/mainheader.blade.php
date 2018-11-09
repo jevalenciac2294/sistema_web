@@ -14,9 +14,9 @@
 
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
-        <!-- Sidebar toggle button-->
+        <!-- Sidebar toggle button
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        </a>
+        </a>-->
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
@@ -81,8 +81,9 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
+                                    <a href="{{url('user')}}" class="btn btn-default btn-flat">Perfil</a>
                                     <a href="{{url('auth/logout')}}" class="btn btn-default btn-flat">Salir</a>
-                                    <a href="{{url('user/password')}}" class="btn btn-default btn-flat">Cambiar mi password</a>
+                                    <a href="{{url('user/password')}}" class="btn btn-default btn-flat">Cambiar mi contraseña</a>
                                 </div>
                                 <div class="pull-right">
 

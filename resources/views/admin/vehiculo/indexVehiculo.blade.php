@@ -74,17 +74,18 @@
             
         @if('vehiculo.editVehiculo')
         
-        <td><a href="{{ url('editVehiculo', [$vehiculos->id]) }}" class="btn btn-danger">Editar</a>    </td>
+        <td width="10px"><a href="{{ url('editVehiculo', [$vehiculos->id]) }}" class="btn btn-danger">Editar</a>    </td>
  
         
         @endif
         @if('rutasvehiculos.asignarutasvehiculo')
-        <td><a class="btn btn-info" data-toggle="modal2" data-target="#myModal2" onclick="listarRuta('{{url('obtenerRutas')}}','{{url('asignarutasvehiculo')}}', '{{$vehiculos->id}}', '{{ url('indexubicacion')}}')">Asignar ruta</a></td>
 
-        
+        <td  width="10px"><a class="btn btn-info" data-toggle="modal" data-target="#myModal2" onclick="listarRuta('{{url('obtenerRutas')}}','{{url('asignarutasvehiculo')}}', '{{$vehiculos->id}}', '{{ url('indexubicacion')}}')">Asignar ruta</a></td>
+
+       
         @endif
         @if('vehiculo.destroyVehiculo')
-        <td><a href="{{ url('destroyVehiculo', [$vehiculos->id]) }}" class="btn btn-warning">Eliminar</a>
+        <td width="10px"><a href="{{ url('destroyVehiculo', [$vehiculos->id]) }}" class="btn btn-warning">Eliminar</a>
 
         </td>
         @endif

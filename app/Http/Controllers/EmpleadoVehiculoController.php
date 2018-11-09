@@ -84,7 +84,7 @@ public function asignaempleadovehiculo(Request $request){
             $salida_respuesta = $empleadovehiculo->save();
         }else{
             $empleadovehiculo = EmpleadoVehiculo::Where('vehiculo_id', '=', $id_vehiculo)->
-                                            Where('empleado_id', '=', $id_empleado)->firstOrFail();//first();
+                                            Where('empleado_id', '=', $id_empleado)->first();//first();
 //            foreach($rutavehiculo as $key => $rv){
 //                    echo 'key: ' . $key . ", dato:" . $rv. "</br>";
 //                foreach($rv as $key2 => $rv2){
@@ -94,7 +94,7 @@ public function asignaempleadovehiculo(Request $request){
 //exit;
 //return true;
             // $ruta_eliminar = EmpleadoVehiculo::find($empleadovehiculo[0].id);
-           $ruta_eliminar->delete();
+           $empleadovehiculo->delete();
             
             $salida_respuesta = true;
         }

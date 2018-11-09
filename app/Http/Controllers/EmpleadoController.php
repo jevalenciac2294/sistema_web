@@ -69,40 +69,40 @@ class EmpleadoController extends Controller{
   {
    //Roles de validación
    $rules = [
-    'name' => 'required|min:3|max:16|regex:/^[a-záéíóúàèìòùäëïöüñ\s]+$/i',
-    'apellidoS' => 'required|min:3|max:16|regex:/^[a-záéíóúàèìòùäëïöüñ\s]+$/i',
-    'documento' => 'required|min:3|max:10|regex:/^[1-9]+$/i',
-    'email' => 'required|email|max:255|unique:empleado,email',
-    'direccion' => 'required|min:3|max:20|regex:/^[a-záéíóúàèìòùäëïöüñ123456789\s]+$/i',
-    'telefono' => 'required|min:3|max:10|regex:/^[1-9]+$/i',
-    'sueldo' => 'required|min:3|max:16|regex:/^[1-9]+$/i'
+    'name' => ['required', 'min:3', 'max:30',  'regex:/^[A-ZÀÂÇÉÈÊËÎÏÔÛÙÜŸÑÆŒa-zàâçéèêëîïôûùüÿñæœ_.,() ]+$/'],
+    'apellidoS' => ['required', 'min:3', 'max:30', 'regex:/^[A-ZÀÂÇÉÈÊËÎÏÔÛÙÜŸÑÆŒa-zàâçéèêëîïôûùüÿñæœ_.,() ]+$/'],
+    'documento' => ['required', 'min:3', 'max:16', 'unique:empleado,documento'],
+    'email' => ['required', 'min:3', 'max:200', 'unique:empleado,email'],
+    'direccion' => ['required', 'min:3', 'max:30',  'regex:/^[A-ZÀÂÇÉÈÊËÎÏÔÛÙÜŸÑÆŒa-zàâçéèêëîïôûùüÿñæœ0-9_.,() ]+$/'],
+    'telefono' => ['required', 'min:3', 'max:16',  'regex:/(^([0-9]+)(\d+)?$)/u'],
+    'sueldo' => ['required', 'min:3', 'max:30',  'regex:/(^([0-9]+)(\d+)?$)/u'],
    ];
    
    //Posibles mensajes de error de validación
    $messages = [
     'name.required' => 'El campo es requerido',
     'name.min' => 'El mínimo de caracteres permitidos son 3',
-    'name.max' => 'El máximo de caracteres permitidos son 16',
-    'name.regex' => 'Sólo se aceptan letras','name.required' => 'El campo es requerido',
+    'name.max' => 'El máximo de caracteres permitidos son 30',
+    'name.regex' => 'Sólo se aceptan letras',
     'apellidoS.min' => 'El mínimo de caracteres permitidos son 3',
-    'apellidoS.max' => 'El máximo de caracteres permitidos son 16',
-    'apellidoS.regex' => 'Sólo se aceptan letras','name.required' => 'El campo es requerido',
+    'apellidoS.max' => 'El máximo de caracteres permitidos son 30',
+    'apellidoS.regex' => 'Sólo se aceptan letras',
     'documento.min' => 'mminimo 3 numeros',
     'documento.max' => 'El máximo de numeros permitidos son 10',
-    'documento.regex' => 'Sólo se aceptan numeros','documento.required' => 'El campo es requerido',
+    'documento.regex' => 'Sólo se aceptan numeros', 
     'email.required' => 'El campo es requerido',
     'email.email' => 'El formato de email es incorrecto',
     'email.max' => 'El máximo de caracteres permitidos son 255',
     'email.unique' => 'El email ya existe',
     'direccion.min' => 'El mínimo de caracteres permitidos son 3',
     'direccion.max' => 'El máximo de caracteres permitidos son 16',
-    'direccion.regex' => 'Sólo se aceptan letras y numeros','name.required' => 'El campo es requerido',
+    'direccion.regex' => 'Sólo se aceptan numeros y letras',
     'telefono.min' => 'mminimo 3 numeros',
     'telefono.max' => 'El máximo de numeros permitidos son 10',
-    'telefono.regex' => 'Sólo se aceptan numeros','documento.required' => 'El campo es requerido',
-    'sueldo.min' => 'mminimo 3 numeros',
+    'telefono.regex' => 'Sólo se aceptan numeros',
+    'sueldo.min' => 'minimo 3 numeros',
     'sueldo.max' => 'El máximo de numeros permitidos son 10',
-    'sueldo.regex' => 'Sólo se aceptan numeros','documento.required' => 'El campo es requerido'
+    'sueldo.regex' => 'Sólo se aceptan numeros' 
    ];
    
    $validator = Validator::make($request->all(), $rules, $messages);
@@ -112,7 +112,7 @@ class EmpleadoController extends Controller{
        // TODO: hay que buscar una forma de mostrar los mensajes que salen mal
         return redirect()->back()->with('message', 'Problemas al crear el empleado:'.print_r($validator->messages(), 1));
    }
-   else{ // De los contrario guardar al usuario
+   else{ // De los contrario guardar al empleado
     $empleado = new Empleado();
     $empleado->name = $request->name;
     $empleado->apellidoS = $request->apellidoS;
@@ -153,7 +153,8 @@ class EmpleadoController extends Controller{
         $empleado = Empleado::find($id);
         $empleado ->delete();
 //        $empleado->destroy($id);
-        $empleado_all = Empleado::orderBy('name', 'ASC')->paginate(2);
+        $empleado_all = Empleado::orderBy('name', 'ASC')->paginate(5);
+        return redirect()->back()->with('message', 'Empleado Eliminado Correctamente');
         Session::flash('message','Empleado Eliminado Correctamente');
         return View('admin.empleado.indexEmpleado', ['empleado'=>$empleado_all]);
     }

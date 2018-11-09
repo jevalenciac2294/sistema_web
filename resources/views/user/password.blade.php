@@ -7,8 +7,17 @@
  {{Session::get('message')}}
  </div>
 @endif
+
+
+
 <hr />
+        
 <div class="col-sm-6 col-sm-offset-3 myform-cont" >
+
+ <h4 class="box-title">Perfil</h4>
+            <ol class="breadcrumb">
+                <a href="{{url('user')}}" class="btn btn-default btn-flat">Atrás</a>
+            </ol> 	
 <div class="myform-bottom">
 <form method="post" action="{{url('user/updatepassword')}}">
  {{csrf_field()}}

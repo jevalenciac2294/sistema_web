@@ -177,15 +177,11 @@
                     </li>
                 @endif
                 @if('home.rutas_conductor') 
-                
-
                     <li>
                         <a href="{{url('reporte_Ruta_Conductor')}}">RUTAS POR CONDUCTOR</a>
                     </li>
                 @endif
                 @if('home.conductores_vehiculos') 
-                
-
                     <li>
                         <a href="{{url('reporte_vehiculo_ruta')}}">VEHICULOS POR RUTA</a>
                     </li>
