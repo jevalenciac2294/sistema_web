@@ -58,7 +58,9 @@
 
 		</div>
 
-                <div class="panel-body">
+  
+       <div class="box-body box-white">
+                    <div class="table-responsive" >
                     <table class="table table-striped table-hover">
     <thead>
         <th>    Id  </th>
@@ -90,19 +92,19 @@
 
 
         @if('empleado.editEmpleado')
-        <td  width="10px"><a href="{{ url('editEmpleado', [$empleados->id]) }}" class="btn btn-danger">Editar</a></td>
+        <td  width="2px"><a href="{{ url('editEmpleado', [$empleados->id]) }}" class="btn btn-danger">Editar</a></td>
  
         @endif
         @if('empleadoVehiculo.asignaempleadovehiculo')
 
-        <td  width="10px"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1" onclick="listarVehiculo('{{url('obtenerVehiculo')}}','{{url('asignaempleadovehiculo')}}', '{{$empleados->id}}', '{{ url('indexVehiculo') }}')">Asignar vehiculo</a></td>
+        <td  width="2px"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1" onclick="listarVehiculo('{{url('obtenerVehiculo')}}','{{url('asignaempleadovehiculo')}}', '{{$empleados->id}}', '{{ url('indexVehiculo') }}')">Asignar vehiculo</a></td>
 
          @endif
         
         @if('empleado.destroyEmpleado')
 
 
-         <td  width="10px"><a href="{{ url('destroyEmpleado', [$empleados->id]) }}" class="btn btn-warning">Eliminar</a>
+         <td  width="2px"><a href="{{ url('destroyEmpleado', [$empleados->id]) }}" class="btn btn-warning">Eliminar</a>
 
 <!--         <td><a href="{{ url('destroyEmpleado', [$empleados->id]) }}" class="btn btn-warning">Eliminar</a>-->     
 
@@ -118,7 +120,8 @@
 
 {!! $empleado->render()!!}
 </div>
-</div>    
+
+   
 
 
 <!--<div class="box box-primary col-xs-12">

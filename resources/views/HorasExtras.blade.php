@@ -105,7 +105,7 @@
 <table class="table table-hover table-striped" cellspacing="0" width="100%">
     <thead>
         <th>    Fecha  </th>
-        <th>    nombre  </th>
+        <th>    Nombre  </th>
         <th>    Horas  </th>
         <th>    Horas Extras  </th>
         

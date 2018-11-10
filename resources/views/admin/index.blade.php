@@ -126,11 +126,14 @@
 		<tr role="row" class="odd">
 			<td>{{ $user->id }}</td>
 			<td><span class="label label-default">
-             
+             @if($user->getRoles())
+
              @foreach($user->getRoles() as $roles)
-			 {{  $roles.","  }}
+			 {{ $roles.","  }}
              @endforeach
-           
+           @else
+          <span>Sin rol</span>
+           @endif
              </span>
 			</td>
 			<td class="mailbox-messages mailbox-name"><i class="fa fa-user"></i>&nbsp;&nbsp;{{ $user->name  }}</td>

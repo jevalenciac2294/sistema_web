@@ -28,15 +28,21 @@
 <br>
             <button type="submit" class="btn btn-sm btn-primary">Buscar</button>    
 </form>
+        <div class="margin" id="botones_control">
 
+              @if('home.rutas_conductor') 
+              <a href="{{url('generarpdfrutas_conductor')}}"  class="btn btn-xs btn-primary" >Listado PDF empleados por rutas</a> 
+              @endif
+
+        </div>
 
 
     </div>          
         <div class="table-responsive" >
 <table class="table table-hover table-striped" cellspacing="0" width="100%">
     <thead>
-        <th>    nombre  </th>
-        <th>    ruta  </th>
+        <th>    Nombre Empleado  </th>
+        <th>    Ruta  </th>
     </thead>
     <tbody>
         @foreach($datos as $empleados)       <tr>

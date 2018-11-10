@@ -20,7 +20,7 @@
                 <li><a href="{{url('indexVehiculos')}}">Vehiculos</a></li>
                 <li class="active">Crear Vehiculos</li>
             </ol> 
-        <div class="table-responsi
+        
         <div class="table-responsive" >
             
 		<div class="margin" id="botones_control">

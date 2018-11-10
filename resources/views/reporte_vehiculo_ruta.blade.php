@@ -31,6 +31,18 @@
      <button type="submit" class="btn btn-sm btn-primary">Buscar</button>  
 </form>
 
+       <div class="margin" id="botones_control">
+
+              @if('home.conductores_vehiculos')  
+              <a href="{{url('generarpdfvehiculo_rutas')}}"  class="btn btn-xs btn-primary" >Listado PDF vehiculos por rutas</a> 
+              @endif
+
+        </div>
+
+
+
+
+
      </div>          
 
    
@@ -39,8 +51,8 @@
     <thead>
 
 
-        <th>    nombre  </th>
-        <th>    ruta  </th>
+        <th>    Matricula  </th>
+        <th>    Ruta  </th>
         
     </thead>
     <tbody>

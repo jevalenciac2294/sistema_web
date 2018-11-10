@@ -29,7 +29,7 @@
 
 <section  id="contenido_principal">
 
-<h3>Calendar</h3>
+<h3>Calendario</h3>
 <div class="container" style="width: 700px; height: 700px; ">
     <div id="calendar" ></div>
 </div>

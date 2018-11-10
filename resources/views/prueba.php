@@ -23,9 +23,9 @@
 <table class="table table-striped">
     <thead>
         <th>    Id  </th>
-        <th>    title  </th>
-        <th>    fecha_inicio  </th>
-        <th>    fecha_final  </th>
+        <th>    Titulo  </th>
+        <th>    Fecha_inicio  </th>
+        <th>    Fecha_final  </th>
         
     </thead>
     <tbody>

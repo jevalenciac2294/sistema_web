@@ -474,6 +474,62 @@ Route::get('generarpdfrutas', function(){
     $pdf = PDF::loadView('generarpdfrutas', ['ruta' => $ruta]);
     return $pdf->download('rutas.pdf');
 });
+//Generar pdf reportes
+Route::get('generarpdfrutas_conductor', function(){
+        $ruta_conductor = DB::table('empleado')
+        ->join('empleadoVehiculo', 'empleadoVehiculo.empleado_id', '=', 'empleado.id')
+        ->join('vehiculo', 'vehiculo.id', '=', 'empleadoVehiculo.vehiculo_id')
+        ->join('rutasvehiculos', 'rutasvehiculos.vehiculo_id', '=', 'vehiculo.id')
+        ->join('rutas', 'rutas.id', '=', 'rutasvehiculos.ruta_id')
+        //->select('rutas.name','rutas.id',  'empleado.name as name_emp')    
+        ->select('empleado.name', 'rutas.name as nombre_ruta' )
+
+        ->get();           
+        
+      // echo '<pre>';print_r($ruta_conductor);die();    
+  $salida = array();
+            foreach($ruta_conductor as $emp){
+            //     foreach($emp as $r){
+            $fila['name'] = $emp->name;
+            $fila['nombre_ruta'] = $emp->nombre_ruta;
+            //$fila['name'] = $r->name;
+            $salida[]=$fila;
+              //   }
+        }
+    $pdf = PDF::loadView('generarpdfrutas_conductor',  ['datos' => $salida]);
+    return $pdf->download('rutas_conductor.pdf');
+});
+
+Route::get('generarpdfvehiculo_rutas', function(){
+    $keyword = Input::get('keyword');
+
+
+         $vehiculo_ruta = DB::table('vehiculo')
+
+        ->join('rutasvehiculos', 'rutasvehiculos.vehiculo_id', '=', 'vehiculo.id')
+
+        ->join('rutas', 'rutas.id', '=', 'rutasvehiculos.ruta_id')
+        ->where('vehiculo.matricula', "LIKE", '%'.$keyword.'%')
+        ->select('rutas.name','rutas.id',  'vehiculo.matricula')
+        
+        //->where('rutas.name', "LIKE", '%'.$keyword.'%')
+
+        
+        ->get();                     
+        
+      // echo '<pre>';print_r($ruta_conductor);die();    
+  $salida = array();
+            foreach($vehiculo_ruta as $rut){
+            //     foreach($emp as $r){
+           // $fila['name'] = $rutacreate->name;
+            $fila['matricula'] = $rut->matricula;
+            $fila['name'] = $rut->name;
+            $salida[]=$fila;
+              //   }
+        }
+    $pdf = PDF::loadView('generarpdfvehiculo_rutas', ['datos' => $salida]);
+    return $pdf->download('vehiculo_rutas.pdf');
+});
 
 //Horas extras
 

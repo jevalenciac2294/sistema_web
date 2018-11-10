@@ -17,6 +17,11 @@
      <div class="box-header">
         <div class="table-responsive" >
 
+ <div class="text-info" Style="padding-top: 40px">
+    @if(isset($mensaje_error_permiso))
+        {{$mensaje_error_permiso}}
+    @endif
+</div>
             <h1>Bienvenid@ {{Auth::user()->name}} </h1>	
 @if (Session::has('status'))
 <hr />

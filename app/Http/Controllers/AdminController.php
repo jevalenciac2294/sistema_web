@@ -603,6 +603,7 @@ public function asignar_rol($idusu,$idrol){
         $users=User::find($idusu);
         $users->assignRole($idrol);
 
+        if(getRoles()){
         $users=User::find($idusu);
         $rolesasignados=$users->getRoles();
         /*
@@ -616,6 +617,9 @@ public function asignar_rol($idusu,$idrol){
          * //retornar todos con getroles()...
          */
         echo json_encode($rolesasignados);
+    }else{
+        $rolesasignados = 'no hay roles asignados';
+    }
 }
 
 public function quitar_rol($idusu,$idrol){
